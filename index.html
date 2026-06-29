@@ -419,14 +419,35 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
         <p>4 Bedingungen → 2⁴ = 16 Spalten</p>
       </div>
       <div class="cheat-card">
-        <h4>Methoden-Zuordnung</h4>
+        <h4>Methoden-Zuordnung (Altklausur A3)</h4>
         <ul class="ak">
-          <li>Entscheidungstabellen → a</li>
-          <li>Grenzwertanalyse → d</li>
-          <li>Äquivalenzklassen → b</li>
-          <li>Anwendungsfall → e</li>
-          <li>Zustandsbasiert → g</li>
+          <li><strong>1 Entscheidungstabellen → a</strong><br><span style="font-size:11px;color:#666">Bedingungskombinationen mit Tabellenmodell</span></li>
+          <li><strong>2 Grenzwertanalyse → d</strong><br><span style="font-size:11px;color:#666">Grenzwerte für die einzelnen Klassen testen</span></li>
+          <li><strong>3 Äquivalenzklassen → b</strong><br><span style="font-size:11px;color:#666">Klassen gleich behandelter Werte</span></li>
+          <li><strong>4 Anwendungsfallbasiert → e</strong><br><span style="font-size:11px;color:#666">Anwendungsfälle bestimmen und testen</span></li>
+          <li><strong>5 Zustandsbasiert → g</strong><br><span style="font-size:11px;color:#666">Alle Zustände und Übergänge identifizieren</span></li>
         </ul>
+      </div>
+      <div class="cheat-card">
+        <h4>Wohngeld-Beispiel: Äquivalenzklassen</h4>
+        <p style="font-size:12px;color:#666;margin-bottom:6px">3 Bedingungen → 6 ÄK → 4 Testfälle</p>
+        <ul class="ak">
+          <li>ÄK1 ✅ Wohnsitz in Deutschland</li>
+          <li>ÄK2 ❌ Wohnsitz NICHT in DE</li>
+          <li>ÄK3 ✅ Einkommen 0–1600 €</li>
+          <li>ÄK4 ❌ Einkommen &gt; 1600 €</li>
+          <li>ÄK5 ✅ Mietpreis 0–499 €</li>
+          <li>ÄK6 ❌ Mietpreis ≥ 500 €</li>
+        </ul>
+        <div class="formula">TF = 1 + 3 ungültige = 4</div>
+      </div>
+      <div class="cheat-card">
+        <h4>Wohngeld: Grenzwertanalyse ⚠️</h4>
+        <p><strong>Einkommen ≤ 1600 €:</strong></p>
+        <ul class="ak"><li>1599 € → gültig</li><li>1600 € → gültig (letzter!)</li><li>1601 € → ungültig</li></ul>
+        <p style="margin-top:8px"><strong>Mietpreis &lt; 500 € (strikt!):</strong></p>
+        <ul class="ak"><li>499 € → gültig</li><li>500 € → ❌ UNGÜLTIG! (&lt; nicht ≤)</li><li>501 € → ungültig</li></ul>
+        <p style="font-size:11px;color:var(--red);font-weight:600;margin-top:6px">Merke: Bei „&lt;" ist der Grenzwert selbst ungültig!</p>
       </div>
     </div>
   </div>
@@ -465,6 +486,19 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
         <h4>Review-Arten</h4>
         <ul class="ak"><li><strong>Inspektion</strong> – formal, mit Protokoll</li><li><strong>Technisches Review</strong> – fachlich</li><li><strong>Walkthrough</strong> – Autor führt durch</li><li><strong>Informell</strong> – schnell, ohne Regeln</li></ul>
       </div>
+      <div class="cheat-card">
+        <h4>Fehlerarten: Review ≠ Test (A5)</h4>
+        <p style="font-size:12px;color:#666;margin-bottom:6px">Was Reviews finden, Tests aber oft nicht:</p>
+        <ul class="ak">
+          <li>✅ A) Architekturfehler</li>
+          <li>❌ B) Usability-Probleme (Test findet sie auch)</li>
+          <li>✅ C) Falsche Interpretation der Anforderungen</li>
+          <li>✅ D) Inkonsistenzen in Dokumenten</li>
+          <li>❌ E) Sicherheitslücken (eher Tests)</li>
+          <li>❌ F) Fehlerhafte Implementierung (Test!)</li>
+        </ul>
+        <p style="font-size:11px;color:var(--accent);font-weight:600;margin-top:6px">Antwort: A, C, D</p>
+      </div>
     </div>
   </div>
 
@@ -476,6 +510,27 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
       <tr><td><strong>Lasttest</strong></td><td>Steigende User-Zahl</td><td>Kapazitätsgrenze finden</td></tr>
       <tr><td><strong>Stresstest</strong></td><td>Über die Grenze hinaus</td><td>Verhalten beim Zusammenbruch</td></tr>
     </table>
+    <div class="cheat-grid" style="margin-top:1rem">
+      <div class="cheat-card">
+        <h4>Reihenfolge: Kapazitätsermittlung (A6)</h4>
+        <ol class="ak" style="padding-left:1.2rem">
+          <li><strong>Performanztest</strong> – Baseline messen (wenig User)</li>
+          <li><strong>Lasttest</strong> – schrittweise steigern bis zur Grenze</li>
+          <li><strong>Stresstest</strong> – absichtlich über Grenze → Verhalten beim Zusammenbruch</li>
+        </ol>
+        <p style="font-size:12px;margin-top:8px">Max. Kapazität = höchste User-Zahl im Lasttest bei der SLAs noch eingehalten werden (z.B. Antwortzeit &lt; 2s, Fehlerrate &lt; 1%).</p>
+      </div>
+      <div class="cheat-card">
+        <h4>Webshop-Testszenario (Aufgabe 6)</h4>
+        <p style="font-size:12px;color:#666;margin-bottom:6px">Kombination aller 3 Testarten:</p>
+        <ul class="ak">
+          <li><strong>Phase 1:</strong> 10 User → Baseline (Antwortzeit, CPU)</li>
+          <li><strong>Phase 2:</strong> +50 User schrittweise → wann bricht SLA?</li>
+          <li><strong>Phase 3:</strong> 200% Last → Zusammenbruch? Erholung?</li>
+          <li><strong>Ergebnis:</strong> Max. User = letzter Lasttest-Punkt ohne SLA-Verletzung</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="cheat-section">
@@ -643,6 +698,21 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
           <li>Review-Arten?</li>
           <li>ISO 25010 Merkmale (8 Stück)?</li>
           <li>GQM-Ansatz?</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <h4>Altklausur-Spezifisches</h4>
+        <ul class="ak">
+          <li>Testmethoden → Beschreibungen (1→a, 2→d, 3→b, 4→e, 5→g)</li>
+          <li>Wohngeld: 6 ÄK, 4 Testfälle</li>
+          <li>Grenzwerte Einkommen ≤ 1600: 1599, 1600, 1601</li>
+          <li>⚠️ Mietpreis &lt; 500: 500 € ist UNGÜLTIG!</li>
+          <li>Review-Fehlerarten: A, C, D</li>
+          <li>Review-Vorteile: A, B, D</li>
+          <li>NFT-Reihenfolge: Performanz → Last → Stress</li>
+          <li>Traceability = Antwort B (bidirektional)</li>
+          <li>Testbasis = Antwort C (Anforderungen, User Stories)</li>
+          <li>V-Modell für sicherheitskritische Software</li>
         </ul>
       </div>
     </div>
