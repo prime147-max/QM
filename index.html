@@ -786,6 +786,12 @@ const cardSets = {
     { q: "Wann werden Black-Box-Verfahren hauptsächlich eingesetzt?", a: "Besonders in späten Phasen: im System- und Abnahmetest. Grund: Sie basieren auf Spezifikationen und Anforderungen, nicht auf dem Code." },
     { q: "Unterschied Black-Box vs. White-Box?", a: "Black-Box: Testen aus Benutzersicht, basiert auf Spezifikation, kein Codewissen nötig.\nWhite-Box: Testen aus Entwicklersicht, basiert auf Code-/Strukturkenntnis. Typisch in frühen Teststufen (Unit, Integration)." },
     { q: "Was sind Black-Box-Testverfahren?", a: "• Äquivalenzklassenbildung\n• Grenzwertanalyse\n• Entscheidungstabellentest\n• Zustandsbasiertes Testen\n• Anwendungsfallbasiertes Testen" },
+    { q: "Wohngeld-Programm: Welche ÄK entstehen für die 3 Bedingungen?", a: "6 ÄK gesamt:\n• ÄK1 (gültig): Wohnsitz in Deutschland\n• ÄK2 (ungültig): Wohnsitz NICHT in Deutschland\n• ÄK3 (gültig): Einkommen 0–1600 €\n• ÄK4 (ungültig): Einkommen > 1600 €\n• ÄK5 (gültig): Mietpreis 0–499 €\n• ÄK6 (ungültig): Mietpreis ≥ 500 €" },
+    { q: "Wohngeld-Programm: Wie viele Testfälle nach ÄK-Methode?", a: "4 Testfälle:\n• TF1: alle 3 gültigen ÄK zusammen (Wohnsitz DE, ≤1600 €, <500 €)\n• TF2: ÄK2 – Wohnsitz nicht in Deutschland\n• TF3: ÄK4 – Einkommen > 1600 €\n• TF4: ÄK6 – Mietpreis ≥ 500 €\nRegel: 1 gemeinsamer TF für alle gültigen ÄK + je 1 eigener TF pro ungültiger ÄK" },
+    { q: "Wohngeld: Grenzwerte Einkommen ≤ 1600 €?", a: "3 Grenzwerte:\n• 1599 € – unterhalb der Grenze (gültig)\n• 1600 € – genau an der Grenze (gültig, letzter gültiger Wert)\n• 1601 € – oberhalb der Grenze (ungültig)" },
+    { q: "Wohngeld: Grenzwerte Mietpreis < 500 € (ACHTUNG: strikt <, nicht ≤)?", a: "3 Grenzwerte:\n• 499 € – unterhalb (gültig)\n• 500 € – AN der Grenze, aber UNGÜLTIG! (Bedingung ist < 500, nicht ≤ 500)\n• 501 € – oberhalb (ungültig)\nMerkregel: Bei '<' ist der Grenzwert selbst ungültig!" },
+    { q: "Beschreibung e → welche Testmethode?", a: "Anwendungsfallbasiertes Testen\nBeschreibung: 'Bestimmen von Anwendungsfällen und entsprechendes Testen'\nDeckt typische Benutzerszenarien ab." },
+    { q: "Beschreibung g → welche Testmethode?", a: "Zustandsbasiertes Testen\nBeschreibung: 'Identifizierung aller gültigen Zustände und Übergänge, die getestet werden müssen'\nModelliert das System als Zustandsautomat." },
   ],
   testfaelle: [
     { q: "Was ist ein Testfall?", a: "Ein Testfall beschreibt eine spezifische Eingabe, Ausführungsbedingung und erwartetes Ergebnis, um ein bestimmtes Ziel zu testen oder einen Fehler aufzudecken." },
@@ -848,6 +854,13 @@ const quizQuestions = [
   { topic:'nftest', q: "Was testet ein Usability-Test?", opts: ["Systemsicherheit","Datenbankperformanz","Wie einfach und effektiv das System von Benutzern bedient werden kann","Code-Korrektheit"], answer: 2, exp: "Usability-Test prüft Gebrauchstauglichkeit: Effizienz, Effektivität, Zufriedenheit der Benutzer. Methoden: Beobachtung, Thinking-Aloud, Fragebögen." },
   { topic:'metriken', q: "Was ist die zyklomatische Komplexität?", opts: ["Anzahl der Codezeilen","Anzahl unabhängiger Pfade durch den Code","Anzahl der Klassen","Anzahl der Tests"], answer: 1, exp: "Zyklomatische Komplexität = Anzahl linear unabhängiger Pfade durch den Kontrollfluss. Hohe Werte → schwer testbar, fehleranfälliger." },
   { topic:'testarten', q: "Was ist White-Box-Testen?", opts: ["Testen ohne Kenntnis des Codes","Testen mit Kenntnis der inneren Struktur/Code","Testen aus Benutzersicht","Testen nur mit Black-Box-Methoden"], answer: 1, exp: "White-Box: Testdesign basiert auf Kenntnis des Codes (Kontrollfluss, Datenpfade). Typisch für Unit- und Integrationstest." },
+  { topic:'blackbox', q: "Welche Beschreibung passt zu 'Anwendungsfallbasiertes Testen'?", opts: ["Grenzwerte für Klassen testen","Anwendungsfälle bestimmen und entsprechend testen","Alle Zustände und Übergänge identifizieren","Bedingungskombinationen tabellarisch testen"], answer: 1, exp: "Beschreibung e: 'Bestimmen von Anwendungsfällen und entsprechendes Testen' → Anwendungsfallbasiertes Testen." },
+  { topic:'blackbox', q: "Welche Beschreibung passt zu 'Zustandsbasiertes Testen'?", opts: ["Grenzwerte für Klassen testen","Anwendungsfälle bestimmen","Alle gültigen Zustände und Übergänge identifizieren und testen","Eingaben in gleich behandelte Klassen gruppieren"], answer: 2, exp: "Beschreibung g: 'Identifizierung aller gültigen Zustände und Übergänge' → Zustandsbasiertes Testen." },
+  { topic:'blackbox', q: "Wohngeld-Programm (3 gültige, 3 ungültige ÄK): Wie viele Testfälle?", opts: ["3","4","6","7"], answer: 1, exp: "1 gemeinsamer Testfall für alle 3 gültigen ÄK + je 1 Testfall für jede ungültige ÄK (3×) = 4 Testfälle." },
+  { topic:'blackbox', q: "Wohngeld: Mietpreis < 500 € – ist 500 € gültig oder ungültig?", opts: ["Gültig, weil an der Grenze","Ungültig, weil die Bedingung strikt < 500 ist","Gültig, weil ≤ 500","Hängt vom Test ab"], answer: 1, exp: "ACHTUNG: Die Bedingung ist strikt < 500 (nicht ≤ 500). Deshalb ist 500 € bereits ungültig – das ist ein klassischer Grenzwert-Fallstrick!" },
+  { topic:'reviews', q: "Welche 3 Fehlerarten erkennt ein Review, die Tests oft übersehen?", opts: ["Laufzeitabsturz, Performanz, Speicherleck","Architekturfehler, falsche Interpretation der Anforderungen, Inkonsistenzen in Dokumenten","Syntaxfehler, Compilerfehler, Typfehler","Datenbankfehler, Netzwerkfehler, Timeout"], answer: 1, exp: "A) Architekturfehler, C) Falsche Interpretation der Anforderungen, D) Inkonsistenzen in der Datenbankschema-Definition – alles Entwurfs-/Dokumentfehler." },
+  { topic:'nftest', q: "In welcher Reihenfolge bestimmt man die maximale Benutzerkapazität?", opts: ["Stresstest → Lasttest → Performanztest","Performanztest (Baseline) → Lasttest (bis Maximum) → Stresstest (Überlast)","Lasttest → Performanztest → Stresstest","Alle Testarten gleichzeitig"], answer: 1, exp: "Erst Performanztest: Baseline bei wenig Usern. Dann Lasttest: schrittweise steigern bis zur Kapazitätsgrenze. Dann Stresstest: absichtlich überschreiten." },
+  { topic:'grundlagen', q: "Was kann als Testbasis für Softwaretests dienen?", opts: ["Die Projektplanung für den Zeitplan","Code-Kommentare","Anforderungsspezifikationen, User Stories, Designbeschreibungen","Liste bekannter Bugs"], answer: 2, exp: "Testbasis = Dokumente aus denen Testfälle abgeleitet werden: Anforderungsspezifikationen, Benutzergeschichten, Designbeschreibungen (Antwort C aus der Altklausur)." },
 ].sort(() => Math.random() - 0.5).slice(0, 12);
 
 const examQuestions = [
@@ -861,6 +874,10 @@ const examQuestions = [
   { q: "Welche 3 Review-Vorteile sind korrekt? (1 Punkt)", opts: ["Erkennt Laufzeitfehler, findet Bugs, braucht Code","Frühzeitig Fehler, keine Testumgebung, Wissenstransfer","Sichert Performance, findet 80% Fehler, ist billiger","Ersetzt Tests, braucht Experten, ist langsam"], answer: 1, exp: "A) Früh Fehler finden, B) keine Testumgebung nötig, D) Wissenstransfer – das sind die 3 richtigen." },
   { q: "Was macht ein Stresstest? (2 Punkte)", opts: ["Testet mit 1 User","Testet schrittweise bis Maximum","Überlastet absichtlich über die Grenze hinaus","Misst Baseline-Werte"], answer: 2, exp: "Stresstest = absichtliche Überlastung um Systemverhalten beim Zusammenbruch zu sehen." },
   { q: "Was ist die Formel für Testfälle bei der ÄK-Methode? (1 Punkt)", opts: ["Anzahl gültiger ÄK","Anzahl ungültiger ÄK","1 + Anzahl ungültiger ÄK","Gültige × Ungültige"], answer: 2, exp: "1 Testfall für alle gültigen ÄK zusammen + 1 Testfall pro ungültiger ÄK." },
+  { q: "Wohngeld-Programm: Wie viele ÄK gibt es für Bedingung 'Einkommen ≤ 1600 €'? (1 Punkt)", opts: ["1 ÄK","2 ÄK (gültig: 0–1600; ungültig: >1600)","3 ÄK (untere, mittlere, obere)","4 ÄK"], answer: 1, exp: "Für numerische Bedingungen entstehen typisch 2 ÄK: eine gültige (0–1600) und eine ungültige (>1600)." },
+  { q: "Wohngeld: Ist 500 € beim Mietpreis < 500 € gültig oder ungültig? (1 Punkt)", opts: ["Gültig – liegt an der Grenze","Ungültig – Bedingung ist strikt < 500, nicht ≤","Gültig – Grenzen sind immer eingeschlossen","Kommt auf die Implementierung an"], answer: 1, exp: "Strikte Kleiner-als-Bedingung: < 500 bedeutet maximal 499 € gültig. 500 € selbst ist ungültig – typischer Prüfungsfallstrick!" },
+  { q: "Testmethoden (Altklausur Aufgabe 3): Beschreibung 'e' passt zu welcher Methode? (1 Punkt)", opts: ["Grenzwertanalyse","Zustandsbasiertes Testen","Anwendungsfallbasiertes Testen","Entscheidungstabellen"], answer: 2, exp: "Beschreibung e: 'Bestimmen von Anwendungsfällen und entsprechendes Testen' → Anwendungsfallbasiertes Testen (Nr. 4 in der Tabelle)." },
+  { q: "Reviews – welche 3 Fehlerarten bleiben beim Testen unentdeckt? (1 Punkt)", opts: ["Performanz, Speicherleck, Absturz","Architekturfehler, falsche Interpretation, Inkonsistenzen","Syntaxfehler, Compilerfehler, Typfehler","Zeitüberschreitungen, Datenverlust, Netzwerkfehler"], answer: 1, exp: "A) Architekturfehler, C) Falsche Interpretation der Anforderungen, D) Inkonsistenzen in Dokumenten – Entwurfs-/Interpretationsfehler, die nur im Dokument erkennbar sind." },
 ];
 
 // ===================== DRAG DATA =====================
@@ -895,6 +912,12 @@ const dragExercises = [
     { term: 'Stresstest', def: 'Absichtliche Überlastung über die Kapazitätsgrenze hinaus' },
     { term: 'Skalierbarkeitstest', def: 'Wachstum mit mehr Nutzern ohne Qualitätsverlust prüfen' },
   ]},
+  { title: 'Testmethoden zuordnen (Altklausur Aufgabe 3)', items: [
+    { term: 'Entscheidungstabellen', def: 'Bedingungskombinationen mit einem Tabellenmodell testen' },
+    { term: 'Äquivalenzklassen', def: 'Testbedingungen in Klassen gleich behandelter Werte gruppieren' },
+    { term: 'Anwendungsfallbasiert', def: 'Anwendungsfälle bestimmen und entsprechend testen' },
+    { term: 'Zustandsbasiert', def: 'Alle gültigen Zustände und Übergänge identifizieren und testen' },
+  ]},
 ];
 
 // ===================== LÜCKENTEXT DATA =====================
@@ -909,6 +932,11 @@ const lueckenTexts = [
   { text: 'Pro ungültiger Äquivalenzklasse wird ___ Testfall benötigt.', blank: 'ein eigener', options: ['ein eigener', 'kein', 'ein gemeinsamer', 'zwei'], exp: 'Pro ungültiger ÄK ein eigener Testfall – damit sichtbar ist, welche Bedingung den Fehler auslöst.' },
   { text: 'ISO 25010 definiert ___ Qualitätshauptmerkmale.', blank: 'acht', options: ['acht', 'vier', 'sechs', 'zehn'], exp: 'ISO 25010: Funktionelle Eignung, Leistungseffizienz, Kompatibilität, Gebrauchstauglichkeit, Zuverlässigkeit, Sicherheit, Wartbarkeit, Portabilität.' },
   { text: 'Die zyklomatische Komplexität misst die Anzahl ___ Pfade durch den Code.', blank: 'unabhängiger', options: ['unabhängiger', 'abhängiger', 'schnellster', 'sicherer'], exp: 'Zyklomatische Komplexität = Anzahl linear unabhängiger Pfade durch den Kontrollfluss.' },
+  { text: 'Anwendungsfallbasiertes Testen bestimmt ___ und testet sie entsprechend.', blank: 'Anwendungsfälle', options: ['Anwendungsfälle', 'Grenzwerte', 'Äquivalenzklassen', 'Zustände'], exp: 'Beschreibung e (Altklausur Aufgabe 3): Bestimmen von Anwendungsfällen und entsprechendes Testen.' },
+  { text: 'Das Wohngeld-Programm hat 3 gültige und 3 ungültige ÄK → ___ Testfälle insgesamt.', blank: 'vier', options: ['vier', 'drei', 'sechs', 'sieben'], exp: '1 Testfall für alle gültigen ÄK zusammen + 3 eigene Testfälle (je einer pro ungültiger ÄK) = 4 Testfälle.' },
+  { text: 'Beim Mietpreis < 500 € ist der Wert 500 € ___, weil die Bedingung strikt kleiner ist.', blank: 'ungültig', options: ['ungültig', 'gültig', 'ein Sonderfall', 'nicht testbar'], exp: 'Strikte Kleiner-Bedingung: Nur Werte bis 499 € sind gültig. 500 € selbst ist bereits ungültig – klassischer Grenzwert-Fallstrick!' },
+  { text: 'Um die maximale Benutzerkapazität zu ermitteln: zuerst ___, dann Lasttest, dann Stresstest.', blank: 'Performanztest', options: ['Performanztest', 'Stresstest', 'Sicherheitstest', 'Usability-Test'], exp: 'Reihenfolge: 1. Performanztest (Baseline-Werte), 2. Lasttest (schrittweise bis Maximum), 3. Stresstest (absichtliche Überlastung).' },
+  { text: 'Im V-Modell hat jede ___ eine entsprechende Testphase als Gegenstück.', blank: 'Entwicklungsphase', options: ['Entwicklungsphase', 'Anforderung', 'Codezeile', 'Review-Art'], exp: 'Das V-Modell zeigt: Anforderungsanalyse ↔ Abnahmetest, Systemdesign ↔ Systemtest, Architektur ↔ Integrationstest, Implementierung ↔ Unit-Test.' },
 ];
 
 // ===================== STATE =====================
