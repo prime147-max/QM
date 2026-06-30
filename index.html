@@ -191,6 +191,22 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
 .blank-slot.wrong { color: var(--red); border-color: var(--red); }
 .luecke-text { font-size: 17px; font-weight: 600; line-height: 2; }
 
+/* AUFGABEN-GENERATOR */
+.aufg-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.aufg-tab { padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--border); background: var(--surface); color: var(--muted); font-family: var(--font); transition: all 0.15s; }
+.aufg-tab:hover { border-color: var(--accent); color: var(--accent); }
+.aufg-tab.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+.gen-scenario { background: var(--surface); border: 2px solid var(--border); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem; }
+.gen-scenario h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+.gen-scenario > p { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 0.75rem; }
+.gen-cond-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 6px; }
+.gen-cond-table th { background: var(--surface2); padding: 6px 10px; border: 1px solid var(--border); font-weight: 600; color: var(--accent); text-align: left; }
+.gen-cond-table td { padding: 6px 10px; border: 1px solid var(--border); vertical-align: top; }
+.gen-q { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
+.gen-q p { font-size: 14px; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); line-height: 1.5; }
+.gen-check-row { display: flex; gap: 10px; margin-top: 1rem; flex-wrap: wrap; }
+.gen-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: var(--surface2); color: var(--accent); margin-bottom: 6px; }
+
 /* FORTSCHRITT */
 .fort-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
 .fort-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; text-align: center; }
@@ -220,6 +236,7 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
   <div class="nav-tab" onclick="showPage('cheat')">Spickzettel</div>
   <div class="nav-tab" onclick="showPage('fortschritt')">📊 Fortschritt</div>
   <div class="nav-tab" onclick="showPage('exam')">Klausur</div>
+  <div class="nav-tab" onclick="showPage('aufgaben')">🎯 Aufgaben</div>
   <div class="nav-score">✅ <strong id="global-ok">0</strong> richtig</div>
 </nav>
 
@@ -312,6 +329,12 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
       <h3>Quiz starten</h3>
       <p>Alle Themen gemischt – teste dein Wissen</p>
       <div class="badge">Mixed</div>
+    </div>
+    <div class="topic-card" onclick="showPage('aufgaben')" style="border-color:var(--accent);background:linear-gradient(135deg,#fff 60%,#f0effe)">
+      <div class="icon">🎲</div>
+      <h3>Aufgaben-Generator</h3>
+      <p>Dynamisch erzeugte ÄK- und NFT-Aufgaben – jedes Mal neu!</p>
+      <div class="badge" style="background:var(--accent);color:#fff">NEU – Altklausur</div>
     </div>
   </div>
 </div>
@@ -762,6 +785,20 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
   <div id="exam-result" style="display:none"></div>
 </div>
 
+<!-- AUFGABEN-GENERATOR -->
+<div class="page" id="page-aufgaben">
+  <div class="learn-header">
+    <button class="back-btn" onclick="showPage('home')">← Zurück</button>
+    <div class="learn-title">🎯 Aufgaben-Generator</div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:1rem">Jede Aufgabe wird frisch generiert — klicke auf <strong>Neue Aufgabe</strong> für eine andere Variante.</p>
+  <div class="aufg-tabs">
+    <button class="aufg-tab active" id="aufgtab-ak" onclick="switchAufgTab('ak')">⬛ Äquivalenzklassen &amp; Grenzwerte</button>
+    <button class="aufg-tab" id="aufgtab-nft" onclick="switchAufgTab('nft')">⚡ Nichtfunktionale Tests</button>
+  </div>
+  <div id="aufg-content"><p style="color:var(--muted);text-align:center;padding:3rem 1rem">Wird geladen…</p></div>
+</div>
+
 <script>
 // ===================== STORAGE =====================
 const LS_KEY = 'qm_v1';
@@ -1023,7 +1060,7 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  const map = { home: 0, learn: 1, quiz: 2, drag: 3, luecke: 4, cheat: 5, fortschritt: 6, exam: 7 };
+  const map = { home: 0, learn: 1, quiz: 2, drag: 3, luecke: 4, cheat: 5, fortschritt: 6, exam: 7, aufgaben: 8 };
   const tabs = document.querySelectorAll('.nav-tab');
   if (map[id] !== undefined) tabs[map[id]].classList.add('active');
   if (id === 'home') updateHomeProgress();
@@ -1035,6 +1072,7 @@ function showPage(id) {
   if (id === 'fortschritt') renderFortschritt();
   if (id === 'drag') { dragExIdx = 0; renderDragEx(); }
   if (id === 'luecke') { lueckeIdx = 0; lueckeOk = 0; renderLueckeQ(); }
+  if (id === 'aufgaben') renderAufgaben();
 }
 
 function updateHomeProgress() {
@@ -1475,6 +1513,325 @@ function resetExam() {
 
 // Initialize on load – only update home cards, nothing else
 updateHomeProgress();
+
+// ===================== AUFGABEN-GENERATOR =====================
+const akScenarios = [
+  {
+    name: 'Kreditantrag',
+    desc: 'Eine Bank prüft, ob ein Kreditantrag genehmigt wird. Alle drei Bedingungen müssen erfüllt sein:',
+    conditions: [
+      { name: 'Alter des Antragstellers', op: '>=', value: 18, unit: 'Jahre' },
+      { name: 'Monatliches Nettoeinkommen', op: '>=', value: 2000, unit: '€/Monat' },
+      { name: 'Bestehende Schulden', op: '<', value: 50000, unit: '€' },
+    ]
+  },
+  {
+    name: 'Wohngeld-Antrag',
+    desc: 'Ein Programm prüft den Anspruch auf Wohngeld. Alle Bedingungen müssen erfüllt sein:',
+    conditions: [
+      { name: 'Wohnsitz in Deutschland', op: 'bool' },
+      { name: 'Monatliches Nettoeinkommen', op: '<=', value: 1600, unit: '€/Monat' },
+      { name: 'Mietpreis', op: '<', value: 500, unit: '€/Monat' },
+    ]
+  },
+  {
+    name: 'Führerscheinzulassung',
+    desc: 'Ein System prüft die Zulassung zur Führerscheinprüfung. Alle vier Bedingungen müssen erfüllt sein:',
+    conditions: [
+      { name: 'Mindestalter', op: '>=', value: 17, unit: 'Jahre' },
+      { name: 'Absolvierte Fahrstunden', op: '>=', value: 18, unit: 'Stunden' },
+      { name: 'Sehtest bestanden', op: 'bool' },
+      { name: 'Erste-Hilfe-Kurs absolviert', op: 'bool' },
+    ]
+  },
+  {
+    name: 'Studentenrabatt',
+    desc: 'Ein Ticketsystem gewährt Studentenrabatt, wenn alle Bedingungen zutreffen:',
+    conditions: [
+      { name: 'Alter', op: 'between', min: 18, max: 27, unit: 'Jahre' },
+      { name: 'Studentenausweis vorhanden', op: 'bool' },
+      { name: 'Eingeschriebene Semester', op: '<=', value: 14, unit: 'Semester' },
+    ]
+  },
+  {
+    name: 'Blutdruck-Normalwert',
+    desc: 'Ein Messgerät zeigt „Normalwert", wenn beide Blutdruckwerte im Normalbereich liegen:',
+    conditions: [
+      { name: 'Systolischer Wert', op: 'between', min: 90, max: 140, unit: 'mmHg' },
+      { name: 'Diastolischer Wert', op: 'between', min: 60, max: 90, unit: 'mmHg' },
+    ]
+  },
+  {
+    name: 'Online-Bestellung',
+    desc: 'Ein Online-Shop verarbeitet Bestellungen nur, wenn diese Bedingungen erfüllt sind:',
+    conditions: [
+      { name: 'Bestellwert', op: '>=', value: 5, unit: '€' },
+      { name: 'Lieferzeit', op: '<=', value: 14, unit: 'Tage' },
+      { name: 'Kundenkonto verifiziert', op: 'bool' },
+    ]
+  },
+  {
+    name: 'Gepäck-Abfertigung',
+    desc: 'Ein Flugsystem nimmt Gepäck an, wenn alle Bedingungen erfüllt sind:',
+    conditions: [
+      { name: 'Gepäckgewicht', op: '<=', value: 23, unit: 'kg' },
+      { name: 'Check-in-Vorlauf vor Abflug', op: '>=', value: 45, unit: 'Minuten' },
+      { name: 'Reisepass gültig', op: 'bool' },
+    ]
+  },
+  {
+    name: 'Rücktrittsrecht',
+    desc: 'Ein Webshop gewährt das gesetzliche Rücktrittsrecht, wenn alle Bedingungen zutreffen:',
+    conditions: [
+      { name: 'Tage seit dem Kauf', op: '<=', value: 14, unit: 'Tage' },
+      { name: 'Produkt ungeöffnet', op: 'bool' },
+      { name: 'Kaufbeleg vorhanden', op: 'bool' },
+    ]
+  },
+  {
+    name: 'Bibliotheks-Ausleihe',
+    desc: 'Eine Bibliothek verleiht Bücher, wenn alle Bedingungen erfüllt sind:',
+    conditions: [
+      { name: 'Ausgeliehene Bücher aktuell', op: '<', value: 5, unit: 'Bücher' },
+      { name: 'Ausweisgebühr bezahlt', op: 'bool' },
+      { name: 'Ausleihzeit', op: '<=', value: 28, unit: 'Tage' },
+    ]
+  },
+];
+
+const nftScenarios = [
+  {
+    name: 'E-Commerce Webshop (Black Friday)',
+    desc: 'Ein Webshop hat täglich ~500 gleichzeitige User, zu Spitzenzeiten (Black Friday) bis zu 3.000. SLA: Antwortzeit < 2 Sek., Fehlerrate < 1%.',
+    questions: [
+      { q: 'Welchen Test führen Sie ZUERST durch, um eine Vergleichsbasis zu erhalten?', opts: ['Stresstest mit 5.000 Usern', 'Performanztest mit ~50 Usern zur Baseline-Messung', 'Lasttest mit 3.000 Usern', 'Usability-Test der Oberfläche'], answer: 1, exp: 'Immer zuerst Performanztest → Baseline-Werte (Antwortzeit, CPU, RAM) bei minimaler Last messen. Ohne Vergleichsbasis können Lasttest-Ergebnisse nicht bewertet werden.' },
+      { q: 'Lasttest: Bei 2.000 Usern = 2,4 Sek. Antwortzeit. Was schlussfolgern Sie?', opts: ['Alles in Ordnung – 2,4 Sek. ist nah genug an 2 Sek.', 'SLA verletzt – maximale Kapazität liegt UNTER 2.000 Usern', 'System ist ausreichend stabil', 'Nur mehr Hardware kaufen'], answer: 1, exp: '2,4 Sek. > 2 Sek. SLA → Verletzung. Die Kapazitätsgrenze wurde überschritten. Die maximale Kapazität liegt zwischen 1.000 und 2.000 Usern – weitere Messungen nötig.' },
+      { q: 'Was zeigt der Stresstest (5.000 User) ZUSÄTZLICH zum Lasttest?', opts: ['Dieselbe Kapazitätsgrenze nochmals', 'Systemverhalten beim Zusammenbruch und die Fähigkeit zur Wiederherstellung', 'Die Antwortzeit bei normaler Last', 'Datenbankperformanz'], answer: 1, exp: 'Stresstest ≠ Lasttest: Ziel ist nicht die Kapazitätsgrenze, sondern das Verhalten NACH dem Zusammenbruch: Gibt es Datenverlust? Erholt sich das System automatisch? Fehlermeldungen korrekt?' },
+    ]
+  },
+  {
+    name: 'Online-Banking System',
+    desc: 'Eine Bank hat täglich bis zu 5.000 gleichzeitige User an Spitzenzeiten. SLA: Antwortzeit < 3 Sek., Transaktionsfehlerrate = 0%.',
+    questions: [
+      { q: 'Was misst der Performanztest beim Banking-System?', opts: ['Die maximale Kapazität des Systems', 'Baseline-Werte (Antwortzeit, CPU, RAM) bei wenigen Usern (~100)', 'Sicherheitslücken im Authentifizierungssystem', 'Datenbankintegrität bei gleichzeitigen Transaktionen'], answer: 1, exp: 'Performanztest misst mit minimaler Last die Baseline: Antwortzeit, CPU-Auslastung, RAM-Verbrauch. Diese Werte dienen als Referenz für den Vergleich mit Lasttest-Ergebnissen.' },
+      { q: 'Lasttest zeigt: 5.000 User → 3,2 Sek. Antwortzeit. Was schlussfolgern Sie?', opts: ['5.000 User ist die maximale Kapazität', 'SLA verletzt – die Grenze liegt zwischen 3.000 und 5.000 Usern', 'System ist stabil genug für Spitzenlast', 'Die Grenze liegt bei 7.000 Usern'], answer: 1, exp: '3,2 Sek. > 3 Sek. SLA → verletzt. Die maximale Kapazität liegt zwischen 3.000 und 5.000 Usern. Weitere Tests bei z.B. 4.000 Usern nötig, um die genaue Grenze zu finden.' },
+      { q: 'Welcher Test bestimmt die MAXIMALE KAPAZITÄT des Systems?', opts: ['Stresstest – er bricht das System absichtlich', 'Usability-Test mit echten Nutzern', 'Lasttest – höchste Nutzerzahl bei der alle SLAs eingehalten werden', 'Sicherheitstest – er prüft Verfügbarkeit'], answer: 2, exp: 'Lasttest bestimmt die maximale Kapazität: Die höchste Nutzerzahl, bei der alle SLA-Ziele (Antwortzeit, Fehlerrate) noch eingehalten werden, ist die empfohlene Betriebsgrenze.' },
+    ]
+  },
+  {
+    name: 'Krankenhaus-Informationssystem (KIS)',
+    desc: 'Ein KIS wird von 500 Mitarbeitern genutzt, zu Notaufnahme-Stoßzeiten bis zu 200 gleichzeitig. SLA: Antwortzeit < 1 Sek. (sicherheitskritisch!), Verfügbarkeit 99,9%.',
+    questions: [
+      { q: 'Warum ist der Performanztest beim KIS besonders wichtig?', opts: ['Nur für Kostenoptimierung der Hardware', 'Baseline nötig – Abweichungen bei sicherheitskritischen Systemen müssen sofort erkannt werden', 'Nur für Statistikzwecke und Dokumentation', 'Um Mitarbeiter in der Systemnutzung zu schulen'], answer: 1, exp: 'Bei sicherheitskritischen Systemen (Medizin!) muss die Baseline präzise bekannt sein. Jede Verschlechterung der Antwortzeit kann gefährlich sein – ohne Vergleichswerte bleibt sie unbemerkt.' },
+      { q: 'Lasttest: 150 User → 0,9 Sek. Antwortzeit. Was bedeutet das?', opts: ['SLA verletzt – 0,9 Sek. ist zu langsam', 'SLA eingehalten – 150 User ist ein valider, sicherer Betriebspunkt', 'Test ist fehlgeschlagen', 'Die maximale Kapazität ist bereits erschöpft'], answer: 1, exp: '0,9 Sek. < 1 Sek. SLA ✅ Eingehalten. 150 gleichzeitige User sind ein sicherer Betriebspunkt. Nächste Messung bei 175 oder 200 Usern um die genaue Grenze zu bestimmen.' },
+      { q: 'Was wird beim Stresstest (400 User) ZUSÄTZLICH getestet, was der Lasttest nicht zeigt?', opts: ['Kapazitätsgrenze nochmals bestätigen', 'Verhalten beim Zusammenbruch und automatische Wiederherstellung (Datenverlust?)', 'Benutzerfreundlichkeit der Oberfläche', 'Größe der Datenbank'], answer: 1, exp: 'Stresstest beim KIS: Wie bricht das System bei 400 Usern zusammen? Gehen Patientendaten verloren? Erholt es sich automatisch? Werden Alarme ausgelöst? → Wichtig für Notfallplanung.' },
+    ]
+  },
+  {
+    name: 'Streaming-Plattform (Film-Premiere)',
+    desc: 'Eine Streaming-Plattform hat durchschnittlich 10.000 gleichzeitige User, zu Film-Premieren bis zu 80.000. SLA: Pufferzeit < 0,5 Sek.',
+    questions: [
+      { q: 'In welcher Reihenfolge führen Sie die Performanz-Tests durch?', opts: ['Stresstest → Lasttest → Performanztest', 'Performanztest → Lasttest → Stresstest', 'Lasttest → Performanztest → Stresstest', 'Alle drei gleichzeitig'], answer: 1, exp: 'Standardreihenfolge (Altklausur A6!): 1. Performanztest (Baseline), 2. Lasttest (schrittweise bis Kapazitätsgrenze), 3. Stresstest (absichtliche Überlastung). Merke: P→L→S!' },
+      { q: 'Lasttest: 60.000 User → 0,4 Sek.; 80.000 User → 0,7 Sek. Was ist die empfohlene maximale Kapazität?', opts: ['80.000 User (höchste getestete Zahl)', '60.000 User (letzter SLA-konformer Messpunkt)', '70.000 User (Schätzung)', '40.000 User (sicherheitsmarge)'], answer: 1, exp: '60.000 User: 0,4s < 0,5s SLA ✅. 80.000 User: 0,7s > 0,5s SLA ❌. Empfohlene Kapazität = 60.000 User – der letzte Messpunkt, bei dem die SLA noch eingehalten wird.' },
+      { q: 'Was zeigt der Stresstest (150.000 User) ÜBER den Lasttest hinaus?', opts: ['Bestätigt die 60.000-User-Grenze nochmals', 'Verhalten bei extremer Überlast: Absturz-Art, Session-Verluste, automatische Erholung', 'Video-Streaming-Qualität bei normaler Last', 'Genau dieselben Informationen wie der Lasttest'], answer: 1, exp: 'Stresstest zeigt: Wie stürzt das System bei 150k Usern ab? Verlieren User ihre laufenden Sessions? Erholt sich das System nach Lastabfall automatisch? Wichtig für Premiere-Risikoplanung.' },
+    ]
+  },
+  {
+    name: 'Paketzentrum-Verfolgungssystem (Weihnachten)',
+    desc: 'Ein Logistikunternehmen hat Spitzenlast zu Weihnachten mit 2.000 gleichzeitigen Paketabfragen. SLA: Antwortzeit < 1,5 Sek.',
+    questions: [
+      { q: 'Welchen Test führen Sie zur Bestimmung der Baseline-Antwortzeit durch?', opts: ['Lasttest mit 2.000 gleichzeitigen Abfragen', 'Stresstest mit 4.000 Abfragen', 'Performanztest mit ~50 gleichzeitigen Abfragen', 'Sicherheitstest auf SQL-Injection'], answer: 2, exp: 'Performanztest mit minimaler Last (~50 User) misst die Baseline-Antwortzeit bei idealem Systembetrieb. Dieser Referenzwert ist Voraussetzung für die Bewertung der Lasttest-Ergebnisse.' },
+      { q: 'Lasttest: 1.500 Abfragen → 1,6 Sek. Antwortzeit. Was folgt daraus?', opts: ['Kapazitätsgrenze ist genau 1.500 Abfragen', 'SLA verletzt – Kapazitätsgrenze liegt zwischen 1.000 und 1.500 Abfragen', 'Kein Problem, 1,6 Sek. ist akzeptabel', 'Der Stresstest ist nicht mehr nötig'], answer: 1, exp: '1,6 Sek. > 1,5 Sek. SLA → verletzt. Grenze liegt zwischen 1.000 (ok?) und 1.500 Abfragen. Feinmessung bei 1.200 und 1.400 nötig, um die genaue Grenze zu bestimmen.' },
+      { q: 'Wie liest man die maximale Kapazität aus den Lasttest-Daten ab?', opts: ['Die höchste getestete Nutzerzahl', 'Die Nutzerzahl, bei der das System zusammenbricht', 'Die höchste Nutzerzahl, bei der ALLE SLA-Ziele noch eingehalten werden', 'Der Durchschnitt aller Messpunkte'], answer: 2, exp: 'Maximale Kapazität = der letzte Lasttest-Messpunkt, bei dem alle SLA-Kriterien (Antwortzeit < 1,5 Sek., Fehlerrate etc.) noch vollständig eingehalten werden.' },
+    ]
+  },
+];
+
+let currentAufgTab = 'ak';
+let currentAufgTask = null;
+let aufgUserAnswers = {};
+
+function renderAufgaben() {
+  switchAufgTab(currentAufgTab);
+}
+
+function switchAufgTab(tab) {
+  currentAufgTab = tab;
+  document.querySelectorAll('.aufg-tab').forEach(t => t.classList.remove('active'));
+  const el = document.getElementById('aufgtab-' + tab);
+  if (el) el.classList.add('active');
+  generateAufgTask();
+}
+
+function getAkStats(conditions) {
+  let g = 0, u = 0;
+  conditions.forEach(c => {
+    if (c.op === 'between') { g += 1; u += 2; }
+    else { g += 1; u += 1; }
+  });
+  return { gueltig: g, ungueltig: u, total: g + u, tf: 1 + u };
+}
+
+function aufgShuffled(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function makeOpts4(correct) {
+  const pool = [correct, correct - 1, correct + 1, correct + 2, correct - 2].filter(v => v > 0);
+  const deduped = [...new Set(pool)].slice(0, 4);
+  while (deduped.length < 4) deduped.push(correct + deduped.length + 3);
+  return aufgShuffled(deduped.slice(0, 4));
+}
+
+function opLabel(op) { return { '>': '>', '>=': '≥', '<': '<', '<=': '≤' }[op] || op; }
+function invOpLabel(op) { return { '>=': '<', '>': '≤', '<=': '>', '<': '≥' }[op] || ''; }
+
+function generateAufgTask() {
+  aufgUserAnswers = {};
+  if (currentAufgTab === 'ak') {
+    const sc = akScenarios[Math.floor(Math.random() * akScenarios.length)];
+    const stats = getAkStats(sc.conditions);
+
+    // Build condition table
+    let condHtml = '<table class="gen-cond-table"><tr><th>#</th><th>Bedingung</th><th style="color:var(--green)">Gültig wenn</th><th style="color:var(--red)">Ungültig wenn</th></tr>';
+    sc.conditions.forEach((c, i) => {
+      let v, iv;
+      if (c.op === 'bool') { v = 'Ja / trifft zu'; iv = 'Nein / trifft nicht zu'; }
+      else if (c.op === 'between') { v = `${c.min}–${c.max} ${c.unit}`; iv = `< ${c.min} ${c.unit} oder > ${c.max} ${c.unit}`; }
+      else { v = `${opLabel(c.op)} ${c.value} ${c.unit}`; iv = `${invOpLabel(c.op)} ${c.value} ${c.unit}`; }
+      condHtml += `<tr><td style="font-weight:700;color:var(--accent)">${i+1}</td><td><strong>${c.name}</strong></td><td>${v}</td><td>${iv}</td></tr>`;
+    });
+    condHtml += '</table>';
+
+    // Q1: ÄK count
+    const q1Correct = stats.total;
+    const q1Opts = makeOpts4(q1Correct);
+    const q1CorrectIdx = q1Opts.indexOf(q1Correct);
+
+    // Q2: Testfall count
+    const q2Correct = stats.tf;
+    const q2Opts = makeOpts4(q2Correct);
+    const q2CorrectIdx = q2Opts.indexOf(q2Correct);
+
+    // Q3: Boundary value for first numeric condition
+    const numCond = sc.conditions.find(c => c.op !== 'bool');
+    let q3 = null;
+    if (numCond) {
+      let trickyLabel, isValid, why;
+      if (numCond.op === '<') {
+        trickyLabel = `${numCond.value} ${numCond.unit}`;
+        isValid = false;
+        why = `⚠️ Achtung: Bei striktem „<" ist der Grenzwert selbst NICHT eingeschlossen → ${numCond.value} ${numCond.unit} ist ungültig! Häufiger Klausurfallstrick!`;
+      } else if (numCond.op === '>') {
+        trickyLabel = `${numCond.value} ${numCond.unit}`;
+        isValid = false;
+        why = `⚠️ Bei striktem „>" ist der Grenzwert selbst NICHT eingeschlossen → ${numCond.value} ${numCond.unit} ist ungültig!`;
+      } else if (numCond.op === '<=') {
+        trickyLabel = `${numCond.value} ${numCond.unit}`;
+        isValid = true;
+        why = `Bei „≤" ist der Grenzwert EINGESCHLOSSEN → ${numCond.value} ${numCond.unit} ist gültig (letzter gültiger Wert).`;
+      } else if (numCond.op === '>=') {
+        trickyLabel = `${numCond.value} ${numCond.unit}`;
+        isValid = true;
+        why = `Bei „≥" ist der Grenzwert EINGESCHLOSSEN → ${numCond.value} ${numCond.unit} ist gültig (erster gültiger Wert).`;
+      } else if (numCond.op === 'between') {
+        trickyLabel = `${numCond.max} ${numCond.unit}`;
+        isValid = true;
+        why = `Beim „between"-Operator sind die Grenzwerte eingeschlossen → ${numCond.max} ${numCond.unit} ist gültig (letzter gültiger Wert).`;
+      }
+      q3 = {
+        q: `Grenzwertanalyse: Ist der Wert <strong>${trickyLabel}</strong> für die Bedingung „${numCond.name}" gültig oder ungültig?`,
+        opts: ['✅ Gültig (liegt im gültigen Bereich)', '❌ Ungültig (liegt im ungültigen Bereich)'],
+        answer: isValid ? 0 : 1,
+        exp: why
+      };
+    }
+
+    const questions = [
+      {
+        q: 'Wie viele Äquivalenzklassen (ÄK) entstehen insgesamt für dieses Szenario?',
+        opts: q1Opts.map(String),
+        answer: q1CorrectIdx,
+        exp: `${sc.conditions.length} Bedingungen → ${stats.total} ÄK gesamt: ${stats.gueltig} gültige (je eine pro Bedingung) + ${stats.ungueltig} ungültige.`
+          + (sc.conditions.some(c => c.op === 'between') ? ' Hinweis: „between"-Bedingungen erzeugen 3 ÄK (1 gültig, 2 ungültig).' : '')
+      },
+      {
+        q: 'Wie viele Testfälle werden nach der ÄK-Methode mindestens benötigt?',
+        opts: q2Opts.map(String),
+        answer: q2CorrectIdx,
+        exp: `Formel: 1 gemeinsamer Testfall für alle gültigen ÄK + je 1 Testfall pro ungültiger ÄK = 1 + ${stats.ungueltig} = ${stats.tf} Testfälle.`
+      },
+    ];
+    if (q3) questions.push(q3);
+
+    currentAufgTask = { type: 'ak', scenario: sc, questions, condHtml };
+  } else {
+    const sc = nftScenarios[Math.floor(Math.random() * nftScenarios.length)];
+    currentAufgTask = { type: 'nft', scenario: sc, questions: sc.questions };
+  }
+  renderAufgTask();
+}
+
+function renderAufgTask() {
+  if (!currentAufgTask) return;
+  const { type, scenario, questions, condHtml } = currentAufgTask;
+  aufgUserAnswers = {};
+
+  let html = `<div class="gen-scenario">
+    <span class="gen-badge">${type === 'ak' ? '⬛ Äquivalenzklassen & Grenzwert' : '⚡ Nichtfunktionale Tests'}</span>
+    <h3>${scenario.name}</h3>
+    <p>${scenario.desc}</p>
+    ${condHtml || ''}
+  </div>`;
+
+  questions.forEach((q, qi) => {
+    html += `<div class="gen-q" id="genq-${qi}">
+      <p>${qi + 1}. ${q.q}</p>
+      <div class="quiz-opts">`;
+    q.opts.forEach((opt, oi) => {
+      html += `<button class="quiz-opt" id="gopt-${qi}-${oi}" onclick="pickAufgOpt(${qi},${oi})">${opt}</button>`;
+    });
+    html += `</div><div class="quiz-explanation" id="gexp-${qi}">${q.exp}</div>
+    </div>`;
+  });
+
+  html += `<div class="gen-check-row">
+    <button class="btn btn-primary" onclick="checkAufgaben()">✅ Auswerten</button>
+    <button class="btn btn-ghost" onclick="generateAufgTask()">🔄 Neue Aufgabe generieren</button>
+  </div>
+  <div id="aufg-result" style="display:none;margin-top:1rem"></div>`;
+
+  document.getElementById('aufg-content').innerHTML = html;
+}
+
+function pickAufgOpt(qi, oi) {
+  aufgUserAnswers[qi] = oi;
+  document.querySelectorAll(`#genq-${qi} .quiz-opt`).forEach(b => b.classList.remove('sel'));
+  const btn = document.getElementById(`gopt-${qi}-${oi}`);
+  if (btn) btn.classList.add('sel');
+}
+
+function checkAufgaben() {
+  const qs = currentAufgTask.questions;
+  let ok = 0;
+  qs.forEach((q, qi) => {
+    const chosen = aufgUserAnswers[qi];
+    document.querySelectorAll(`#genq-${qi} .quiz-opt`).forEach((b, oi) => {
+      b.className = 'quiz-opt';
+      if (oi === q.answer) b.classList.add('right');
+      else if (oi === chosen && chosen !== q.answer) b.classList.add('wrong');
+    });
+    const expEl = document.getElementById(`gexp-${qi}`);
+    if (expEl) expEl.classList.add('show');
+    if (chosen === q.answer) ok++;
+  });
+  const pct = Math.round(ok / qs.length * 100);
+  const res = document.getElementById('aufg-result');
+  const color = pct === 100 ? 'var(--green)' : pct >= 67 ? 'var(--yellow)' : 'var(--red)';
+  const bg = pct === 100 ? 'var(--green-bg)' : pct >= 67 ? 'var(--yellow-bg)' : 'var(--red-bg)';
+  const msg = pct === 100 ? '🎉 Perfekt! Alle richtig!' : pct >= 67 ? '👍 Gut gemacht!' : '📚 Nochmal üben!';
+  res.style.display = 'block';
+  res.innerHTML = `<div style="background:${bg};border:1.5px solid ${color};border-radius:10px;padding:14px 18px;font-weight:700;color:${color}">${msg} ${ok}/${qs.length} richtig (${pct}%)</div>`;
+}
+
 </script>
 </body>
 </html>
