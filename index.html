@@ -222,6 +222,47 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
 .status-chip { border-radius: 10px; padding: 10px 4px; }
 .status-chip .chip-n { font-size: 22px; font-weight: 700; }
 .status-chip .chip-l { font-size: 11px; margin-top: 2px; }
+/* ALTKLAUSUR */
+.ak-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;}
+.ak-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;font-weight:700;font-size:14px;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:.75rem;flex-wrap:wrap;gap:4px;}
+.ak-head.warn{color:var(--red);}
+.ak-q-text{font-size:14px;line-height:1.85;color:var(--text);white-space:pre-line;}
+.sol-reveal{background:var(--surface2);border-left:3px solid var(--green);border-radius:0 10px 10px 0;padding:14px 16px;font-size:13px;color:#333;line-height:1.8;display:none;margin-top:.75rem;}
+.sol-reveal.show{display:block;}
+.sol-reveal strong{color:var(--accent);}
+.sol-reveal ul,.sol-reveal ol{padding-left:1.2rem;margin-top:.4rem;}
+.sol-reveal li{margin-bottom:4px;}
+.sol-reveal table.solt{width:100%;border-collapse:collapse;font-size:12px;margin-top:.5rem;}
+.sol-reveal table.solt th{background:var(--border);padding:6px 9px;text-align:left;border:1px solid var(--border);font-weight:600;color:var(--accent);}
+.sol-reveal table.solt td{padding:6px 9px;border:1px solid var(--border);}
+/* EXAM FREITEXT */
+.exam-mode-sel{display:flex;gap:8px;margin-bottom:1.5rem;}
+.exam-mode-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-family:var(--font);transition:all 0.15s;}
+.exam-mode-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;}
+.ft-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem;}
+.ft-head{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:.6rem;display:flex;justify-content:space-between;}
+.ft-q{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:.75rem;white-space:pre-line;}
+.ft-area{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:14px;color:var(--text);font-family:var(--font);resize:vertical;line-height:1.6;display:block;margin-top:.5rem;}
+.ft-area:focus{outline:none;border-color:var(--accent);}
+.ft-sol{background:var(--surface2);border-left:3px solid var(--green);border-radius:0 10px 10px 0;padding:14px 16px;font-size:13px;color:#333;line-height:1.8;display:none;margin-top:.75rem;}
+.ft-sol.show{display:block;}
+.ft-sol strong{color:var(--accent);}
+.ft-sol ul,.ft-sol ol{padding-left:1.2rem;margin-top:.3rem;}
+.ft-sol li{margin-bottom:4px;}
+.ft-sol table.solt{width:100%;border-collapse:collapse;font-size:12px;margin-top:.5rem;}
+.ft-sol table.solt th{background:var(--border);padding:6px 9px;text-align:left;border:1px solid var(--border);font-weight:600;color:var(--accent);}
+.ft-sol table.solt td{padding:6px 9px;border:1px solid var(--border);}
+.ft-acts{display:none;gap:8px;margin-top:.75rem;}
+.ft-acts.show{display:flex;}
+/* HOME KLAUSUR OVERVIEW */
+.kl-section{margin-top:2rem;background:var(--surface);border:1.5px solid var(--accent);border-radius:16px;padding:1.5rem;}
+.kl-section h2{font-size:15px;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
+.kl-row{display:flex;align-items:flex-start;gap:10px;padding:.55rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.kl-row:last-child{border-bottom:none;padding-bottom:0;}
+.kl-num{font-size:11px;font-weight:700;background:var(--accent);color:#fff;border-radius:6px;padding:3px 9px;white-space:nowrap;flex-shrink:0;margin-top:1px;}
+.kl-title{font-size:13px;font-weight:700;color:var(--text);flex-shrink:0;min-width:145px;}
+.kl-pts{font-size:12px;color:var(--accent);font-weight:700;white-space:nowrap;flex-shrink:0;background:var(--surface2);padding:2px 8px;border-radius:10px;}
+.kl-topics{font-size:12px;color:var(--muted);line-height:1.5;flex:1;}
 </style>
 </head>
 <body>
@@ -237,6 +278,7 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
   <div class="nav-tab" onclick="showPage('fortschritt')">📊 Fortschritt</div>
   <div class="nav-tab" onclick="showPage('exam')">Klausur</div>
   <div class="nav-tab" onclick="showPage('aufgaben')">🎯 Aufgaben</div>
+  <div class="nav-tab" onclick="showPage('altklausur')">📜 Altklausur</div>
   <div class="nav-score">✅ <strong id="global-ok">0</strong> richtig</div>
 </nav>
 
@@ -335,6 +377,45 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
       <h3>Aufgaben-Generator</h3>
       <p>Dynamisch erzeugte ÄK- und NFT-Aufgaben – jedes Mal neu!</p>
       <div class="badge" style="background:var(--accent);color:#fff">NEU – Altklausur</div>
+    </div>
+  </div>
+
+  <div class="kl-section">
+    <h2>📋 Klausurrelevante Themen – Überblick (90 Punkte gesamt)</h2>
+    <div class="kl-row">
+      <span class="kl-num">A1 · 8 Pkt</span>
+      <span class="kl-title">Grundlagen &amp; Testen</span>
+      <span class="kl-topics">QM-Definition + 4 Bestandteile | 3 QS-Kategorien | Fehlerwirkungen → <strong>B) Dynamische Tests</strong> | Verifikation vs. Validierung | Testbasis → <strong>C)</strong> | Traceability → <strong>B)</strong></span>
+    </div>
+    <div class="kl-row">
+      <span class="kl-num">A2 · 4 Pkt</span>
+      <span class="kl-title">Teststufen</span>
+      <span class="kl-topics">Testziele 1–8 zuordnen: <strong>Unit → 1,3</strong> | <strong>Integration → 2,4,8</strong> | <strong>System → 5,6</strong> | <strong>Abnahme → 7</strong></span>
+    </div>
+    <div class="kl-row">
+      <span class="kl-num">A3 · 21 Pkt</span>
+      <span class="kl-title">Black-Box Techniken</span>
+      <span class="kl-topics">Entscheidungstabelle: 2⁴ = <strong>16 Spalten</strong> | Zuordnung: <strong>1→a, 2→d, 3→b, 4→e, 5→g</strong> | Wohngeld: 6 ÄK, 4 Testfälle, Grenzwerte | ⚠️ 500€ beim Mietpreis ist <strong>UNGÜLTIG</strong> (strikt &lt;)</span>
+    </div>
+    <div class="kl-row">
+      <span class="kl-num">A4 · 11 Pkt</span>
+      <span class="kl-title">Anforderungen</span>
+      <span class="kl-topics">Funktional vs. nicht-funktional | 3 ISO 25010-Merkmale (z.B. Wartbarkeit, Zuverlässigkeit, Sicherheit) | 4 RE-Aktivitäten: Ermittlung → Analyse → Spezifikation → Validierung | Verfolgbarkeit + Zwecke</span>
+    </div>
+    <div class="kl-row">
+      <span class="kl-num">A5 · 4 Pkt</span>
+      <span class="kl-title">Reviews</span>
+      <span class="kl-topics">Hauptziel: frühzeitige Fehlererkennung | Nur im Review: <strong>A) Architekturfehler, C) Fehlinterpretation, D) Inkonsistenzen</strong> | Vorteile: <strong>A) früh, B) keine Testumgebung, D) Wissenstransfer</strong></span>
+    </div>
+    <div class="kl-row">
+      <span class="kl-num">A6 · 15 Pkt</span>
+      <span class="kl-title">Nichtfunktionale Tests</span>
+      <span class="kl-topics">Webshop-Szenario: <strong>Performanztest</strong> (Baseline) → <strong>Lasttest</strong> (schrittweise bis Kapazität) → <strong>Stresstest</strong> (absichtliche Überlast) | Kapazität = höchste Nutzerzahl mit SLA-Einhaltung</span>
+    </div>
+    <div class="kl-row">
+      <span class="kl-num">A7 · 27 Pkt</span>
+      <span class="kl-title">QS im Unternehmen</span>
+      <span class="kl-topics"><strong>V-Modell</strong> für sicherheitskritisches System (Nachweisbarkeit, Meilensteine) | Anforderungsschwierigkeiten + Techniken | Reviews: <strong>Inspektion</strong> (Anforderungen) + <strong>Technisches Review</strong> (Architektur)</span>
     </div>
   </div>
 </div>
@@ -775,17 +856,45 @@ ul.ak li { margin-bottom: 3px; font-size: 14px; }
     <button class="back-btn" onclick="showPage('home')">← Zurück</button>
     <div class="learn-title">🎓 Klausur-Simulation</div>
   </div>
-  <div class="exam-intro">
-    <h2>Simulierte Klausur</h2>
-    <p>10 Fragen aus allen Themen der Altklausur. Du hast <strong>10 Minuten</strong> Zeit. Danach bekommst du dein Ergebnis mit Erklärungen.</p>
-    <div class="timer" id="exam-timer">10:00</div>
-    <button class="btn btn-primary" id="exam-start-btn" onclick="startExam()">Klausur starten</button>
+  <div class="exam-mode-sel">
+    <button class="exam-mode-btn active" id="exammode-mc" onclick="switchExamMode('mc')">🎯 Multiple Choice</button>
+    <button class="exam-mode-btn" id="exammode-ft" onclick="switchExamMode('ft')">✍️ Freitext-Aufgaben</button>
   </div>
-  <div id="exam-questions" style="display:none"></div>
-  <div id="exam-result" style="display:none"></div>
+  <!-- MC MODE -->
+  <div id="exam-mc-section">
+    <div class="exam-intro">
+      <h2>Simulierte Klausur</h2>
+      <p>10 Fragen aus allen Themen der Altklausur. Du hast <strong>10 Minuten</strong> Zeit. Danach bekommst du dein Ergebnis mit Erklärungen.</p>
+      <div class="timer" id="exam-timer">10:00</div>
+      <button class="btn btn-primary" id="exam-start-btn" onclick="startExam()">Klausur starten</button>
+    </div>
+    <div id="exam-questions" style="display:none"></div>
+    <div id="exam-result" style="display:none"></div>
+  </div>
+  <!-- FREITEXT MODE -->
+  <div id="exam-ft-section" style="display:none">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem">
+      <p style="font-size:14px;font-weight:600;margin-bottom:.4rem">✍️ Klausur-Aufgaben mit Freitext</p>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7">Beantworte die Fragen schriftlich wie in der echten Klausur. Dann Musterlösung aufdecken und selbst bewerten.</p>
+    </div>
+    <div id="exam-ft-content"></div>
+  </div>
 </div>
 
 <!-- AUFGABEN-GENERATOR -->
+<!-- ALTKLAUSUR -->
+<div class="page" id="page-altklausur">
+  <div class="learn-header">
+    <button class="back-btn" onclick="showPage('home')">← Zurück</button>
+    <div class="learn-title">📜 Altklausur mit Musterlösung</div>
+  </div>
+  <div style="background:var(--surface);border:1.5px solid var(--accent);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
+    <div style="font-weight:700;font-size:14px;color:var(--accent);margin-bottom:.5rem">📋 QM-Altklausur 2025 – Original (7 Aufgaben, 90 Punkte)</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.7">Alle 7 Original-Aufgaben mit aufklappbaren Musterlösungen. Erst selbst lösen, dann Lösung aufdecken!</div>
+  </div>
+  <div id="ak-content"></div>
+</div>
+
 <div class="page" id="page-aufgaben">
   <div class="learn-header">
     <button class="back-btn" onclick="showPage('home')">← Zurück</button>
@@ -968,7 +1077,7 @@ const quizQuestions = [
   { topic:'reviews', q: "Welche 3 Fehlerarten erkennt ein Review, die Tests oft übersehen?", opts: ["Laufzeitabsturz, Performanz, Speicherleck","Architekturfehler, falsche Interpretation der Anforderungen, Inkonsistenzen in Dokumenten","Syntaxfehler, Compilerfehler, Typfehler","Datenbankfehler, Netzwerkfehler, Timeout"], answer: 1, exp: "A) Architekturfehler, C) Falsche Interpretation der Anforderungen, D) Inkonsistenzen in der Datenbankschema-Definition – alles Entwurfs-/Dokumentfehler." },
   { topic:'nftest', q: "In welcher Reihenfolge bestimmt man die maximale Benutzerkapazität?", opts: ["Stresstest → Lasttest → Performanztest","Performanztest (Baseline) → Lasttest (bis Maximum) → Stresstest (Überlast)","Lasttest → Performanztest → Stresstest","Alle Testarten gleichzeitig"], answer: 1, exp: "Erst Performanztest: Baseline bei wenig Usern. Dann Lasttest: schrittweise steigern bis zur Kapazitätsgrenze. Dann Stresstest: absichtlich überschreiten." },
   { topic:'grundlagen', q: "Was kann als Testbasis für Softwaretests dienen?", opts: ["Die Projektplanung für den Zeitplan","Code-Kommentare","Anforderungsspezifikationen, User Stories, Designbeschreibungen","Liste bekannter Bugs"], answer: 2, exp: "Testbasis = Dokumente aus denen Testfälle abgeleitet werden: Anforderungsspezifikationen, Benutzergeschichten, Designbeschreibungen (Antwort C aus der Altklausur)." },
-].sort(() => Math.random() - 0.5).slice(0, 12);
+];
 
 const examQuestions = [
   { q: "Was umfasst Qualitätsmanagement? (2 Punkte)", opts: ["Nur Testen","Planung, Sicherung, Kontrolle, Verbesserung","Nur Code Reviews","Nur Dokumentation"], answer: 1, exp: "QM umfasst Qualitätsplanung, Qualitätssicherung, Qualitätskontrolle und Qualitätsverbesserung." },
@@ -1047,8 +1156,12 @@ const lueckenTexts = [
 ];
 
 // ===================== STATE =====================
+function shuffleArr(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function prepQM(q){const pairs=q.opts.map((opt,i)=>({opt,correct:i===q.answer}));const s=shuffleArr(pairs);return{...q,opts:s.map(x=>x.opt),answer:s.findIndex(x=>x.correct)};}
+
 let currentCardSet = [], currentTopic = '', cardIdx = 0, cardRevealed = false, globalOk = 0;
 let quizIdx = 0, quizOk = 0, quizWrong = 0, quizAnswered = false;
+let activeQuizQs = [];
 let examStarted = false, examTimer = null, examSec = 600;
 let dragExIdx = 0, dragPlacements = {}, dragSelTerm = null, dragSelElemId = null;
 let lueckeIdx = 0, lueckeOk = 0, lueckeAnswered = false;
@@ -1060,7 +1173,7 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  const map = { home: 0, learn: 1, quiz: 2, drag: 3, luecke: 4, cheat: 5, fortschritt: 6, exam: 7, aufgaben: 8 };
+  const map = { home: 0, learn: 1, quiz: 2, drag: 3, luecke: 4, cheat: 5, fortschritt: 6, exam: 7, aufgaben: 8, altklausur: 9 };
   const tabs = document.querySelectorAll('.nav-tab');
   if (map[id] !== undefined) tabs[map[id]].classList.add('active');
   if (id === 'home') updateHomeProgress();
@@ -1073,6 +1186,7 @@ function showPage(id) {
   if (id === 'drag') { dragExIdx = 0; renderDragEx(); }
   if (id === 'luecke') { lueckeIdx = 0; lueckeOk = 0; renderLueckeQ(); }
   if (id === 'aufgaben') renderAufgaben();
+  if (id === 'altklausur') renderAltklausur();
 }
 
 function updateHomeProgress() {
@@ -1166,14 +1280,19 @@ function prevCard() { if (cardIdx > 0) { cardIdx--; renderCard(); } }
 
 // ===================== QUIZ =====================
 function initQuiz() {
+  const pool = quizQuestions.map(q => {
+    if(q.v && Math.random()<0.65){const alt=q.v[Math.floor(Math.random()*q.v.length)];return{...q,q:alt};}
+    return q;
+  });
+  activeQuizQs = shuffleArr(pool).slice(0,15).map(prepQM);
   quizIdx = 0; quizOk = 0; quizWrong = 0; quizAnswered = false;
   renderQuizQ();
 }
 
 function renderQuizQ() {
-  const total = quizQuestions.length;
+  const total = activeQuizQs.length;
   if (quizIdx >= total) { showQuizDone(); return; }
-  const q = quizQuestions[quizIdx];
+  const q = activeQuizQs[quizIdx];
   document.getElementById('q-counter').textContent = 'Frage ' + (quizIdx + 1) + ' / ' + total;
   document.getElementById('q-score').innerHTML = '✅ ' + quizOk + ' &nbsp; ❌ ' + quizWrong;
   document.getElementById('quiz-prog').style.width = ((quizIdx / total) * 100) + '%';
@@ -1188,7 +1307,7 @@ function renderQuizQ() {
 function answerQuiz(i) {
   if (quizAnswered) return;
   quizAnswered = true;
-  const q = quizQuestions[quizIdx];
+  const q = activeQuizQs[quizIdx];
   const topic = q.topic || 'allgemein';
   document.querySelectorAll('.quiz-opt').forEach((b, idx) => {
     if (idx === q.answer) b.classList.add('right');
@@ -1208,7 +1327,7 @@ function answerQuiz(i) {
 function nextQuiz() { quizIdx++; renderQuizQ(); }
 
 function showQuizDone() {
-  const pct = Math.round(quizOk / quizQuestions.length * 100);
+  const pct = Math.round(quizOk / activeQuizQs.length * 100);
   const emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
   const weak = Object.entries(pr.q.byTopic)
     .filter(([_, v]) => v.total >= 2 && v.ok / v.total < 0.65)
@@ -1226,7 +1345,7 @@ function showQuizDone() {
   document.getElementById('quiz-content').innerHTML = `
     <div class="quiz-done">
       <h2>${emoji} ${pct}%</h2>
-      <p>${quizOk} von ${quizQuestions.length} richtig</p>
+      <p>${quizOk} von ${activeQuizQs.length} richtig</p>
       ${weakHtml}
       <button class="btn btn-primary" onclick="initQuiz()">Nochmal</button>
       <button class="btn btn-ghost" style="margin-left:8px" onclick="showPage('fortschritt')">📊 Fortschritt</button>
@@ -1830,6 +1949,128 @@ function checkAufgaben() {
   const msg = pct === 100 ? '🎉 Perfekt! Alle richtig!' : pct >= 67 ? '👍 Gut gemacht!' : '📚 Nochmal üben!';
   res.style.display = 'block';
   res.innerHTML = `<div style="background:${bg};border:1.5px solid ${color};border-radius:10px;padding:14px 18px;font-weight:700;color:${color}">${msg} ${ok}/${qs.length} richtig (${pct}%)</div>`;
+}
+
+// ===================== ALTKLAUSUR DATA =====================
+const altklausurQM = [
+  { nr:'Aufgabe 1', pts:8, time:'~12 min', warn:false,
+    q:'Softwarequalität – Grundlagen und Testen\n\n(1) (2 Pkt) Erklären Sie in eigenen Worten, was Qualitätsmanagement ist und was es umfasst.\n\n(2) (1 Pkt) Nennen Sie 3 Kategorien der Qualitätssicherungsmaßnahmen.\n\n(3) (1 Pkt) Welche qualitätssichernde Maßnahme konzentriert sich am stärksten auf die Erkennung von Fehlerwirkungen?\n   A) Statische Codeanalyse\n   B) Dynamische Analyse durch Tests\n   C) Formale Verifikationsverfahren\n   D) Durchführung von Reviews\n\n(4) (2 Pkt) Erläutern Sie, was Verifikation und Validierung bedeuten.\n\n(5) (1 Pkt) Welche Elemente dienen typischerweise als Testbasis?\n   A) Projektplanung (Zeitplan)\n   B) Code-Kommentare\n   C) Anforderungsspezifikationen, User Stories, Designbeschreibungen\n   D) Liste bekannter Bugs\n\n(6) (1 Pkt) Was versteht man unter „Traceability" (Verfolgbarkeit)?\n   A) Arbeitszeiten des Testteams erfassen\n   B) Anforderungen ↔ Testfälle in beide Richtungen dokumentieren\n   C) Code durchsuchen und Abschnitte finden\n   D) Den gesamten Entwicklungsprozess dokumentieren',
+    sol:'<strong>(1) Qualitätsmanagement (2 Pkt):</strong> Alle geplanten Maßnahmen, um sicherzustellen, dass ein Produkt die definierten Qualitätsanforderungen erfüllt. Umfasst:<ul><li>Qualitätsplanung – Ziele und Standards festlegen</li><li>Qualitätssicherung – Prozesse zur Fehlerprävention</li><li>Qualitätskontrolle – Überprüfung der Produkte</li><li>Qualitätsverbesserung – kontinuierliche Optimierung</li></ul><br><strong>(2) 3 QS-Kategorien (1 Pkt):</strong><ul><li><strong>Konstruktiv</strong> – Fehler verhindern (z.B. Code-Guidelines, Schulungen)</li><li><strong>Analytisch</strong> – Fehler finden (z.B. Tests, Reviews, Codeanalyse)</li><li><strong>Organisatorisch</strong> – Prozesse regeln (z.B. QM-Pläne, Projektrollen)</li></ul><br><strong>(3) Richtige Antwort: B) Dynamische Analyse durch Tests (1 Pkt)</strong><br>Nur dynamische Tests führen die Software tatsächlich aus → Fehlerwirkungen (sichtbares Fehlverhalten zur Laufzeit) werden erkannt.<br><br><strong>(4) Verifikation vs. Validierung (je 1 Pkt):</strong><ul><li><strong>Verifikation:</strong> „Bauen wir es richtig?" – Prüfung ob das Produkt gemäß Spezifikation korrekt umgesetzt wurde.</li><li><strong>Validierung:</strong> „Bauen wir das Richtige?" – Prüfung ob das Produkt den tatsächlichen Kundenbedürfnissen entspricht.</li></ul><br><strong>(5) Richtige Antwort: C) (1 Pkt)</strong><br>Testbasis = Dokumente aus denen Testfälle abgeleitet werden: Anforderungsspezifikationen, Benutzergeschichten (User Stories) und Designbeschreibungen.<br><br><strong>(6) Richtige Antwort: B) (1 Pkt)</strong><br>Traceability = die Fähigkeit, Anforderungen zu den Testfällen die sie validieren, und umgekehrt Testfälle zu den Anforderungen zu dokumentieren und nachzuvollziehen.' },
+  { nr:'Aufgabe 2', pts:4, time:'~8 min', warn:false,
+    q:'Testprozess und Teststufen\n\nTabelle 1 zeigt 8 Testziele. Ordnen Sie diese den Teststufen aus Tabelle 2 zu. Tragen Sie die Nummern in die rechte Spalte ein.\n\nTestziele:\n1  Funktionale Fehler in separat testbaren Komponenten oder Klassen finden.\n2  Fehler an Schnittstellen und Wechselwirkungen finden.\n3  Umsetzung impliziter Anforderungen überprüfen.\n4  Fehlerhafte Interaktionen zwischen einzelnen Komponenten finden.\n5  Funktionale und nicht-funktionale Fehler in einer Software / einem System finden.\n6  Probleme, die das Gesamtsystem betreffen, finden.\n7  Vertrauen in das System, Teilsystem oder nicht-funktionale Eigenschaften gewinnen.\n8  Fehler an Schnittstellen mit externen Systemen finden.\n\nTeststufen:\nA. Unit-/Komponententest  →  ?\nB. Integrationstest        →  ?\nC. Systemtest              →  ?\nD. Abnahmetest             →  ?',
+    sol:'<strong>Korrekte Zuordnung (je 0,5 Pkt, gesamt 4 Pkt):</strong><table class="solt"><tr><th>Teststufe</th><th>Testziele Nr.</th><th>Begründung</th></tr><tr><td><strong>A. Unit-/Komponententest</strong></td><td><strong>1, 3</strong></td><td>Einzelne Klasse/Komponente; auch implizite Anforderungen</td></tr><tr><td><strong>B. Integrationstest</strong></td><td><strong>2, 4, 8</strong></td><td>Schnittstellen intern (2,4) und zu externen Systemen (8)</td></tr><tr><td><strong>C. Systemtest</strong></td><td><strong>5, 6</strong></td><td>Gesamtsystem – funktional + nicht-funktional</td></tr><tr><td><strong>D. Abnahmetest</strong></td><td><strong>7</strong></td><td>Vertrauen beim Auftraggeber / Kunden gewinnen</td></tr></table>' },
+  { nr:'Aufgabe 3', pts:21, time:'~25 min', warn:true,
+    q:'Anforderungsbasierte (Black-Box) Techniken  [GRÖSSTE AUFGABE – 21 Punkte]\n\n(1) (1 Pkt) Wie viele Spalten brauchen Sie in einer vollständigen Entscheidungstabelle mit 4 booleschen Bedingungen?\n\n(2) (5 Pkt) Ordnen Sie die Testmethoden den Beschreibungen zu (Format: Zahl Buchstabe):\n\nTestmethoden:\n1. Entscheidungstabellen\n2. Grenzwertanalyse\n3. Äquivalenzklassenbildung\n4. Anwendungsfallbasiertes Testen\n5. Zustandsbasiertes Testen\n\nBeschreibungen:\na. Bedingungskombinationen mit einem Tabellenmodell testen\nb. Testbedingungen in Klassen gleich behandelter Werte gruppieren\nc. Konfigurationskombinationen festlegen und testen\nd. Grenzwerte für die einzelnen Klassen testen\ne. Anwendungsfälle bestimmen und entsprechend testen\nf. Fehlerwirkungen aus der Vergangenheit analysieren\ng. Alle gültigen Zustände und Übergänge identifizieren und testen\n\n(3) (15 Pkt) Wohngeld-Programm:\nAnspruch besteht wenn ALLE 3 Bedingungen erfüllt:\n(1) Wohnsitz in Deutschland\n(2) Einkommen ≤ 1.600 € netto/Monat\n(3) Mietpreis < 500 € pro Monat\n\nWenden Sie Äquivalenzklassenmethode UND Grenzwertanalyse an.',
+    sol:'<strong>(1) Spaltenanzahl: 2⁴ = 16 Spalten (1 Pkt)</strong><br>Formel: 2ⁿ bei n booleschen Bedingungen.<br><br><strong>(2) Zuordnung (je 1 Pkt):</strong><table class="solt"><tr><th>Nr.</th><th>Testmethode</th><th>→</th><th>Beschreibung</th></tr><tr><td>1</td><td>Entscheidungstabellen</td><td>→ <strong>a</strong></td><td>Bedingungskombinationen tabellarisch</td></tr><tr><td>2</td><td>Grenzwertanalyse</td><td>→ <strong>d</strong></td><td>Grenzwerte der einzelnen Klassen</td></tr><tr><td>3</td><td>Äquivalenzklassenbildung</td><td>→ <strong>b</strong></td><td>Klassen gleich behandelter Werte</td></tr><tr><td>4</td><td>Anwendungsfallbasiert</td><td>→ <strong>e</strong></td><td>Anwendungsfälle bestimmen + testen</td></tr><tr><td>5</td><td>Zustandsbasiert</td><td>→ <strong>g</strong></td><td>Alle Zustände + Übergänge</td></tr></table><em>c und f passen zu keiner der 5 Methoden.</em><br><br><strong>(3) Wohngeld – Äquivalenzklassen (je 0,5 Pkt = 3 Pkt):</strong><table class="solt"><tr><th>Bedingung</th><th>Gültige ÄK</th><th>Ungültige ÄK</th></tr><tr><td>Wohnsitz</td><td>ÄK1: in Deutschland</td><td>ÄK2: nicht in Deutschland</td></tr><tr><td>Einkommen</td><td>ÄK3: 0 – 1.600 €</td><td>ÄK4: > 1.600 €</td></tr><tr><td>Mietpreis</td><td>ÄK5: 0 – 499 €</td><td>ÄK6: ≥ 500 € (⚠️ strikt &lt;!)</td></tr></table><br><strong>Testfälle ÄK-Methode (min. 4 Pkt):</strong><table class="solt"><tr><th>TF</th><th>Wohnsitz</th><th>Einkommen</th><th>Mietpreis</th><th>ÄK</th><th>Ergebnis</th></tr><tr><td>TF1</td><td>Deutschland</td><td>1.200 €</td><td>400 €</td><td>ÄK1+3+5</td><td>✅ Wohngeld</td></tr><tr><td>TF2</td><td>Österreich</td><td>1.200 €</td><td>400 €</td><td>ÄK2</td><td>❌ Kein Wohngeld</td></tr><tr><td>TF3</td><td>Deutschland</td><td>1.800 €</td><td>400 €</td><td>ÄK4</td><td>❌ Kein Wohngeld</td></tr><tr><td>TF4</td><td>Deutschland</td><td>1.200 €</td><td>600 €</td><td>ÄK6</td><td>❌ Kein Wohngeld</td></tr></table><br><strong>Grenzwertanalyse (4–6 Pkt):</strong><table class="solt"><tr><th>Bedingung</th><th>Grenzwert darunter</th><th>Grenzwert selbst</th><th>Grenzwert darüber</th></tr><tr><td>Einkommen ≤ 1.600 €</td><td>1.599 € ✅ gültig</td><td>1.600 € ✅ gültig (≤!)</td><td>1.601 € ❌ ungültig</td></tr><tr><td>Mietpreis &lt; 500 €</td><td>499 € ✅ gültig</td><td><strong>500 € ❌ UNGÜLTIG!</strong></td><td>501 € ❌ ungültig</td></tr></table><strong>⚠️ Kritischer Punkt:</strong> Mietpreis < 500 (nicht ≤). Daher ist 500 € selbst schon ungültig!' },
+  { nr:'Aufgabe 4', pts:11, time:'~15 min', warn:false,
+    q:'Qualität der Anforderungen\n\n(1) (2 Pkt) Erläutern Sie den Unterschied zwischen funktionalen und nicht-funktionalen Anforderungen.\n\n(2) (3 Pkt) Nennen Sie drei Qualitätsmerkmale nach ISO 25010 und erklären Sie diese kurz.\n\n(3) (2 Pkt) Nennen Sie 4 grundsätzliche Aktivitäten des Anforderungs-Engineering-Prozesses.\n\n(4) (4 Pkt) Erläutern Sie, was Verfolgbarkeit der Anforderungen bedeutet. Nennen Sie die Zwecke, für die Verfolgbarkeit verwendet wird.',
+    sol:'<strong>(1) Funktional vs. nicht-funktional (je 1 Pkt):</strong><ul><li><strong>Funktionale Anforderungen:</strong> Beschreiben WAS das System tun soll – die konkreten Funktionen und Verhaltensweisen. Beispiel: „Das System authentifiziert Benutzer per Login."</li><li><strong>Nicht-funktionale Anforderungen:</strong> Beschreiben WIE GUT das System es tut – Qualitätseigenschaften. Beispiel: „Das System antwortet in unter 2 Sekunden (Performanz)." Umfasst: Sicherheit, Wartbarkeit, Zuverlässigkeit, Usability.</li></ul><br><strong>(2) 3 ISO 25010-Merkmale (je 1 Pkt):</strong><ul><li><strong>Funktionale Eignung:</strong> Ob die Software alle geforderten Funktionen korrekt und vollständig erfüllt.</li><li><strong>Zuverlässigkeit:</strong> Wie stabil das System unter definierten Bedingungen über Zeit läuft (keine Abstürze, konsistentes Verhalten).</li><li><strong>Wartbarkeit:</strong> Wie leicht das System geändert, erweitert oder korrigiert werden kann.</li><li><em>Weitere: Sicherheit, Usability (Gebrauchstauglichkeit), Leistungseffizienz, Kompatibilität, Portabilität</em></li></ul><br><strong>(3) 4 RE-Aktivitäten (je 0,5 Pkt):</strong><ol><li><strong>Ermittlung</strong> – Anforderungen erheben (Interviews, Beobachtung, Workshops)</li><li><strong>Analyse</strong> – Strukturieren, Konflikte auflösen, priorisieren</li><li><strong>Spezifikation</strong> – Schriftlich dokumentieren (SRS/Lastenheft)</li><li><strong>Validierung</strong> – Korrektheit und Vollständigkeit der Anforderungen prüfen</li></ol><br><strong>(4) Verfolgbarkeit (4 Pkt):</strong><br>Verfolgbarkeit = Anforderungen mit Designdokumenten, Code und Testfällen verknüpfen – sowohl vorwärts als auch rückwärts (bidirektional: Anforderung → Testfall und Testfall → Anforderung).<br><strong>Zwecke (je 1 Pkt):</strong><ul><li>Vollständigkeit prüfen: Sind alle Anforderungen durch Testfälle abgedeckt?</li><li>Auswirkungsanalyse: Was muss getestet werden, wenn sich eine Anforderung ändert?</li><li>Nachweisbarkeit: Belegen, dass alle Anforderungen erfüllt und getestet wurden.</li><li>Fehlerzuordnung: Welche Anforderung wurde durch einen bestimmten Fehler verletzt?</li></ul>' },
+  { nr:'Aufgabe 5', pts:4, time:'~8 min', warn:false,
+    q:'Reviews\n\n(1) (2 Pkt) Was ist das Hauptziel eines Reviews in der Softwarequalitätssicherung?\n\n(2) (1 Pkt) Welche typischen Fehlerarten können bei einem Review entdeckt werden, die beim Testen möglicherweise unentdeckt bleiben? Markieren Sie DREI richtige:\n   A) Architekturfehler\n   B) Probleme mit der Usability\n   C) Falsche Interpretation der Anforderungen\n   D) Inkonsistenzen in der Datenbankschema-Definition\n   E) Sicherheitslücken\n   F) Fehlerhafte Implementierung von Geschäftsregeln\n\n(3) (1 Pkt) Markieren Sie DREI Vorteile von Reviews gegenüber dynamischen Tests:\n   A) Reviews decken Fehler frühzeitig auf, was Kosten spart.\n   B) Reviews erfordern keine Testumgebung oder ausführbaren Code.\n   C) Reviews stellen sicher, dass nicht-funktionale Anforderungen erfüllt sind.\n   D) Reviews fördern Wissenstransfer und gemeinsame Verantwortung.\n   E) Reviews können Performance-Probleme aufdecken.\n   F) Mit Reviews werden ca. 80% Fehler gefunden.',
+    sol:'<strong>(1) Hauptziel Reviews (2 Pkt):</strong> Frühzeitige Erkennung und Beseitigung von Fehlern in Software-Artefakten (Dokumente, Anforderungen, Architektur, Code), bevor sie in die nächste Entwicklungsphase übergehen. Reviews sind statische Prüfverfahren – sie brauchen keinen ausführbaren Code.<br><br><strong>(2) Richtige Antworten: A, C, D (1 Pkt):</strong><ul><li>✅ <strong>A) Architekturfehler</strong> – nur im Entwurfsdokument erkennbar, nicht zur Laufzeit</li><li>❌ B) Usability – findet eher der Usability-Test (dynamisch)</li><li>✅ <strong>C) Falsche Interpretation der Anforderungen</strong> – logisches Missverständnis, nur beim Lesen erkennbar</li><li>✅ <strong>D) Inkonsistenzen in der Datenbankschema-Definition</strong> – Dokumentinkonsistenz, nur lesend erkennbar</li><li>❌ E) Sicherheitslücken – teils durch Penetrationstest (dynamisch)</li><li>❌ F) Fehlerhafte Implementierung – findet der Unit-Test</li></ul><br><strong>(3) Richtige Antworten: A, B, D (1 Pkt):</strong><ul><li>✅ <strong>A)</strong> Frühe Fehlerkennung → Kosten sparen</li><li>✅ <strong>B)</strong> Keine Testumgebung oder ausführbarer Code nötig</li><li>❌ C) Reviews können nicht-funktionale Anforderungen nicht vollständig sicherstellen</li><li>✅ <strong>D)</strong> Wissenstransfer und gemeinsame Verantwortung</li><li>❌ E) Performance-Probleme findet der Lasttest (dynamisch)</li><li>❌ F) Die 80%-Aussage ist eine Faustregel, gilt nicht allgemein</li></ul>' },
+  { nr:'Aufgabe 6', pts:15, time:'~18 min', warn:false,
+    q:'Nichtfunktionale Tests\n\nAls Produktleiterin sind Sie für eine neue Webshop-Applikation verantwortlich. Entwickeln Sie ein Testszenario, das die Testarten Performanztest, Lasttest und Stresstest kombiniert, um die maximale Anzahl gleichzeitiger Benutzer zu ermitteln, die der Webshop zuverlässig bewältigen kann.\n\nBeschreiben Sie detailliert:\n(1) Wie jede Testart im Szenario eingesetzt wird.\n(2) Wie die Ergebnisse interpretiert werden, um die maximale Benutzerkapazität zu bestimmen.',
+    sol:'<strong>(1) Einsatz der Testarten (je ~5 Pkt):</strong><ol><li><strong>Performanztest (Baseline):</strong><br>Szenario: 10 gleichzeitige User führen typische Webshop-Aktionen durch (Suchen, Warenkorb, Checkout). Ziel: Baseline-Referenzwerte messen – Antwortzeit, Durchsatz, CPU-Auslastung, RAM-Nutzung. Diese Werte sind der Vergleichsmaßstab für alle folgenden Tests.</li><li><strong>Lasttest (Kapazitätsermittlung):</strong><br>Szenario: Schrittweise Erhöhung der Nutzerzahl (+20 User alle 5 Minuten: 10 → 30 → 50 → 70 → ...) bis zur erwarteten oder definierten Maximalzahl. Ziel: Verhalten unter realistischer Last beobachten; prüfen ob SLA-Ziele (z.B. Antwortzeit &lt; 2 Sek., Fehlerrate &lt; 1%) noch eingehalten werden.</li><li><strong>Stresstest (Robustheit):</strong><br>Szenario: Nutzerzahl weit über die im Lasttest ermittelte Kapazitätsgrenze erhöhen (z.B. 200%). Ziel: Systemverhalten beim Zusammenbruch analysieren – bricht das System kontrolliert ab? Erholt es sich nach Entlastung? Gibt es Datenverlust?</li></ol><br><strong>(2) Ergebnisinterpretation (je ~2,5 Pkt):</strong><br>Die <strong>maximale Benutzerkapazität</strong> = höchste Nutzerzahl im Lasttest, bei der ALLE definierten SLA-Ziele noch vollständig eingehalten werden (Antwortzeit &lt; 2 Sek. UND Fehlerrate &lt; 1%).<br><br>Fällt eine SLA-Metrik erstmals unter die Grenze, ist das die Kapazitätsgrenze. Empfehlung: 80% dieser Grenze als sichere Betriebsgrenze verwenden (Sicherheitspuffer).<br><br>Aus dem Stresstest: Wenn das System sich nach Entlastung selbst erholt → robuste Architektur. Wenn nicht → Wiederherstellungsmechanismen fehlen.' },
+  { nr:'Aufgabe 7', pts:27, time:'~30 min', warn:true,
+    q:'Softwarequalitätssicherung in einem Unternehmen  [GRÖSSTE AUFGABE – 27 Punkte]\n\nSie sind als QM-Expertin tätig. Ein Unternehmen entwickelt Steuerungssoftware für ein industrielles sicherheitskritisches System in der Verpackungsindustrie (Roboterarme, Sensoren, Transportband, HMI – Echtzeitdatenaustausch).\n\nProjektanforderungen:\n• Maximale Nachweisbarkeit des Entwicklungsprozesses\n• Softwarequalität durch definierte Projektrollen\n• Auf 2 Meilensteinen (Anforderungen + Architektur) muss Qualität durch geeignete Maßnahmen nachgewiesen und dokumentiert werden\n\n(1) (6 Pkt) Welches Softwareentwicklungsmodell ist am besten geeignet? Begründen Sie Ihre Wahl.\n\n(2) (8 Pkt) Bei Erhebung von Anforderungen können Schwierigkeiten auftreten. Nennen Sie diese und erläutern Sie Techniken zur Überwindung.\n\n(3) (13 Pkt) Welche Reviews empfehlen Sie für dieses Projekt? Welche spezifischen Reviewarten sichern Qualität der Anforderungen und des Architekturentwurfs? Begründen Sie.',
+    sol:'<strong>(1) Empfehlung: V-Modell (6 Pkt):</strong><br>Das V-Modell ist das geeignetste Modell, weil:<ul><li><strong>Sicherheitskritisch (2 Pkt):</strong> V-Modell ist der etablierte Standard für sicherheitskritische Systeme (IEC 61508, EN ISO 13849). Sicherheitsnachweise und Zertifizierungen sind zwingend auf V-Modell ausgerichtet.</li><li><strong>Nachweisbarkeit (2 Pkt):</strong> Jede Entwicklungsphase hat eine spiegelbildliche Testphase. Alles wird dokumentiert: Anforderungsanalyse ↔ Abnahmetest, Systemdesign ↔ Systemtest, Architekturentwurf ↔ Integrationstest, Implementierung ↔ Unit-Test.</li><li><strong>Projektrollen + Meilensteine (2 Pkt):</strong> Das V-Modell definiert klare Projektrollen (Qualitätsbeauftragte, Tester, Reviewer) und Meilensteine mit Quality Gates – exakt wie gefordert.</li></ul>Agile Methoden (Scrum/Kanban) sind ungeeignet: zu wenig Dokumentation, Zertifizierung nach Sicherheitsnormen kaum möglich.<br><br><strong>(2) Schwierigkeiten + Techniken (je 2 Pkt = 8 Pkt):</strong><table class="solt"><tr><th>Schwierigkeit</th><th>Beschreibung</th><th>Technik zur Überwindung</th></tr><tr><td><strong>Implizites Wissen</strong></td><td>Stakeholder nehmen Dinge als selbstverständlich an und nennen sie nicht</td><td>Beobachtung am Arbeitsplatz, Ethnografische Studie, Szenarien</td></tr><tr><td><strong>Widersprüchliche Anforderungen</strong></td><td>Verschiedene Stakeholder haben unterschiedliche oder gegensätzliche Anforderungen</td><td>Workshops, Priorisierungstechniken (MoSCoW), Verhandlung</td></tr><tr><td><strong>Missverständnisse/Mehrdeutigkeit</strong></td><td>Natürliche Sprache ist mehrdeutig; Begriffe werden unterschiedlich interpretiert</td><td>Glossar erstellen, Prototyping, formale Sprachen (UML)</td></tr><tr><td><strong>Unvollständige Anforderungen</strong></td><td>Stakeholder vergessen Ausnahmefälle oder Randbedingungen</td><td>Checklisten, iterative Erhebung, Use Cases / User Stories</td></tr></table><br><strong>(3) Review-Empfehlungen (13 Pkt):</strong><br><strong>Für Meilenstein 1 – Anforderungsspezifikation:</strong><ul><li><strong>Inspektion (5 Pkt):</strong> Formalste Review-Art. Definierte Rollen (Moderator, Autoren, Gutachter, Schriftführer), strukturierter Prozess mit Entry/Exit-Kriterien, Protokoll und Metriken. Für sicherheitskritische Anforderungen zwingend erforderlich – Inspektion ist zertifizierbar und nachweisbar (erfüllt Meilensteinpflicht).</li><li><strong>Walkthrough (3 Pkt):</strong> Ergänzend zu Beginn: Autor führt Stakeholder durch die Anforderungen → frühe Missverständnisse aufdecken, bevor formale Inspektion startet.</li></ul><strong>Für Meilenstein 2 – Architekturentwurf:</strong><ul><li><strong>Technisches Review (5 Pkt):</strong> Fachexperten (Architekten, Senior-Entwickler) prüfen den Entwurf auf technische Korrektheit, Erfüllung der Sicherheitsanforderungen, Echtzeitfähigkeit und Schnittstellen. Gezielt für technische Artefakte – weniger formal als Inspektion, aber mit Protokoll und Gutachterberichte als Nachweis.</li></ul>' },
+];
+
+// ===================== EXAM FREITEXT =====================
+const examFreitextQs = [
+  { aufg:'A1 (1)', pts:2,
+    q:'Erklären Sie in eigenen Worten, was Qualitätsmanagement ist und was es umfasst.',
+    sol:'<strong>Qualitätsmanagement</strong> = alle geplanten Maßnahmen zur Sicherstellung, dass ein Produkt die definierten Qualitätsanforderungen erfüllt.<br><strong>Umfasst 4 Teilgebiete:</strong><ul><li>Qualitätsplanung – Ziele und Standards festlegen</li><li>Qualitätssicherung (QA) – Prozesse zur Fehlerprävention</li><li>Qualitätskontrolle (QC) – Überprüfung der Produkte</li><li>Qualitätsverbesserung – kontinuierliche Optimierung</li></ul>' },
+  { aufg:'A1 (2)', pts:1,
+    q:'Nennen Sie 3 Kategorien der Qualitätssicherungsmaßnahmen.',
+    sol:'<ul><li><strong>Konstruktiv</strong> – Fehler verhindern (z.B. Code-Guidelines, Schulungen)</li><li><strong>Analytisch</strong> – Fehler finden (z.B. Tests, Reviews, Codeanalyse)</li><li><strong>Organisatorisch</strong> – Prozesse regeln (z.B. QM-Pläne, definierte Projektrollen)</li></ul>' },
+  { aufg:'A1 (4)', pts:2,
+    q:'Erläutern Sie, was Verifikation und Validierung bedeuten.',
+    sol:'<ul><li><strong>Verifikation:</strong> „Bauen wir es richtig?" – Prüfung ob das Produkt gemäß der Spezifikation korrekt umgesetzt wurde.</li><li><strong>Validierung:</strong> „Bauen wir das Richtige?" – Prüfung ob das Produkt den tatsächlichen Bedürfnissen und Erwartungen des Kunden entspricht.</li></ul>' },
+  { aufg:'A2', pts:4,
+    q:'Ordnen Sie die Testziele (1–8) den Teststufen zu:\n\n1 Funktionale Fehler in separat testbaren Komponenten finden\n2 Fehler an Schnittstellen und Wechselwirkungen finden\n3 Umsetzung impliziter Anforderungen überprüfen\n4 Fehlerhafte Interaktionen zwischen Komponenten finden\n5 Funktionale + nicht-funktionale Fehler im System finden\n6 Probleme, die das Gesamtsystem betreffen\n7 Vertrauen in das System gewinnen\n8 Fehler an Schnittstellen mit externen Systemen finden\n\nA. Unit/Komponententest → ?\nB. Integrationstest → ?\nC. Systemtest → ?\nD. Abnahmetest → ?',
+    sol:'<table class="solt"><tr><th>Teststufe</th><th>Testziele-Nr.</th></tr><tr><td><strong>A. Unit/Komponententest</strong></td><td><strong>1, 3</strong></td></tr><tr><td><strong>B. Integrationstest</strong></td><td><strong>2, 4, 8</strong></td></tr><tr><td><strong>C. Systemtest</strong></td><td><strong>5, 6</strong></td></tr><tr><td><strong>D. Abnahmetest</strong></td><td><strong>7</strong></td></tr></table>' },
+  { aufg:'A3 (1)', pts:1,
+    q:'Wie viele Spalten brauchen Sie in einer vollständigen Entscheidungstabelle mit 4 booleschen Bedingungen?',
+    sol:'<strong>16 Spalten</strong><br>Formel: 2ⁿ = 2⁴ = 16<br>Bei n booleschen Bedingungen entstehen 2ⁿ mögliche Kombinationen.' },
+  { aufg:'A3 (2)', pts:5,
+    q:'Ordnen Sie die Testmethoden den Beschreibungen zu (Format: Zahl Buchstabe):\n1. Entscheidungstabellen  2. Grenzwertanalyse  3. Äquivalenzklassenbildung  4. Anwendungsfallbasiertes Testen  5. Zustandsbasiertes Testen\n\na. Bedingungskombinationen mit Tabellenmodell\nb. Testbedingungen in Klassen gleich behandelter Werte gruppieren\nc. Konfigurationskombinationen festlegen\nd. Grenzwerte für die einzelnen Klassen testen\ne. Anwendungsfälle bestimmen und entsprechend testen\nf. Fehlerwirkungen aus Vergangenheit analysieren\ng. Alle Zustände und Übergänge identifizieren und testen',
+    sol:'<ul><li><strong>1 → a</strong>: Entscheidungstabellen → Bedingungskombinationen</li><li><strong>2 → d</strong>: Grenzwertanalyse → Grenzwerte der Klassen</li><li><strong>3 → b</strong>: Äquivalenzklassen → Klassen gleich behandelter Werte</li><li><strong>4 → e</strong>: Anwendungsfallbasiert → Anwendungsfälle bestimmen</li><li><strong>5 → g</strong>: Zustandsbasiert → Alle Zustände + Übergänge</li></ul>' },
+  { aufg:'A3 (3)', pts:15,
+    q:'Wohngeld-Programm (3 Bedingungen):\n(1) Wohnsitz in Deutschland\n(2) Einkommen ≤ 1.600 €/Monat\n(3) Mietpreis < 500 €/Monat\n\nLeiten Sie alle Äquivalenzklassen ab, ermitteln Sie die minimale Testfallanzahl und bestimmen Sie die Grenzwerte für Einkommen ≤ 1.600 € und Mietpreis < 500 €.',
+    sol:'<strong>Äquivalenzklassen (6 ÄK):</strong><table class="solt"><tr><th>Bedingung</th><th>Gültige ÄK</th><th>Ungültige ÄK</th></tr><tr><td>Wohnsitz</td><td>ÄK1: in Deutschland</td><td>ÄK2: nicht in Deutschland</td></tr><tr><td>Einkommen</td><td>ÄK3: 0–1.600 €</td><td>ÄK4: &gt; 1.600 €</td></tr><tr><td>Mietpreis</td><td>ÄK5: 0–499 €</td><td>ÄK6: ≥ 500 €</td></tr></table><br><strong>Minimale Testfälle: 4</strong> (1 für alle 3 gültigen ÄK zusammen + je 1 pro ungültiger ÄK)<br><br><strong>Grenzwerte Einkommen ≤ 1.600 €:</strong> 1.599 € ✅ | 1.600 € ✅ | 1.601 € ❌<br><strong>Grenzwerte Mietpreis &lt; 500 €: 499 € ✅ | 500 € ❌ UNGÜLTIG! | 501 € ❌</strong><br>⚠️ Bei strikt &lt; ist der Grenzwert selbst ungültig!' },
+  { aufg:'A4', pts:11,
+    q:'(1) Unterschied funktionale vs. nicht-funktionale Anforderungen? (2 Pkt)\n(2) Drei Qualitätsmerkmale nach ISO 25010 + kurze Erklärung? (3 Pkt)\n(3) Vier Aktivitäten des RE-Prozesses? (2 Pkt)\n(4) Was bedeutet Verfolgbarkeit der Anforderungen + Zwecke? (4 Pkt)',
+    sol:'<strong>(1)</strong> Funktional: WAS das System tut (z.B. Login). Nicht-funktional: WIE GUT (z.B. Login &lt; 2 Sek., Sicherheit, Wartbarkeit).<br><br><strong>(2) 3 ISO 25010-Merkmale:</strong> z.B. Wartbarkeit (leicht änderbar), Zuverlässigkeit (stabil über Zeit), Sicherheit (Schutz vor Zugriff), Usability (einfach bedienbar).<br><br><strong>(3) RE-Aktivitäten:</strong> 1. Ermittlung → 2. Analyse → 3. Spezifikation → 4. Validierung<br><br><strong>(4) Verfolgbarkeit:</strong> Bidirektionale Verknüpfung von Anforderungen und Testfällen (vorwärts und rückwärts). Zwecke: Vollständigkeit prüfen | Auswirkungsanalyse bei Änderungen | Nachweis der Erfüllung | Fehlerzuordnung.' },
+  { aufg:'A5 (1)', pts:2,
+    q:'Was ist das Hauptziel eines Reviews in der Softwarequalitätssicherung?',
+    sol:'Frühzeitige Erkennung und Beseitigung von Fehlern in Software-Artefakten (Anforderungen, Architektur, Code), bevor sie in die nächste Entwicklungsphase übergehen. Reviews sind statisch – kein ausführbarer Code nötig. Finden Fehler die Tests übersehen (Architekturfehler, Inkonsistenzen, Fehlinterpretationen).' },
+  { aufg:'A6', pts:15,
+    q:'Webshop-Testszenario: Kombinieren Sie Performanztest, Lasttest und Stresstest, um die maximale Benutzerkapazität zu ermitteln.\n\n(1) Wie wird jede Testart eingesetzt?\n(2) Wie interpretieren Sie die Ergebnisse zur Kapazitätsbestimmung?',
+    sol:'<strong>(1) Testarten:</strong><ol><li><strong>Performanztest:</strong> Start mit ~10 Usern (normale Last). Baseline-Werte erheben: Antwortzeit, CPU, RAM – Referenz für alle weiteren Tests.</li><li><strong>Lasttest:</strong> Schrittweise +20 User (z.B. alle 5 min). Beobachten wann SLA-Ziele (Antwortzeit &lt; 2s, Fehlerrate &lt; 1%) nicht mehr eingehalten werden.</li><li><strong>Stresstest:</strong> 200% über Kapazitätsgrenze. Wie bricht das System zusammen? Erholt es sich nach Entlastung?</li></ol><strong>(2) Kapazität</strong> = höchste Nutzerzahl im Lasttest mit vollständiger SLA-Einhaltung. Empfehlung: 80% als sichere Betriebsgrenze.' },
+  { aufg:'A7 (1)', pts:6,
+    q:'Industrielles sicherheitskritisches Steuerungssystem, Echtzeit-Datenaustausch, strenge Nachweispflicht. Welches Entwicklungsmodell empfehlen Sie? Begründen Sie.',
+    sol:'<strong>V-Modell</strong><br><ul><li>Standard für sicherheitskritische Systeme (IEC 61508)</li><li>Jede Entwicklungsphase ↔ Testphase: vollständige Nachweisbarkeit</li><li>Anforderungsanalyse ↔ Abnahmetest | Systemdesign ↔ Systemtest | Architektur ↔ Integrationstest | Implementierung ↔ Unit-Test</li><li>Definierte Projektrollen und Meilensteine – exakt wie gefordert</li></ul>Scrum/Kanban ungeeignet: zu wenig Dokumentation, keine Sicherheitszertifizierung.' },
+];
+
+function renderExamFreitext(){
+  if(document.getElementById('exam-ft-content').innerHTML) return;
+  let h='';
+  examFreitextQs.forEach((q,i)=>{
+    h+=`<div class="ft-block">`;
+    h+=`<div class="ft-head"><span>Aufgabe ${q.aufg}</span><span style="color:var(--muted);font-weight:400">${q.pts} Punkt${q.pts>1?'e':''}</span></div>`;
+    h+=`<div class="ft-q">${q.q}</div>`;
+    h+=`<textarea class="ft-area" id="ftarea-${i}" placeholder="Deine Antwort hier eingeben…"></textarea>`;
+    h+=`<button class="btn btn-ghost" onclick="revealFT(${i})" id="ftbtn-${i}" style="margin-top:.75rem;font-size:13px">📋 Musterlösung zeigen</button>`;
+    h+=`<div class="ft-sol" id="ftsol-${i}">${q.sol}</div>`;
+    h+=`<div class="ft-acts" id="ftacts-${i}">`;
+    h+=`<button class="btn" style="background:var(--green-bg);color:var(--green);font-size:13px;padding:8px 14px" onclick="rateFT(${i},true)">✅ Richtig / Vollständig</button>`;
+    h+=`<button class="btn" style="background:var(--yellow-bg);color:var(--yellow);font-size:13px;padding:8px 14px" onclick="rateFT(${i},false)">🔁 Nochmal lernen</button>`;
+    h+=`</div></div>`;
+  });
+  document.getElementById('exam-ft-content').innerHTML=h;
+}
+
+function revealFT(i){
+  document.getElementById(`ftsol-${i}`).classList.add('show');
+  document.getElementById(`ftacts-${i}`).classList.add('show');
+  document.getElementById(`ftbtn-${i}`).style.display='none';
+}
+
+function rateFT(i,ok){
+  const acts=document.getElementById(`ftacts-${i}`);
+  acts.innerHTML=ok
+    ?'<span style="color:var(--green);font-size:13px;font-weight:600">✅ Als richtig markiert</span>'
+    :'<span style="color:var(--yellow);font-size:13px;font-weight:600">🔁 Zum Wiederholen vorgemerkt</span>';
+}
+
+function switchExamMode(mode){
+  document.getElementById('exammode-mc').classList.toggle('active',mode==='mc');
+  document.getElementById('exammode-ft').classList.toggle('active',mode==='ft');
+  document.getElementById('exam-mc-section').style.display=mode==='mc'?'':'none';
+  document.getElementById('exam-ft-section').style.display=mode==='ft'?'':'none';
+  if(mode==='ft') renderExamFreitext();
+}
+
+// ===================== ALTKLAUSUR FUNCTIONS =====================
+function renderAltklausur(){
+  let h='';
+  altklausurQM.forEach((q,i)=>{
+    h+=`<div class="ak-block">`;
+    h+=`<div class="ak-head${q.warn?' warn':''}"><span>${q.nr} · ${q.pts} Pkt</span><span>⏱ ${q.time}</span></div>`;
+    h+=`<div class="ak-q-text">${q.q}</div>`;
+    h+=`<button class="btn btn-ghost" onclick="toggleAKSol(${i})" id="akbtn-${i}" style="margin-top:.9rem;font-size:13px">📋 Musterlösung zeigen</button>`;
+    h+=`<div class="sol-reveal" id="aksol-${i}">${q.sol}</div>`;
+    h+=`</div>`;
+  });
+  document.getElementById('ak-content').innerHTML=h;
+}
+
+function toggleAKSol(i){
+  const box=document.getElementById(`aksol-${i}`);
+  const btn=document.getElementById(`akbtn-${i}`);
+  const v=box.classList.toggle('show');
+  btn.textContent=v?'📋 Musterlösung verbergen':'📋 Musterlösung zeigen';
 }
 
 </script>
