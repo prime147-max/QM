@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT-Prozesse Lernseite</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+:root {
+  --bg: #0d0d14;
+  --s1: #16161f;
+  --s2: #1e1e2a;
+  --s3: #26263a;
+  --border: #2e2e42;
+  --accent: #7c6ff7;
+  --a2: #a78bfa;
+  --a3: #c4b5fd;
+  --green: #10b981;
+  --gbg: #052e1a;
+  --red: #f87171;
+  --rbg: #2d0f0f;
+  --yellow: #fbbf24;
+  --ybg: #2d1e00;
+  --blue: #38bdf8;
+  --bbg: #0c2336;
+  --pink: #f472b6;
+  --text: #e2e2f0;
+  --muted: #6b6b8a;
+  --font: 'Inter', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;}
+
+/* HEADER */
+header{
+  background:var(--s1);border-bottom:1px solid var(--border);
+  padding:0 1.5rem;display:flex;align-items:center;
+  position:sticky;top:0;z-index:100;gap:0;overflow-x:auto;
+}
+.brand{font-weight:700;font-size:15px;color:var(--a2);
+  padding:1rem 1.5rem 1rem 0;border-right:1px solid var(--border);
+  margin-right:0.5rem;white-space:nowrap;flex-shrink:0;}
+.tab{padding:1rem 0.9rem;font-size:13px;font-weight:500;color:var(--muted);
+  cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;}
+.tab:hover{color:var(--a2);}
+.tab.on{color:var(--a2);border-bottom-color:var(--accent);}
+.xp{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap;padding-left:1rem;flex-shrink:0;}
+.xp strong{color:var(--yellow);}
+
+/* PAGES */
+.pg{display:none;max-width:820px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+.pg.on{display:block;}
+
+/* HOME */
+.hero{text-align:center;padding:2.5rem 0 2rem;}
+.hero h1{font-size:30px;font-weight:700;background:linear-gradient(135deg,var(--a2),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem;}
+.hero p{color:var(--muted);font-size:15px;margin-bottom:2rem;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:12px;}
+.tcard{
+  background:var(--s1);border:1px solid var(--border);border-radius:14px;
+  padding:1.25rem;cursor:pointer;transition:all .2s;text-align:left;
+}
+.tcard:hover{border-color:var(--accent);transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(124,111,247,.15);}
+.tcard .ico{font-size:26px;margin-bottom:.6rem;}
+.tcard h3{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--text);}
+.tcard p{font-size:12px;color:var(--muted);line-height:1.5;}
+.tcard .folie{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;
+  background:var(--s3);color:var(--a3);margin-top:8px;font-weight:600;}
+.streak{display:flex;gap:12px;justify-content:center;margin-bottom:2rem;flex-wrap:wrap;}
+.streak-box{background:var(--s1);border:1px solid var(--border);border-radius:12px;
+  padding:.75rem 1.25rem;text-align:center;min-width:100px;}
+.streak-box .n{font-size:24px;font-weight:700;color:var(--yellow);}
+.streak-box .l{font-size:12px;color:var(--muted);}
+
+/* SECTION LABEL */
+.slabel{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);
+  margin:1.5rem 0 .75rem;font-weight:600;display:flex;align-items:center;gap:8px;}
+.slabel::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* CARDS */
+.lhead{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
+.back{padding:6px 14px;border-radius:20px;border:1px solid var(--border);
+  background:transparent;font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s;}
+.back:hover{color:var(--a2);border-color:var(--accent);}
+.ltitle{font-size:19px;font-weight:700;color:var(--text);}
+.prog-wrap{height:4px;background:var(--s3);border-radius:2px;margin-bottom:1rem;}
+.prog-bar{height:4px;background:linear-gradient(90deg,var(--accent),var(--blue));
+  border-radius:2px;transition:width .3s;}
+.ctr{text-align:center;font-size:13px;color:var(--muted);margin-bottom:.75rem;}
+
+.fcard{
+  background:var(--s1);border:1px solid var(--border);border-radius:16px;
+  padding:2rem;min-height:200px;cursor:pointer;transition:border-color .2s;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.fcard:hover{border-color:var(--accent);}
+.fcard .clabel{font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--a2);margin-bottom:.75rem;}
+.fcard .cq{font-size:17px;font-weight:600;line-height:1.5;color:var(--text);}
+.fcard .ca{font-size:14px;line-height:1.8;color:#ccc;margin-top:1.25rem;
+  padding-top:1.25rem;border-top:1px solid var(--border);display:none;}
+.fcard .ca.show{display:block;}
+.fcard .ca ul{padding-left:1.3rem;margin-top:.4rem;}
+.fcard .ca li{margin-bottom:4px;}
+.fcard .ca strong{color:var(--a3);}
+.fcard .ca .tag{display:inline-block;background:var(--s3);color:var(--a3);
+  font-size:12px;padding:2px 8px;border-radius:20px;margin:.25rem .25rem 0 0;}
+.chint{text-align:center;font-size:13px;color:var(--muted);margin-top:.75rem;}
+.cactions{display:flex;gap:8px;margin-top:.75rem;}
+.cactions button{flex:1;padding:10px;border-radius:10px;font-size:14px;
+  font-weight:500;cursor:pointer;border:none;font-family:var(--font);}
+.bok{background:var(--gbg);color:var(--green);}
+.bok:hover{background:#073d22;}
+.brep{background:var(--rbg);color:var(--red);}
+.brep:hover{background:#3d1515;}
+.cnav{display:flex;gap:8px;margin-top:8px;}
+.cnav button{flex:1;padding:8px;border-radius:8px;font-size:13px;cursor:pointer;
+  border:1px solid var(--border);background:transparent;color:var(--muted);font-family:var(--font);}
+.cnav button:hover{color:var(--text);border-color:var(--muted);}
+
+/* QUIZ */
+.qq{font-size:16px;font-weight:600;margin-bottom:1rem;line-height:1.5;color:var(--text);}
+.qopts{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
+.qopt{
+  padding:12px 16px;border-radius:10px;border:1px solid var(--border);
+  background:var(--s1);font-size:14px;cursor:pointer;text-align:left;
+  transition:all .15s;font-family:var(--font);color:var(--text);
+}
+.qopt:hover{border-color:var(--accent);background:var(--s2);}
+.qopt.sel{border-color:var(--accent);background:var(--s2);color:var(--a2);font-weight:500;}
+.qopt.right{border-color:var(--green);background:var(--gbg);color:var(--green);font-weight:500;}
+.qopt.wrong{border-color:var(--yellow);background:var(--ybg);color:var(--yellow);}
+.qexp{font-size:13px;background:var(--s2);border-radius:8px;padding:12px;
+  line-height:1.7;display:none;margin-bottom:1rem;border-left:3px solid var(--accent);}
+.qexp.show{display:block;}
+.qexp strong{color:var(--a3);}
+.qstat{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:.75rem;}
+.qdone{text-align:center;padding:2.5rem;background:var(--s1);border-radius:16px;border:1px solid var(--border);}
+.qdone h2{font-size:30px;font-weight:700;color:var(--accent);margin-bottom:.5rem;}
+.qdone p{color:var(--muted);font-size:15px;margin-bottom:1.5rem;}
+
+/* SPICKZETTEL */
+.csec{margin-bottom:2.5rem;}
+.csec h2{font-size:15px;font-weight:700;color:var(--a2);margin-bottom:1rem;
+  padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;}
+.ccard{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+.ccard h4{font-size:13px;font-weight:700;color:var(--a3);margin-bottom:6px;}
+.ccard p,.ccard li{font-size:13px;color:#bbb;line-height:1.7;}
+.ccard ul{padding-left:1.1rem;}
+.ccard li{margin-bottom:3px;}
+.formula{background:var(--s3);border-radius:8px;padding:10px;font-size:14px;
+  font-weight:600;color:var(--a2);margin:.5rem 0;text-align:center;
+  border-left:3px solid var(--accent);}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;
+  margin:.2rem .2rem 0 0;font-weight:500;}
+.b-blue{background:var(--bbg);color:var(--blue);}
+.b-green{background:var(--gbg);color:var(--green);}
+.b-pink{background:#2d0f1f;color:var(--pink);}
+.b-yellow{background:var(--ybg);color:var(--yellow);}
+.b-purple{background:#1e1a3a;color:var(--a3);}
+table.ct{width:100%;border-collapse:collapse;font-size:13px;margin-top:.5rem;}
+table.ct th{background:var(--s2);padding:8px 10px;text-align:left;
+  border:1px solid var(--border);font-weight:600;color:var(--a3);}
+table.ct td{padding:7px 10px;border:1px solid var(--border);color:#bbb;line-height:1.5;}
+
+/* EXAM */
+.exam-box{background:var(--s1);border:1px solid var(--border);border-radius:14px;
+  padding:1.5rem;margin-bottom:1.5rem;}
+.exam-box h2{font-size:18px;font-weight:700;margin-bottom:.5rem;}
+.exam-box p{color:var(--muted);font-size:14px;line-height:1.7;}
+.timer{font-size:36px;font-weight:700;color:var(--accent);text-align:center;
+  margin:1rem 0;font-variant-numeric:tabular-nums;letter-spacing:.05em;}
+.timer.red{color:var(--red);}
+.eq-block{background:var(--s1);border:1px solid var(--border);border-radius:12px;
+  padding:1.25rem;margin-bottom:1rem;}
+.eq-block h4{font-size:14px;font-weight:600;margin-bottom:.75rem;color:var(--text);}
+.pts{font-size:11px;color:var(--muted);font-weight:400;}
+
+/* BUTTONS */
+.btn{padding:10px 22px;border-radius:8px;font-size:14px;font-weight:500;
+  cursor:pointer;border:none;font-family:var(--font);transition:all .15s;}
+.btn-p{background:var(--accent);color:#fff;}
+.btn-p:hover{background:var(--a2);}
+.btn-g{background:var(--s2);color:var(--muted);border:1px solid var(--border);}
+.btn-g:hover{color:var(--text);}
+.result-box{padding:14px 18px;border-radius:10px;font-size:14px;font-weight:500;
+  display:none;margin-top:1rem;}
+.result-box.show{display:flex;align-items:center;gap:8px;}
+.rok{background:var(--gbg);color:var(--green);border:1px solid var(--green);}
+.rbad{background:var(--rbg);color:var(--red);border:1px solid var(--red);}
+
+/* EXAM BANNER */
+.exam-banner{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid var(--yellow);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;}
+.exam-banner h3{font-size:15px;font-weight:700;color:var(--yellow);margin-bottom:.75rem;}
+.pts-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.75rem;}
+.xpts{background:var(--ybg);color:var(--yellow);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;}
+.xwarn{background:var(--rbg);color:var(--red);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;}
+.exam-banner ul{padding-left:1.1rem;}
+.exam-banner li{font-size:13px;color:#ccc;margin-bottom:4px;line-height:1.6;}
+.ptip{background:var(--s2);border-left:3px solid var(--yellow);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#ccc;margin-top:.75rem;line-height:1.6;}
+.chk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:6px;margin-top:.75rem;}
+.chk-item{background:var(--s2);border-radius:8px;padding:7px 12px;font-size:12px;color:#bbb;border-left:3px solid var(--accent);}
+
+/* AUFGABEN */
+.task-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem;}
+.task-area{width:100%;min-height:110px;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:14px;color:var(--text);font-family:var(--font);resize:vertical;line-height:1.6;margin-top:.75rem;display:block;}
+.task-area:focus{outline:none;border-color:var(--accent);}
+.sol-box{background:var(--s2);border-left:3px solid var(--green);border-radius:0 10px 10px 0;padding:14px 16px;font-size:13px;color:#ccc;line-height:1.8;display:none;margin-top:.75rem;}
+.sol-box.show{display:block;}
+.sol-box strong{color:var(--a3);}
+.sol-box ul,.sol-box ol{padding-left:1.2rem;margin-top:.4rem;}
+.sol-box li{margin-bottom:4px;}
+.sol-box em{color:var(--muted);}
+/* ALTKLAUSUR */
+.ak-block{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;}
+.ak-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;font-weight:700;font-size:14px;color:var(--a2);border-bottom:1px solid var(--border);padding-bottom:.75rem;flex-wrap:wrap;gap:4px;}
+.ak-head.warn{color:var(--yellow);}
+.ak-q{font-size:14px;line-height:1.8;color:var(--text);white-space:pre-line;}
+/* CONFETTI anim */
+@keyframes pop{0%{transform:scale(.8);opacity:0;}50%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
+.pop{animation:pop .3s ease;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">🖥️ IT-Prozesse</div>
+  <div class="tab on" onclick="go('home')">🏠 Start</div>
+  <div class="tab" onclick="go('learn')">🃏 Karteikarten</div>
+  <div class="tab" onclick="go('quiz')">🎯 Quiz</div>
+  <div class="tab" onclick="go('cheat')">📄 Spickzettel</div>
+  <div class="tab" onclick="go('exam')">🎓 Klausur</div>
+  <div class="tab" onclick="go('tasks')">📝 Aufgaben</div>
+  <div class="tab" onclick="go('altklausur')">📜 Altklausur</div>
+  <div class="xp">⭐ <strong id="xp">0</strong> XP</div>
+</header>
+
+<!-- HOME -->
+<div class="pg on" id="pg-home">
+  <div class="hero">
+    <h1>IT-Prozesse Trainer</h1>
+    <p>Alle Themen aus dem Lernzettel – schnell, einfach, motivierend 🚀</p>
+  </div>
+  <div class="streak">
+    <div class="streak-box"><div class="n" id="s-ok">0</div><div class="l">Richtig</div></div>
+    <div class="streak-box"><div class="n" id="s-xp" style="color:var(--blue)">0</div><div class="l">XP</div></div>
+    <div class="streak-box"><div class="n" id="s-done" style="color:var(--green)">0%</div><div class="l">Fortschritt</div></div>
+  </div>
+  <div class="exam-banner">
+    <h3>📋 Klausur 07.07.2026 – Prof. Dr. Karduck | 60 Punkte</h3>
+    <div class="pts-row">
+      <span class="xpts">55 Pkt = Note 1</span>
+      <span class="xpts">45 Pkt = Note 2</span>
+      <span class="xpts">35 Pkt = Note 3</span>
+      <span class="xpts">52 Pkt ≈ 1,3 &nbsp;|&nbsp; 48 Pkt ≈ 1,7</span>
+      <span class="xwarn">⚠️ Aufgabe 1: KEINE Notizen!</span>
+    </div>
+    <ul>
+      <li><strong>Aufgabe 1 (10 Pkt, 15 min):</strong> Fallbeispiel kurz erläutern + Bezug zur Nachhaltigkeit (sozial/ökon./ökol.) — ohne Zettel, frei aus dem Kopf</li>
+      <li><strong>Format:</strong> Prof gibt Schaubilder vor → erläutern ODER selbst skizzieren. Kein stupides Auswendiglernen!</li>
+      <li><strong>Tipp:</strong> Google/IBM/Continental bei fast JEDER Aufgabe als Beispiel verwendbar</li>
+    </ul>
+    <div class="ptip">💬 Prof: „Bei mir geht es gemütlich zu – aber fair immer. Nicht auswendiglernen – Konzepte verstehen + an Beispielen erklären."</div>
+    <div style="margin-top:.9rem">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem;font-weight:600;">Prüfungsthemen laut Prof (Sprachnachricht)</div>
+      <div class="chk-grid">
+        <div class="chk-item">🌍 Fallbeispiel + Nachhaltigkeit</div>
+        <div class="chk-item">📈 Gartner Hype Cycle (5 Phasen)</div>
+        <div class="chk-item">🏗️ 3-Schichten + Edge/Cloud</div>
+        <div class="chk-item">📡 Sensor Intelligence</div>
+        <div class="chk-item">🏭 IT-Produktlinie (Scoping→App.)</div>
+        <div class="chk-item">🔗 P2P (Energie oder Mobilität)</div>
+        <div class="chk-item">🪞 Digitaler Zwilling</div>
+        <div class="chk-item">🗓️ Zeitraum-Matrix (2 Quadranten)</div>
+        <div class="chk-item">🛒 Dienstemarkt + BPMN</div>
+        <div class="chk-item">⚖️ LkSG & CSDDD</div>
+        <div class="chk-item">🏛️ Digitale Souveränität</div>
+        <div class="chk-item">🏛️ Architektursichten (5 Sichten)</div>
+      </div>
+    </div>
+  </div>
+  <div class="slabel">Themen auswählen</div>
+  <div class="grid" id="topic-grid"></div>
+</div>
+
+<!-- KARTEIKARTEN -->
+<div class="pg" id="pg-learn">
+  <div class="lhead">
+    <button class="back" onclick="go('home')">← Zurück</button>
+    <div class="ltitle" id="l-title">Karteikarten</div>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="c-prog" style="width:0%"></div></div>
+  <div class="ctr" id="c-ctr">1 / 1</div>
+  <div class="fcard" id="fcard" onclick="revealC()">
+    <div class="clabel" id="c-label">Frage</div>
+    <div class="cq" id="c-q">–</div>
+    <div class="ca" id="c-a"></div>
+  </div>
+  <div class="chint" id="c-hint">Tippe auf die Karte zum Aufdecken</div>
+  <div class="cactions" id="c-acts" style="display:none">
+    <button class="bok" onclick="markC(true)">✅ Gewusst (+10 XP)</button>
+    <button class="brep" onclick="markC(false)">🔁 Nochmal</button>
+  </div>
+  <div class="cnav">
+    <button onclick="prevC()">← Zurück</button>
+    <button onclick="nextC()">Weiter →</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="pg" id="pg-quiz">
+  <div class="lhead">
+    <button class="back" onclick="go('home')">← Zurück</button>
+    <div class="ltitle">Quiz – alle Themen</div>
+  </div>
+  <div class="qstat">
+    <span id="q-ctr">Frage 1 / 15</span>
+    <span id="q-sc">✅ 0 &nbsp; ❌ 0</span>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="q-prog" style="width:0%"></div></div>
+  <div id="q-content"></div>
+</div>
+
+<!-- SPICKZETTEL -->
+<div class="pg" id="pg-cheat">
+  <div class="lhead">
+    <button class="back" onclick="go('home')">← Zurück</button>
+    <div class="ltitle">📄 Spickzettel – alles auf einen Blick</div>
+  </div>
+
+  <div class="csec">
+    <h2>🌱 SEED – Social, Economic, Ecologic (Folie 4)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Was ist SEED?</h4>
+        <p>Rahmenmodell für nachhaltige IT-Innovation: Drei Dimensionen müssen gleichzeitig erfüllt sein.</p>
+        <span class="badge b-green">Social</span>
+        <span class="badge b-blue">Economic</span>
+        <span class="badge b-purple">Ecologic</span>
+      </div>
+      <div class="ccard">
+        <h4>Microsoft Beispiel</h4>
+        <ul>
+          <li><strong>Social:</strong> Barrierefreie Software, globale Bildung</li>
+          <li><strong>Economic:</strong> Azure-Cloud hilft KMUs Kosten senken</li>
+          <li><strong>Ecologic:</strong> CO₂-negativ bis 2030, Meerwasserkühlung</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🧠 Collective Intelligence (Folie 14)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Definition</h4>
+        <p>Zusammenspiel von Menschen + Maschinen + Algorithmen, das klüger handelt als jeder Einzelne allein.</p>
+        <div class="formula">Menschen + KI + Plattformen = Collective Intelligence</div>
+      </div>
+      <div class="ccard">
+        <h4>Beispiel Smart City</h4>
+        <ul>
+          <li>Sensoren (IoT) liefern Echtzeitdaten</li>
+          <li>KI analysiert Stau & schlägt Ampelschaltung vor</li>
+          <li>Stadtplaner entscheiden per Groupware gemeinsam</li>
+          <li>System lernt mit jeder Entscheidung dazu</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🤝 CSCW – Computer Supported Cooperative Work (Folie 15)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Definition</h4>
+        <p>IT-gestützte Zusammenarbeit. Workflows zwischen Personen, Teams, Organisationen werden transparent und steuerbar.</p>
+        <span class="badge b-blue">Microsoft Teams</span>
+        <span class="badge b-blue">SAP</span>
+        <span class="badge b-blue">Power Automate</span>
+      </div>
+      <div class="ccard">
+        <h4>Zeit-Raum-Matrix</h4>
+        <table class="ct">
+          <tr><th></th><th>Same Place</th><th>Different Place</th></tr>
+          <tr><td><strong>Same Time</strong></td><td>Decision Room</td><td>Videokonferenz</td></tr>
+          <tr><td><strong>Diff. Time</strong></td><td>Kanban Board</td><td>GitHub / Jira</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🏗️ 3-Schichten-Modell (Folien 67–72)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Die 3 Schichten</h4>
+        <ul>
+          <li>🖥️ <strong>Präsentationssicht</strong> – Benutzeroberfläche</li>
+          <li>⚙️ <strong>Applikationssicht</strong> – Geschäftslogik</li>
+          <li>🗄️ <strong>Datenzugriffssicht</strong> – Datenbank</li>
+        </ul>
+      </div>
+      <div class="ccard">
+        <h4>Beispiel Online-Banking</h4>
+        <ul>
+          <li>Nutzer bedient Web-UI (Presentation Layer)</li>
+          <li>Server prüft Überweisungsregeln (Business Logic)</li>
+          <li>Datenbank speichert Transaktionen (Data Layer)</li>
+          <li>+ Querschnitt: Sicherheit, Logging, 2FA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🔗 P2P – Peer-to-Peer (Folie 74)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Definition</h4>
+        <p>Alle Teilnehmer (Peers) sind gleichberechtigt – jeder kann gleichzeitig Client UND Server sein. Keine zentrale Instanz.</p>
+        <div class="formula">Peer = Client + Server gleichzeitig</div>
+      </div>
+      <div class="ccard">
+        <h4>Vorteile P2P</h4>
+        <ul>
+          <li>Keine Abhängigkeit vom zentralen Server</li>
+          <li>Lastverteilung im Netzwerk</li>
+          <li>Robuster gegen Ausfälle</li>
+          <li>Skaliert automatisch mit Teilnehmerzahl</li>
+        </ul>
+        <span class="badge b-purple">BitTorrent</span>
+        <span class="badge b-purple">Blockchain</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>⚡ Edge Computing (Folie 85)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Definition</h4>
+        <p>Datenverarbeitung findet nicht zentral in der Cloud statt, sondern direkt am Rand des Netzwerks – nah an der Datenquelle.</p>
+        <div class="formula">Verarbeitung → direkt beim Sensor/Gerät</div>
+      </div>
+      <div class="ccard">
+        <h4>Vorteile & Nachteile</h4>
+        <p><strong style="color:var(--green)">✅ Vorteile:</strong></p>
+        <ul><li>Geringe Latenz</li><li>Weniger Datenübertragung</li><li>Höherer Datenschutz</li><li>Ausfallsicher</li></ul>
+        <p style="margin-top:.5rem"><strong style="color:var(--red)">❌ Nachteile:</strong></p>
+        <ul><li>Komplexere Architektur</li><li>Höhere Hardwarekosten</li><li>Sicherheitsrisiken</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>📊 Business-IT-Alignment (Folie 83)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Kernidee</h4>
+        <p>Business-Strategie und IT-Strategie müssen aufeinander abgestimmt sein und sich gegenseitig unterstützen.</p>
+        <div class="formula">Business-Strategie ↔ IT-Strategie</div>
+      </div>
+      <div class="ccard">
+        <h4>Mapping (horizontal)</h4>
+        <ul>
+          <li>Business-Strategie bestimmt IT-Strategie</li>
+          <li>Org-Struktur bestimmt IS-Infrastruktur</li>
+        </ul>
+        <h4 style="margin-top:.5rem">Beispiel E-Commerce</h4>
+        <ul>
+          <li>Strategie: Online-Vertrieb</li>
+          <li>IT: Webshop, Zahlungsabwicklung</li>
+          <li>Org: Digital Sales Team</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🔄 Gartner Hype Cycle (Folie 137/140)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>5 Phasen</h4>
+        <ul>
+          <li>1. <strong>Technology Trigger</strong> – Erste Aufmerksamkeit</li>
+          <li>2. <strong>Peak of Inflated Expectations</strong> – Übertriebener Hype</li>
+          <li>3. <strong>Trough of Disillusionment</strong> – Enttäuschung</li>
+          <li>4. <strong>Slope of Enlightenment</strong> – Echte Anwendungen</li>
+          <li>5. <strong>Plateau of Productivity</strong> – Ausgereift</li>
+        </ul>
+      </div>
+      <div class="ccard">
+        <h4>Beispiele allgemein</h4>
+        <span class="badge b-blue">Quantum Computing → Phase 1</span>
+        <span class="badge b-yellow">E-Book Reader → Phase 2</span>
+        <span class="badge b-pink">Online-Video → Phase 3</span>
+        <span class="badge b-green">Tablet PCs → Phase 4</span>
+        <span class="badge b-green">Speech Recognition → Phase 5</span>
+      </div>
+      <div class="ccard">
+        <h4>Case Study: Nachhaltige Betriebsabläufe</h4>
+        <ul>
+          <li>🔵 <strong>KI-Energiesteuerung (Google DeepMind)</strong><br>→ Schon am <span class="badge b-green">Plateau</span> – produktiv eingesetzt</li>
+          <li>🔵 <strong>Blockchain in Lieferketten (IBM)</strong><br>→ <span class="badge b-purple">Slope of Enlightenment</span> (Food Trust aktiv)</li>
+          <li>🔵 <strong>Digitaler Zwilling (Continental)</strong><br>→ Noch auf dem <span class="badge b-purple">Slope of Enlightenment</span></li>
+          <li>🔵 <strong>KI allgemein (Intelligent Age)</strong><br>→ <span class="badge b-yellow">Auf dem Weg zum Peak</span></li>
+        </ul>
+        <p style="margin-top:.5rem;font-size:12px;color:var(--muted)">Klausur: Phase erklären + Beispiel aus deiner Case Study einordnen + begründen</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>☁️ XaaS – Everything as a Service (Folie 150)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Drei Modelle</h4>
+        <ul>
+          <li>☁️ <strong>SaaS</strong> – Fertige Anwendung (Google Docs, M365)</li>
+          <li>🛠️ <strong>PaaS</strong> – Entwicklungsplattform (Azure, Heroku)</li>
+          <li>🖥️ <strong>IaaS</strong> – Infrastruktur (Amazon EC2)</li>
+        </ul>
+      </div>
+      <div class="ccard">
+        <h4>Merkhilfe</h4>
+        <div class="formula">SaaS = Anwendung nutzen</div>
+        <div class="formula">PaaS = Software entwickeln</div>
+        <div class="formula">IaaS = Server mieten</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>⚙️ Domain Engineering & Application Engineering (Folie 118)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Domain Engineering</h4>
+        <p><strong>Ziel:</strong> Wiederverwendbare Bausteine (Plattform) für eine Produktfamilie entwickeln.</p>
+        <p><strong>Ergebnis:</strong> Plattform-Architektur mit Modulen</p>
+        <span class="badge b-purple">Für Wiederverwendung</span>
+      </div>
+      <div class="ccard">
+        <h4>Application Engineering</h4>
+        <p><strong>Ziel:</strong> Konkretes Produkt auf Basis der Plattform bauen.</p>
+        <p><strong>Ergebnis:</strong> Fertiges Softwareprodukt</p>
+        <span class="badge b-blue">Mit Wiederverwendung</span>
+        <p style="margin-top:.5rem"><strong>Beispiel VW:</strong> Plattform für alle Modelle (Golf, ID.3, Audi Q4) → Infotainment-Module werden je nach Fahrzeug ausgewählt.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🌍 Nachhaltige Betriebsabläufe – Case Study</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>3 Dimensionen</h4>
+        <ul>
+          <li>🤝 <strong>Sozial</strong> – Mitarbeiter entlasten, faire Lieferkette (IBM Food Trust), Luftqualitätsmonitoring, digitale Inklusion</li>
+          <li>💰 <strong>Ökonomisch</strong> – Energiekosten senken (Google -40%), Predictive Maintenance, weniger Verschwendung, Wettbewerbsvorteil</li>
+          <li>🌱 <strong>Ökologisch</strong> – CO₂-Reduktion (Google KI), Ressourcenschonung (Continental), Blockchain-Transparenz (IBM), Smart Grids</li>
+        </ul>
+        <p style="margin-top:.5rem;font-size:12px;color:var(--muted)">Nicht alle 3 müssen zutreffen – nur begründen welche relevant sind!</p>
+      </div>
+      <div class="ccard">
+        <h4>Firmen-Mapping</h4>
+        <p><strong>Google</strong> = Energieeffizienz</p>
+        <span class="badge b-green">Ökologisch</span><span class="badge b-blue">Ökonomisch</span>
+        <p style="margin-top:.5rem"><strong>IBM</strong> = Lieferkettentransparenz</p>
+        <span class="badge b-pink">Sozial</span><span class="badge b-blue">Ökonomisch</span>
+        <p style="margin-top:.5rem"><strong>Continental</strong> = Ressourceneffizienz</p>
+        <span class="badge b-green">Ökologisch</span><span class="badge b-blue">Ökonomisch</span>
+        <div class="formula" style="margin-top:.75rem">Bei JEDER Aufgabe: Case Study als Beispiel!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🏭 IT-Produktlinie</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>4 Schritte</h4>
+        <div class="formula">Scoping → Domain Engineering → Plattform → Application Engineering</div>
+        <ul>
+          <li>1. <strong>Scoping</strong> – Domäne eingrenzen (z.B. "Nachhaltige Energiesteuerung für Industriebetriebe")</li>
+          <li>2. <strong>Domain Engineering</strong> – Domänenmodell mit Use Cases + Requirements</li>
+          <li>3. <strong>Plattform</strong> – Wiederverwendbare gemeinsame Architektur</li>
+          <li>4. <strong>Application Engineering</strong> – Kundenwunsch aus Plattform konfigurieren</li>
+        </ul>
+      </div>
+      <div class="ccard">
+        <h4>Case Study Beispiele</h4>
+        <ul>
+          <li><strong>Plattform:</strong> Google Cloud Platform für KI-Energiesteuerung, IBM Blockchain-Framework</li>
+          <li><strong>Application:</strong> Continental nutzt Plattform für Reifenproduktion, IBM für Lebensmittelkunde X</li>
+        </ul>
+        <h4 style="margin-top:.75rem">Kernaussage</h4>
+        <p>Das Rad nicht neu erfinden = <strong>Nachhaltigkeit in der IT!</strong><br>Wiederverwendbare Plattform spart Zeit, Ressourcen, Geld → direkte Verbindung zu nachhaltigen Betriebsabläufen</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>📡 Sensor Intelligence + Edge vs. Cloud</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Konzept</h4>
+        <ul>
+          <li>Sensoren erfassen Daten vor Ort (Edge)</li>
+          <li>Vorverarbeitung direkt am Sensor</li>
+          <li>Erst dann relevante Daten → Cloud</li>
+          <li>Spart Bandbreite + ermöglicht Echtzeit</li>
+        </ul>
+        <h4 style="margin-top:.75rem">Warum Edge?</h4>
+        <span class="badge b-green">Keine Latenz</span>
+        <span class="badge b-green">Bandbreite sparen</span>
+        <span class="badge b-green">Unabhängig von Internet</span>
+      </div>
+      <div class="ccard">
+        <h4>3-Schichten + Edge/Cloud (Case Study)</h4>
+        <div class="formula">Sensor (Edge) → KI (Cloud) → Steuersignal (Edge)</div>
+        <ul>
+          <li>🔵 <strong>Google:</strong> Temperatursensor (Edge) → KI berechnet Kühlung (Cloud) → Steuersignal zurück (Edge)</li>
+          <li>🔵 <strong>Continental:</strong> Produktionssensor (Edge) → Cloud analysiert Optimierung</li>
+          <li>🔵 <strong>IBM:</strong> Kühlketten-Sensor (Edge) → Blockchain (Cloud)</li>
+        </ul>
+        <p style="margin-top:.5rem;font-size:12px;color:var(--muted)">Klausur: 3 Schichten beschreiben + was läuft Edge/Cloud + WARUM</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🪞 Digitaler Zwilling + P2P Energie</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Digitaler Zwilling</h4>
+        <p>Digitales Abbild der realen Hardware/Prozesse zum <strong>Simulieren, Steuern, Optimieren</strong>.</p>
+        <ul style="margin-top:.5rem">
+          <li>🔵 <strong>Continental:</strong> Zwilling der Reifenproduktion → Materialverbrauch simulieren vor Produktion</li>
+          <li>🔵 <strong>Google:</strong> Zwilling der Rechenzentren → KI simuliert Kühlbedarf</li>
+          <li>🔵 <strong>IBM:</strong> Zwilling der Lieferkette → Simulation Lieferantenauswahl</li>
+        </ul>
+      </div>
+      <div class="ccard">
+        <h4>P2P im Energienetz (Smart Grid)</h4>
+        <ul>
+          <li>Alle 3 Schichten auf jedem Knoten lokal</li>
+          <li>Kein zentraler Server</li>
+          <li>Jeder ist gleichzeitig Client + Server</li>
+        </ul>
+        <p style="margin-top:.5rem"><strong>Energie-Beispiel:</strong> Privatleute verkaufen Strom an Nachbarn</p>
+        <ul>
+          <li>Physisch: normales Stromnetz</li>
+          <li>Digital: P2P Marktplatz-Ebene</li>
+          <li>= <strong>Virtuelles Kraftwerk</strong></li>
+        </ul>
+        <p style="margin-top:.5rem;font-size:12px;color:var(--muted)">Hybrid: Autos an Kreuzung reagieren P2P untereinander + Cloud</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>📋 BPMN / Koordination + Raum-Zeit-Matrix</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>BPMN Grundlagen</h4>
+        <ul>
+          <li>Standard für Prozessmodellierung</li>
+          <li>Zustandsübergang → Dienst wird aufgerufen</li>
+          <li>Jeder Schritt nutzt Daten + verändert sie</li>
+          <li>Parallel: beide Schritte fertig → nächster startet</li>
+        </ul>
+        <h4 style="margin-top:.75rem">Energiemanagement Continental</h4>
+        <ol style="padding-left:1.1rem;font-size:13px;color:#bbb">
+          <li>Sensor erfasst Verbrauch → <em>Zustand: Erfassung</em></li>
+          <li>KI analysiert → <em>Dienst: Analyse-Service</em></li>
+          <li>Empfehlung → <em>Dienst: Empfehlungs-Service</em></li>
+          <li>Techniker bestätigt → <em>Dienst: Freigabe</em></li>
+          <li>Anlage angepasst → <em>Zustand: Abgeschlossen</em></li>
+        </ol>
+      </div>
+      <div class="ccard">
+        <h4>Raum-Zeit-Matrix (Case Study)</h4>
+        <table class="ct">
+          <tr><th></th><th>Selbe Zeit (sync)</th><th>Versch. Zeit (async)</th></tr>
+          <tr><td><strong>Selber Ort</strong></td><td>Team-Workshop nachhaltige Prozesse</td><td>Schichtübergabe mit Sustainability-Dashboard</td></tr>
+          <tr><td><strong>Versch. Ort</strong></td><td>Remote-Monitoring Continental-Werk von Hamburg</td><td>IBM + Lieferant in Asien async. koordinieren</td></tr>
+        </table>
+        <p style="margin-top:.75rem;font-size:12px;color:var(--muted)"><strong>Innovativ (Klausur):</strong> AR-Brille für Techniker = selber Ort (sync) + Remote-Experte (versch. Ort, sync) + Handbuch (versch. Ort, async) → 3 Quadranten gleichzeitig!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🔁 Workflow Management & ARIS (Folie 166/168)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Workflow Management</h4>
+        <p>Digitale Steuerung und Automatisierung von Geschäftsprozessen.</p>
+        <ul>
+          <li>Aufbauorganisation: Wer ist verantwortlich?</li>
+          <li>Ablauforganisation: Was passiert wann?</li>
+        </ul>
+        <span class="badge b-green">Effizienz</span>
+        <span class="badge b-green">Transparenz</span>
+        <span class="badge b-green">Nachverfolgbarkeit</span>
+      </div>
+      <div class="ccard">
+        <h4>ARIS – 5 Sichten</h4>
+        <ul>
+          <li>📋 <strong>Function View</strong> – Aktivitäten & Prozesse</li>
+          <li>👤 <strong>Organisation View</strong> – Verantwortliche Stellen</li>
+          <li>📦 <strong>Data View</strong> – Genutzte Daten</li>
+          <li>🛍️ <strong>Product/Service View</strong> – Ergebnisse</li>
+          <li>⚡ <strong>Event View</strong> – Auslöser der Funktionen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>⚖️ LkSG & CSDDD – Lieferkettenrecht</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>LkSG (Deutschland, 2023)</h4>
+        <p><strong>Lieferkettensorgfaltspflichtengesetz</strong> – verpflichtet große Konzerne, Risiken (Menschenrechte, Umwelt) in der gesamten Lieferkette zu prüfen, adressieren und melden.</p>
+        <div class="formula">Merksatz: Nachhaltige Produkte → nachhaltige Lieferketten</div>
+      </div>
+      <div class="ccard">
+        <h4>Timeline 2023–2028+</h4>
+        <table class="ct">
+          <tr><th>Jahr</th><th>Ereignis</th></tr>
+          <tr><td>2023</td><td>LkSG in Kraft (DE)</td></tr>
+          <tr><td>2024</td><td>EU CSDDD (Richtlinie 2024/1760)</td></tr>
+          <tr><td>Feb 2026</td><td><strong>Omnibus I</strong> – Entlastung Mittelstand</td></tr>
+          <tr><td>Jul 2026</td><td>EU-Leitlinien + Helpdesk</td></tr>
+          <tr><td>2028+</td><td>Vollanwendung → Wettbewerbsvorteil</td></tr>
+        </table>
+        <p style="margin-top:.5rem;font-size:12px;color:var(--muted)">CSDDD betrifft: >5.000 MA & >1,5 Mrd. € Umsatz</p>
+      </div>
+      <div class="ccard">
+        <h4>IT als Hebel</h4>
+        <ul>
+          <li>Automatisierung statt Excel-Listen</li>
+          <li>Blockchain für Transparenz (IBM Food Trust)</li>
+          <li>Produkt statt Projekt – skalierbar & messbar</li>
+        </ul>
+        <div class="formula">Merksatz: Was man nicht misst, kann man nicht verbessern.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🏛️ Architektursichten (Folie 128)</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>5 Sichten der Architekturbeschreibung</h4>
+        <ul>
+          <li>🗺️ <strong>Konzeptionelle Sicht</strong> – Überblick Systemlandschaft</li>
+          <li>⏱️ <strong>Laufzeitsicht</strong> – Systemstart, Konfiguration, Admin</li>
+          <li>🔧 <strong>Implementationssicht</strong> – Struktur & Zusammenhänge der Komponenten</li>
+          <li>🗄️ <strong>Datensicht</strong> – Struktur der Datenelemente & Beziehungen</li>
+          <li>🖥️ <strong>Infrastruktursicht</strong> – Ablaufumgebung (Hardware, Cloud)</li>
+        </ul>
+      </div>
+      <div class="ccard">
+        <h4>Merkhilfe</h4>
+        <div class="formula">K-L-I-D-I</div>
+        <p style="font-size:12px;color:#bbb;margin-top:.5rem">Konzeptionell → Laufzeit → Implementation → Daten → Infrastruktur</p>
+        <p style="margin-top:.75rem;font-size:13px;color:#bbb">Klausur: Sichten benennen + kurz erklären was jede Sicht zeigt. Kombination mit 3-Schichten möglich (Datenschicht ↔ Datensicht).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec">
+    <h2>🛒 Dienstemarkt & Find-Bind-Invoke</h2>
+    <div class="cgrid">
+      <div class="ccard">
+        <h4>Dienstemarkt Konzept</h4>
+        <p>Plattform, auf der Diensteanbieter ihre Dienste publizieren und Dienstenutzer diese finden und nutzen.</p>
+        <div class="formula">Publish → Find → Bind → Invoke</div>
+        <ul style="margin-top:.5rem">
+          <li>📢 <strong>Publish:</strong> Dienst veröffentlichen</li>
+          <li>🔍 <strong>Find:</strong> Dienst suchen</li>
+          <li>🔗 <strong>Bind:</strong> Schnittstelle aufbauen</li>
+          <li>▶️ <strong>Invoke:</strong> Dienst aufrufen</li>
+        </ul>
+      </div>
+      <div class="ccard">
+        <h4>Koordinationsschicht + BPMN</h4>
+        <p>BPMN modelliert den <strong>Ablauf</strong> (Zustandsübergänge), jede Aktivität ruft einen Dienst auf → <strong>Orchestrierung</strong>.</p>
+        <p style="margin-top:.5rem"><strong>Beispiel Klinik:</strong><br>Aufnahme → Versorgung → Rechnung<br>→ jeder Schritt ruft automatisch den passenden Dienst auf</p>
+        <div class="formula" style="margin-top:.5rem">Koordination = Nachhaltigkeit in Abläufen</div>
+      </div>
+      <div class="ccard">
+        <h4>Digitale Souveränität</h4>
+        <p>Die Fähigkeit von Nationen/Unternehmen, eigene digitale Infrastruktur zu kontrollieren – unabhängig von fremden Anbietern.</p>
+        <p style="margin-top:.5rem"><strong>Schwarz Digit:</strong> Deutsche Cloud-Infrastruktur für Mobilitäts- und Gesundheitsanbieter – ein Beispiel für digitale Souveränität.</p>
+        <span class="badge b-blue">Prof erwähnt: wichtig für IT-Produktmanager!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KLAUSUR -->
+<div class="pg" id="pg-exam">
+  <div class="lhead">
+    <button class="back" onclick="go('home')">← Zurück</button>
+    <div class="ltitle">🎓 Klausur-Simulation</div>
+  </div>
+  <div class="exam-box">
+    <h2>Bereit für die Klausur?</h2>
+    <p>10 Fragen aus allen Themen des Lernzettels. Du hast <strong style="color:var(--yellow)">12 Minuten</strong> Zeit. Danach siehst du dein Ergebnis mit Erklärungen.</p>
+    <div class="timer" id="e-timer">12:00</div>
+    <button class="btn btn-p" id="e-start" onclick="startExam()">🚀 Klausur starten</button>
+  </div>
+  <div id="e-qs" style="display:none"></div>
+  <div id="e-result" style="display:none"></div>
+</div>
+
+<!-- AUFGABEN -->
+<div class="pg" id="pg-tasks">
+  <div class="lhead">
+    <button class="back" onclick="go('home')">← Zurück</button>
+    <div class="ltitle">📝 Aufgaben – Freitext</div>
+  </div>
+  <div class="qstat">
+    <span id="t-ctr">Aufgabe 1 / 8</span>
+    <span id="t-sc">✅ 0 &nbsp; 🔁 0</span>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="t-prog" style="width:0%"></div></div>
+  <div id="t-content"></div>
+</div>
+
+<!-- ALTKLAUSUR -->
+<div class="pg" id="pg-altklausur">
+  <div class="lhead">
+    <button class="back" onclick="go('home')">← Zurück</button>
+    <div class="ltitle">📜 Muster-Klausur mit Musterlösung</div>
+  </div>
+  <div class="exam-banner" style="margin-bottom:1.5rem">
+    <h3>📋 Muster-Klausur – 60 Punkte | Bearbeitungszeit: ~75 Minuten</h3>
+    <div class="pts-row">
+      <span class="xpts">55 Pkt = Note 1</span>
+      <span class="xpts">45 Pkt = Note 2</span>
+      <span class="xpts">35 Pkt = Note 3</span>
+      <span class="xwarn">⚠️ Aufgabe 1: OHNE Notizen!</span>
+    </div>
+    <div class="ptip">Diese Klausur spiegelt das Format und die Themen von Prof. Dr. Karduck (07.07.2026) wider. Musterlösungen klappen auf – erst selbst versuchen!</div>
+  </div>
+  <div id="ak-content"></div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const topics = [
+  { id:'seed', ico:'🌱', title:'SEED Modell', sub:'Social, Economic, Ecologic', folie:'Folie 4' },
+  { id:'ci', ico:'🧠', title:'Collective Intelligence', sub:'MIT, Smart City, KI + Menschen', folie:'Folie 14' },
+  { id:'cscw', ico:'🤝', title:'CSCW', sub:'Zeit-Raum-Matrix, Groupware, Kollaboration', folie:'Folie 15' },
+  { id:'drei', ico:'🏗️', title:'3-Schichten-Modell', sub:'Presentation, Business, Data Layer', folie:'Folie 67–72' },
+  { id:'p2p', ico:'🔗', title:'Peer-to-Peer', sub:'Gleichberechtigt, kein zentraler Server', folie:'Folie 74' },
+  { id:'edge', ico:'⚡', title:'Edge Computing', sub:'Verarbeitung am Rand, geringe Latenz', folie:'Folie 85' },
+  { id:'align', ico:'📊', title:'Business-IT-Alignment', sub:'Strategie & IT aufeinander abstimmen', folie:'Folie 83' },
+  { id:'hype', ico:'📈', title:'Gartner Hype Cycle', sub:'5 Phasen, Technologiereife', folie:'Folie 137/140' },
+  { id:'xaas', ico:'☁️', title:'XaaS / Cloud', sub:'SaaS, PaaS, IaaS', folie:'Folie 150' },
+  { id:'domain', ico:'🔄', title:'Domain & Application Engineering', sub:'Plattform, Wiederverwendung, VW-Beispiel', folie:'Folie 118' },
+  { id:'workflow', ico:'⚙️', title:'Workflow & ARIS', sub:'Automatisierung, 5 Sichten', folie:'Folie 166/168' },
+  { id:'nachhaltigkeit', ico:'🌍', title:'Nachhaltige Betriebsabläufe', sub:'Google, IBM, Continental – 3 Dimensionen', folie:'Case Study' },
+  { id:'itprodlinie', ico:'🏭', title:'IT-Produktlinie', sub:'Scoping → Domain → Plattform → Application', folie:'Case Study' },
+  { id:'sensor', ico:'📡', title:'Sensor Intelligence', sub:'Edge + Cloud Zusammenspiel', folie:'Case Study' },
+  { id:'digzwilling', ico:'🪞', title:'Digitaler Zwilling', sub:'Simulation, Steuerung, Optimierung', folie:'Case Study' },
+  { id:'bpmn', ico:'📋', title:'BPMN / Koordination', sub:'Prozessmodellierung, Zustandsübergänge', folie:'Case Study' },
+  { id:'lksg', ico:'⚖️', title:'LkSG & CSDDD', sub:'Lieferkettenrecht DE & EU, Omnibus I, 2028', folie:'Teil A' },
+  { id:'archsichten', ico:'🏛️', title:'Architektursichten', sub:'5 Sichten: Konzeptionell, Laufzeit, Implementation, Daten, Infrastruktur', folie:'Folie 128' },
+  { id:'dienstemarkt', ico:'🛒', title:'Dienstemarkt & Find-Bind-Invoke', sub:'Publish → Find → Bind → Invoke – Koordinationsschicht', folie:'Letztes Kapitel' },
+];
+
+const cardSets = {
+  seed: [
+    { q:'Was bedeutet SEED?', a:'<strong>S</strong>ocial, <strong>E</strong>conomic, <strong>E</strong>cologic Development.<br>Rahmenmodell für nachhaltige IT-Innovation – alle drei Dimensionen müssen erfüllt sein.' },
+    { q:'Microsoft Beispiel – was gehört zu Social?', a:'Barrierefreie Software (z.B. Vorlesefunktion in Word), globale Bildungskampagnen ("Microsoft Learn"), Inklusion in der digitalen Welt.' },
+    { q:'Microsoft Beispiel – was gehört zu Economic?', a:'Azure-Cloud hilft Unternehmen und KMUs, Kosten zu senken und Prozesse zu digitalisieren. Wirtschaftliche Skaleneffekte durch IT-Infrastruktur.' },
+    { q:'Microsoft Beispiel – was gehört zu Ecologic?', a:'Ziel: CO₂-negativ bis 2030. Rechenzentren mit erneuerbarer Energie, Kühlung mit Meerwasser (Projekt Natick), CO₂-Messung für Kunden.' },
+  ],
+  ci: [
+    { q:'Was ist Collective Intelligence?', a:'Das Zusammenspiel von <strong>Menschen + Maschinen + Algorithmen</strong>, das als Gruppe klüger handelt als jeder Einzelne allein.<br><span class="tag">MIT Center for Collective Intelligence</span>' },
+    { q:'Wie funktioniert das Smart City Beispiel?', a:'<ul><li>Sensoren (IoT) im Straßenverkehr liefern Echtzeitdaten</li><li>KI analysiert Stau & schlägt adaptive Ampelschaltung vor</li><li>Stadtplaner entscheiden gemeinsam per Groupware</li><li>System lernt mit jeder Entscheidung</li></ul>' },
+    { q:'Was ist der Unterschied zwischen einzelner und kollektiver Intelligenz?', a:'Einzeln: jede Person/Maschine handelt für sich.<br>Kollektiv: Durch Vernetzung (Plattformen, Groupware, Sensorik, Big Data) entstehen bessere Entscheidungen als es Einzelne treffen könnten.' },
+  ],
+  cscw: [
+    { q:'Was bedeutet CSCW?', a:'<strong>Computer Supported Cooperative Work</strong> – IT-gestützte Zusammenarbeit. Workflows zwischen Personen, Teams und Organisationen werden transparent, nachvollziehbar und steuerbar.' },
+    { q:'Erkläre die Zeit-Raum-Matrix mit Beispielen.', a:'<ul><li>Same Place + Same Time: Decision Room (Brainstorming vor Ort)</li><li>Different Place + Same Time: Videokonferenz (Teams Toronto–Tokio)</li><li>Same Place + Diff. Time: Kanban-Board im Büro</li><li>Different Place + Diff. Time: GitHub, Jira (asynchron)</li></ul>' },
+    { q:'Nenne ein CSCW-Praxisbeispiel aus dem Lernzettel.', a:'Lieferkette: Alle Schritte (Bestellung, Lieferung, Status) laufen über einen digitalen Workflow. Power Automate automatisiert Updates. Lieferant greift direkt auf Cloud-Daten zu – keine separaten E-Mails nötig.' },
+  ],
+  drei: [
+    { q:'Nenne die 3 Schichten des Schichtenmodells.', a:'<ul><li>🖥️ <strong>Präsentationssicht</strong> – Benutzeroberfläche (was der User sieht)</li><li>⚙️ <strong>Applikationssicht</strong> – Geschäftslogik & Workflows</li><li>🗄️ <strong>Datenzugriffssicht</strong> – Datenbankzugriff</li></ul>' },
+    { q:'Erkläre das Online-Banking Beispiel anhand der 3 Schichten.', a:'<ul><li>Nutzer bedient Web-Oberfläche → <strong>Presentation Layer</strong></li><li>Server prüft Überweisungsregeln → <strong>Business Logic Layer</strong></li><li>Datenbank speichert Transaktionen → <strong>Data Access Layer</strong></li><li>Quer durch alle: Sicherheit (TAN, 2FA), Logging, Fehlermanagement</li></ul>' },
+    { q:'Was bedeutet verteilte Architektur im Schichtenmodell?', a:'Die Schichten können auf verschiedene Systeme verteilt werden. Beispiel: Präsentationslogik läuft lokal im Browser (Client), Applikationslogik auf dem Server, Daten auf einem zentralen Datenbankserver.' },
+  ],
+  p2p: [
+    { q:'Was ist P2P und wie unterscheidet es sich von Client-Server?', a:'Bei <strong>Peer-to-Peer</strong> sind alle Teilnehmer gleichberechtigt – jeder Peer ist gleichzeitig Client UND Server. Kein zentraler Server nötig.<br>Bei Client-Server gibt es eine klare Trennung: Clients fragen an, Server antworten.' },
+    { q:'Erkläre P2P am BitTorrent-Beispiel.', a:'Du willst einen Film herunterladen:<ul><li>Du fragst nicht einen zentralen Server, sondern andere Peers</li><li>Du bekommst einzelne Teile von verschiedenen Nutzern</li><li>Gleichzeitig gibst du bereits erhaltene Teile weiter</li><li>Du bist also gleichzeitig Client und Server</li></ul>' },
+    { q:'Nenne 3 Vorteile von P2P.', a:'<ul><li>Keine Abhängigkeit vom zentralen Server</li><li>Lastverteilung im Netzwerk</li><li>Robuster gegen Ausfälle (wenn ein Peer offline → viele andere übernehmen)</li><li>Skaliert automatisch mit mehr Teilnehmern</li></ul>' },
+  ],
+  edge: [
+    { q:'Was ist Edge Computing?', a:'Datenverarbeitung findet <strong>nicht zentral in der Cloud</strong> statt, sondern direkt am "Rand" des Netzwerks – nah an der Datenquelle (Sensor, Smartphone, IoT-Gerät).<br>Nur relevante/zusammengefasste Daten werden weitergeleitet.' },
+    { q:'Erkläre Edge Computing am Verkehrskamera-Beispiel.', a:'<strong>Ohne Edge:</strong> Kamera sendet permanent Videobild zur Cloud → hohe Netzkosten, Datenschutzprobleme.<br><strong>Mit Edge:</strong> Kamera hat eigene Recheneinheit (z.B. Raspberry Pi), analysiert Bild vor Ort, sendet nur "Stau erkannt" → schnell, ressourcenschonend, datenschutzfreundlich.' },
+    { q:'Nenne Vor- und Nachteile von Edge Computing.', a:'<strong style="color:var(--green)">Vorteile:</strong><ul><li>Geringe Latenz (ideal für Echtzeitanwendungen wie autonomes Fahren)</li><li>Weniger Datenübertragung (spart Bandbreite)</li><li>Höherer Datenschutz</li><li>Ausfallsicher bei Verbindungsproblemen</li></ul><strong style="color:var(--red)">Nachteile:</strong><ul><li>Komplexere Systemarchitektur</li><li>Höhere Hardware- und Wartungskosten</li><li>Sicherheitsrisiken, Dateninkonsistenz</li></ul>' },
+  ],
+  align: [
+    { q:'Was bedeutet Business-IT-Alignment?', a:'Business-Strategie und IT-Strategie müssen <strong>aufeinander abgestimmt</strong> sein und sich gegenseitig unterstützen. Beide Bereiche sollen zusammenarbeiten und nicht isoliert handeln.' },
+    { q:'Erkläre das horizontale Mapping (Complementing).', a:'Business-Strategie beeinflusst IT-Strategie und umgekehrt. Org-Struktur beeinflusst IS-Infrastruktur.<br>Beispiel: UN will kundenzentriert arbeiten → IT muss CRM-Systeme und Mobile Apps bereitstellen.' },
+    { q:'E-Commerce Beispielfrage: Wie wird Alignment umgesetzt?', a:'<ul><li><strong>Business-Strategie</strong> ändert sich: Online-Vertrieb</li><li><strong>IT-Strategie</strong>: Webshop, Zahlungsabwicklung, neue Systeme</li><li><strong>Org-Struktur</strong>: Digital Sales Team, Logistik</li><li><strong>IT-Infrastruktur</strong>: Hosting, Sicherheit, Skalierbarkeit</li></ul>' },
+  ],
+  hype: [
+    { q:'Nenne die 5 Phasen des Gartner Hype Cycle.', a:'<ol style="padding-left:1.2rem"><li><strong>Technology Trigger</strong> – Erste Aufmerksamkeit</li><li><strong>Peak of Inflated Expectations</strong> – Übertriebener Hype</li><li><strong>Trough of Disillusionment</strong> – Enttäuschung</li><li><strong>Slope of Enlightenment</strong> – Erste echte Anwendungen</li><li><strong>Plateau of Productivity</strong> – Ausgereift & wirtschaftlich einsetzbar</li></ol>' },
+    { q:'Ordne diese Technologien dem Hype Cycle zu: Quantum Computing, Cloud Computing, Speech Recognition.', a:'<ul><li><strong>Quantum Computing</strong> → Phase 1 (Technology Trigger) – noch sehr früh</li><li><strong>Cloud Computing</strong> → Phase 2 (Peak) – riesiger Hype</li><li><strong>Speech Recognition</strong> → Phase 5 (Plateau) – ausgereift, überall genutzt</li></ul>' },
+    { q:'Warum ist der Hype Cycle nützlich?', a:'Er hilft zu beurteilen, ob eine Technologie gerade <strong>Hype</strong> ist oder schon <strong>reif für den produktiven Einsatz</strong>. Unternehmen können so bessere Investitionsentscheidungen treffen.' },
+  ],
+  xaas: [
+    { q:'Was bedeutet XaaS?', a:'<strong>Everything as a Service</strong> – Funktionalitäten werden nicht lokal installiert, sondern als Cloud-Dienst bereitgestellt. Nutzer mieten nur was sie brauchen – skalierbar, flexibel, online.' },
+    { q:'Was ist der Unterschied zwischen SaaS, PaaS und IaaS?', a:'<ul><li>☁️ <strong>SaaS</strong> – Fertige Anwendung direkt nutzen (Google Docs, M365)</li><li>🛠️ <strong>PaaS</strong> – Plattform zum Entwickeln eigener Software (Azure, Heroku)</li><li>🖥️ <strong>IaaS</strong> – Rohe Infrastruktur mieten: Server, Speicher, Netzwerk (Amazon EC2)</li></ul>' },
+    { q:'Merkhilfe für SaaS, PaaS, IaaS?', a:'<div style="margin:.3rem 0"><span class="tag">SaaS = Software anwenden</span></div><div style="margin:.3rem 0"><span class="tag">PaaS = Programmieren auf Plattform</span></div><div style="margin:.3rem 0"><span class="tag">IaaS = Infrastruktur mieten</span></div>Klausur-Tipp: Endnutzer = SaaS, Entwickler = PaaS, Admin = IaaS' },
+  ],
+  domain: [
+    { q:'Was ist der Unterschied zwischen Domain Engineering und Application Engineering?', a:'<ul><li><strong>Domain Engineering</strong> – Wiederverwendbare Bausteine/Plattform für eine ganze Produktfamilie entwickeln</li><li><strong>Application Engineering</strong> – Konkretes Produkt auf Basis der Plattform erstellen</li></ul>Domain liefert die Basis, Application nutzt diese Basis.' },
+    { q:'Erkläre das VW-Beispiel für Domain und Application Engineering.', a:'<strong>Domain Engineering:</strong> VW entwickelt eine Infotainment-Plattform für alle Modelle (Golf, ID.3, Audi Q4) mit Modulen: Navigation, Sprachsteuerung, Bluetooth, Touchscreen.<br><br><strong>Application Engineering:</strong> Für den ID.3 werden die passenden Module ausgewählt (Navigation ✓, Spotify ✓, HUD ✓) und zu einem konkreten Infotainmentsystem zusammengebaut.' },
+  ],
+  workflow: [
+    { q:'Was ist Workflow Management?', a:'Digitale <strong>Steuerung und Automatisierung</strong> von Geschäftsprozessen. Aufgaben werden automatisch verteilt, überwacht und dokumentiert.<br>Vorteile: Effizienz, Transparenz, Nachverfolgbarkeit.' },
+    { q:'Nenne die 5 ARIS-Sichten.', a:'<ul><li>📋 <strong>Function View</strong> – Aktivitäten & Prozesse</li><li>👤 <strong>Organisation View</strong> – Verantwortliche Stellen/Personen</li><li>📦 <strong>Data View</strong> – Genutzte Daten (Kundendaten, Rechnungsdaten)</li><li>🛍️ <strong>Product/Service View</strong> – Ergebnisse des Prozesses</li><li>⚡ <strong>Event View</strong> – Auslöser der Funktionen</li></ul>' },
+    { q:'Was ist die Kernidee der 3 Ebenen (Strategie → Prozess → IT)?', a:'<ul><li>1. <strong>Strategie</strong>: Unternehmen stimmen sich ab (Wer arbeitet mit wem? Gemeinsame Ziele?)</li><li>2. <strong>Prozesse</strong>: Ziele werden in konkrete Geschäftsprozesse übersetzt und optimiert</li><li>3. <strong>IT-Systeme</strong>: Prozesse werden durch Systeme wie SAP, ERP, Workflow-Tools automatisch ausgeführt</li></ul>' },
+  ],
+
+  nachhaltigkeit: [
+    { q:'Welche 3 Dimensionen hat das Nachhaltigkeitsmodell?', a:'<ul><li>🤝 <strong>Sozial</strong> – Mitarbeiter entlasten, faire Arbeitsbedingungen, Inklusion</li><li>💰 <strong>Ökonomisch</strong> – Kosten senken, Effizienzgewinne, Wettbewerbsvorteil</li><li>🌱 <strong>Ökologisch</strong> – CO₂-Reduktion, Ressourcenschonung, Abfallminimierung</li></ul>' },
+    { q:'Ordne Google, IBM und Continental den Nachhaltigkeitsdimensionen zu.', a:'<ul><li>🔵 <strong>Google</strong> → Energieeffizienz = <span class="tag">Ökologisch</span> + <span class="tag">Ökonomisch</span></li><li>🔵 <strong>IBM</strong> → Lieferkettentransparenz = <span class="tag">Sozial</span> + <span class="tag">Ökonomisch</span></li><li>🔵 <strong>Continental</strong> → Ressourceneffizienz = <span class="tag">Ökologisch</span> + <span class="tag">Ökonomisch</span></li></ul><strong>Wichtig:</strong> Nicht alle 3 Dimensionen müssen zutreffen – nur begründen warum welche relevant sind!' },
+    { q:'Welche sozialen Aspekte hat IT in nachhaltigen Betriebsabläufen?', a:'<ul><li>Mitarbeiter durch digitale Tools entlasten</li><li>Faire Arbeitsbedingungen in Lieferketten (IBM Food Trust)</li><li>Gesundheitsschutz durch Luftqualitätsmonitoring</li><li>Digitale Inklusion: alle Mitarbeiter einbeziehen</li><li>Weniger Energie = weniger Ressourcenkonflikte</li></ul>' },
+    { q:'Nenne ökologische Aspekte aus der Case Study.', a:'<ul><li>CO₂-Reduktion durch KI-Steuerung (Google: -40% Energieverbrauch)</li><li>Ressourcenschonung (Gummi, Metalle bei Continental)</li><li>Blockchain für lückenlose Lieferkettentransparenz (IBM)</li><li>Erneuerbare Energie steuern mit Smart Grids</li><li>Weniger Abfall durch optimierte Prozesse</li></ul>' },
+    { q:'Was ist das Potenzial der Case Study für die Klausur?', a:'<ul><li>Google = Energieeffizienz (ökologisch + ökonomisch)</li><li>IBM = Lieferkettentransparenz (sozial + ökonomisch)</li><li>Continental = Ressourceneffizienz (ökologisch + ökonomisch)</li></ul><strong>Tipp:</strong> Bei fast JEDER Aufgabe kannst du Google/IBM/Continental als Beispiel nehmen!' },
+  ],
+
+  itprodlinie: [
+    { q:'Erkläre die 4 Schritte der IT-Produktlinie.', a:'<ol style="padding-left:1.2rem"><li><strong>Scoping</strong> – Bereich eingrenzen, Domäne bestimmen</li><li><strong>Domain Engineering</strong> – Domäne analysieren, Modell mit Use Cases + Requirements erstellen</li><li><strong>Plattform</strong> – Gemeinsame wiederverwendbare Architektur entwickeln</li><li><strong>Application Engineering</strong> – Kundenwunsch konfigurieren + aus Plattform zusammenbauen</li></ol><div class="formula">Scoping → Domain Engineering → Plattform → Application Engineering</div>' },
+    { q:'Was ist Scoping in der IT-Produktlinie?', a:'Den Bereich (Domäne) eingrenzen.<br><br><strong>Beispiel:</strong> "Nachhaltige Energiesteuerung für Industriebetriebe"<br><br>Frage: Welche Domäne? Was soll die Plattform können?' },
+    { q:'Was ist Domain Engineering?', a:'Analyse der Domäne → Domänenmodell erstellen (Use Cases + Requirements für den Bereich).<br><br><strong>Beispiel:</strong> Alle Anforderungen an Energiemanagementsysteme in der Produktion sammeln und modellieren.' },
+    { q:'Was ist Application Engineering und welche Kernaussage steckt dahinter?', a:'Kundenwunsch → konfigurieren → aus Plattform zusammenbauen.<br><br><strong>Beispiele:</strong><ul><li>Continental nutzt Plattform für spezifische Reifenproduktion</li><li>IBM nutzt Framework für Lebensmittelkunde X</li></ul><strong>Kernaussage:</strong> Das Rad nicht neu erfinden = Nachhaltigkeit in der IT! Wiederverwendbare Plattform spart Zeit, Ressourcen, Geld.' },
+  ],
+
+  sensor: [
+    { q:'Was ist Sensor Intelligence?', a:'<ul><li>Sensoren erfassen Daten vor Ort (<strong>Edge</strong>)</li><li>Vorverarbeitung direkt am Sensor</li><li>Erst dann relevante Daten → Cloud</li><li>Spart Bandbreite + ermöglicht Echtzeit-Reaktion</li></ul>' },
+    { q:'Warum Vorverarbeitung am Sensor statt alles in die Cloud senden?', a:'<ul><li>💾 <strong>Bandbreite sparen</strong> – nur relevante Daten werden übertragen</li><li>⚡ <strong>Echtzeit</strong> – sofortige Reaktion ohne Netzwerkverzögerung</li><li>🔒 <strong>Datenschutz</strong> – sensible Rohdaten verlassen das Gerät nicht</li><li>📡 <strong>Ausfallsicher</strong> – funktioniert auch ohne Cloud-Verbindung</li></ul>' },
+    { q:'Erkläre Sensor Intelligence am Google-Rechenzentrum-Beispiel.', a:'<strong>Ablauf:</strong><ol style="padding-left:1.2rem"><li>Sensoren messen Temperatur → <span class="tag">Edge</span></li><li>KI berechnet optimale Kühlung → <span class="tag">Cloud</span></li><li>Steuersignal zurück an die Anlage → <span class="tag">Edge</span></li></ol>Ergebnis: Google spart 40% Kühlenergie.' },
+    { q:'Nenne 3 Case Study Beispiele für Sensor Intelligence.', a:'<ul><li>🔵 <strong>Google:</strong> Temperatursensoren (Edge) → KI berechnet Kühlung (Cloud) → Steuersignal (Edge)</li><li>🔵 <strong>Continental:</strong> Produktionssensoren messen Materialverbrauch (Edge) → Cloud analysiert Optimierungspotenzial</li><li>🔵 <strong>IBM:</strong> Kühlketten-Sensoren messen Temp. lokal (Edge) → speichern in Blockchain (Cloud)</li></ul>' },
+  ],
+
+  digzwilling: [
+    { q:'Was ist ein Digitaler Zwilling?', a:'Ein <strong>digitales Abbild</strong> der realen Hardware/eines realen Prozesses.<br><br>Verwendung: <strong>Simulieren, Steuern, Optimieren</strong> – bevor Änderungen in der Realität vorgenommen werden.<br><span class="tag">Continental</span> <span class="tag">Google</span> <span class="tag">IBM</span>' },
+    { q:'Nenne 3 Case Study Beispiele für Digitale Zwillinge.', a:'<ul><li>🔵 <strong>Continental:</strong> Digitaler Zwilling der Reifenproduktion – Materialverbrauch simulieren bevor produziert wird</li><li>🔵 <strong>Google:</strong> Digitaler Zwilling der Rechenzentren – KI simuliert Kühlbedarf vor Anpassung</li><li>🔵 <strong>IBM:</strong> Digitaler Zwilling der Lieferkette – Simulation welcher Lieferant auszuwählen ist</li></ul>' },
+    { q:'Wozu nutzt Continental den Digitalen Zwilling?', a:'Continental erstellt einen Digitalen Zwilling der Reifenproduktionsanlage.<br><br><strong>Zweck:</strong> Materialverbrauch (Gummi, Metalle) simulieren bevor tatsächlich produziert wird → Ressourcenverschwendung vermeiden → nachhaltigere Produktion.' },
+    { q:'Was ist der Zusammenhang zwischen P2P und Digitalen Zwillingen im Smart Grid?', a:'<ul><li><strong>P2P Energienetz:</strong> Privatleute verkaufen Strom an Nachbarn → Physisch: normales Stromnetz, Digital: P2P-Marktplatz-Ebene (= Virtuelles Kraftwerk)</li><li><strong>Digitaler Zwilling:</strong> Simuliert das Energienetz, berechnet optimale Verteilung</li><li>Smart Grids = P2P + Digitaler Zwilling für nachhaltige Energieverteilung</li></ul>' },
+  ],
+
+  bpmn: [
+    { q:'Was ist BPMN und wofür wird es genutzt?', a:'<strong>Business Process Model and Notation</strong> – standardisierte Notation zur Prozessmodellierung (OMG-Standard, ISO/IEC 19510:2013).<br><br>Zeigt: wer macht was in welcher Reihenfolge, welche Dienste aufgerufen werden, welche Zustände durchlaufen werden.' },
+    { q:'Was ist der Unterschied zwischen Aufbau und Ablauf?', a:'<ul><li><strong>Ablauf</strong> (Ablauforganisation): Wer macht was in welcher Reihenfolge? → BPMN modelliert dies</li><li><strong>Aufbau</strong> (Aufbauorganisation): Wer hat welche Rolle + Abteilung? → Organigramm</li></ul><br>BPMN ist ein Werkzeug für die <strong>Ablauforganisation</strong>.' },
+    { q:'Erkläre den BPMN-Prozess Energiemanagement bei Continental.', a:'<ol style="padding-left:1.2rem"><li>Sensor erfasst Energieverbrauch → <strong>Zustand: Erfassung</strong></li><li>KI analysiert Anomalie → <strong>Dienst: Analyse-Service</strong></li><li>Optimierungsempfehlung → <strong>Dienst: Empfehlungs-Service</strong></li><li>Techniker bestätigt → <strong>Dienst: Freigabe</strong></li><li>Anlage angepasst → <strong>Zustand: Abgeschlossen</strong></li></ol><em>Parallel:</em> Energiedaten + Nachhaltigkeitsbericht werden gleichzeitig aktualisiert.' },
+    { q:'Warum ist Koordination direkte Nachhaltigkeit?', a:'<ul><li>Koordination = Abläufe effizient gestalten</li><li>= keine Zeit/Ressourcen/Geld verschwenden</li><li>= direkte Definition von Nachhaltigkeit!</li></ul>Jeder Schritt im Prozess nutzt Daten und verändert sie. Parallele Schritte: beide fertig → nächster startet.' },
+  ],
+
+  lksg: [
+    { q:'Was ist das LkSG und seit wann gilt es?', a:'<strong>Lieferkettensorgfaltspflichtengesetz</strong> – deutsches Gesetz, seit 2023 in Kraft.<br><br>Verpflichtet große Konzerne, Risiken (Menschenrechte, Umwelt) in der <strong>gesamten Lieferkette</strong> zu prüfen, adressieren und melden.<br><span class="tag">Merksatz: Nachhaltige Produkte erfordern nachhaltige Lieferketten!</span>' },
+    { q:'Was ist die CSDDD?', a:'<strong>Corporate Sustainability Due Diligence Directive</strong> – EU-Richtlinie 2024/1760.<br><br><ul><li>Betroffen: Unternehmen >5.000 Mitarbeiter & >1,5 Mrd. € Umsatz</li><li>Ziel: einheitliche EU-Standards für Sorgfaltspflichten</li><li>Aufgaben: Risiken prüfen, adressieren, melden</li></ul>' },
+    { q:'Was passiert wann? (Timeline Lieferkettenrecht)', a:'<ul><li>2023: <strong>LkSG</strong> in Kraft (DE) – Prüfpflichten für große Konzerne</li><li>2024: EU <strong>CSDDD</strong> verabschiedet – Einheitliche EU-Standards</li><li>Feb 2026: <strong>Omnibus I</strong> – Vereinfachung & Entlastung für Mittelstand</li><li>Jul 2026: EU-Leitlinien + offizieller Helpdesk</li><li>2028+: Vollanwendung → Wettbewerbsvorteil durch frühe Vorbereitung</li></ul>' },
+    { q:'Was ist der IT-Hebel bei nachhaltigen Lieferketten?', a:'<ul><li><strong>Automatisierung:</strong> Ersatz manueller Excel-Listen durch automatisierte Datenströme</li><li><strong>Transparenz:</strong> Blockchain (IBM Food Trust) für lückenlose Lieferkettenverfolgung</li><li><strong>Produkt statt Projekt:</strong> Skalierbare, messbare, iterativ verbesserbare IT-Lösungen</li></ul><span class="tag">Merksatz: Was man nicht misst, kann man nicht verbessern.</span>' },
+    { q:'Was bedeutet "Omnibus I" für den Mittelstand?', a:'Das Omnibus-I-Paket (Feb 2026) vereinfacht die Lieferketten-Sorgfaltspflichten und entlastet den Mittelstand.<br><br><strong>Chance:</strong> Wer früh CSDDD-Ready ist, hat 2028+ einen Wettbewerbsvorteil. Frühzeitige Vorbereitung zahlt sich aus!' },
+  ],
+
+  archsichten: [
+    { q:'Nenne die 5 Architektursichten (Folie 128).', a:'<ol style="padding-left:1.2rem"><li><strong>Konzeptionelle Sicht</strong> – Überblick über die Systemlandschaft</li><li><strong>Laufzeitsicht</strong> – Bestandteile während der Ausführung (Start, Konfiguration, Admin)</li><li><strong>Implementationssicht</strong> – Funktionalität, Struktur, Zusammenhänge der Komponenten</li><li><strong>Datensicht</strong> – Struktur der Datenelemente und ihre Beziehungen</li><li><strong>Infrastruktursicht</strong> – Ablaufumgebung des Systems</li></ol>' },
+    { q:'Was beschreibt die konzeptionelle Sicht vs. die Laufzeitsicht?', a:'<ul><li><strong>Konzeptionelle Sicht:</strong> Überblick über die gesamte Systemlandschaft – was gibt es? Wie hängen Systeme zusammen?</li><li><strong>Laufzeitsicht:</strong> Was passiert, wenn das System <em>läuft</em>? (Systemstart, Laufzeitkonfiguration, Administration)</li></ul>' },
+    { q:'Was beschreibt die Implementationssicht vs. die Datensicht?', a:'<ul><li><strong>Implementationssicht:</strong> Funktionalität, Struktur und Zusammenhänge der Komponenten – wie ist das System aufgebaut?</li><li><strong>Datensicht:</strong> Struktur der Datenelemente und ihre Beziehungen – welche Daten gibt es, wie sind sie strukturiert?</li></ul>' },
+    { q:'Was ist die Infrastruktursicht?', a:'Die Infrastruktursicht beschreibt die <strong>Ablaufumgebung</strong> des Systems – auf welcher Hardware und Infrastruktur läuft das System?<br><br>Beispiel: Welche Server, Cloud-Dienste, Netzwerkkomponenten sind im Einsatz?' },
+  ],
+
+  dienstemarkt: [
+    { q:'Was ist der Dienstemarkt?', a:'Eine Plattform, auf der Diensteanbieter ihre Dienste <strong>publizieren</strong> und Dienstenutzer diese finden, sich verbinden und nutzen können.<br><br>Wie ein Wochenmarkt: Anbieter stellen Waren aus, Käufer suchen und kaufen – nur digital mit IT-Diensten.' },
+    { q:'Erkläre Publish → Find → Bind → Invoke.', a:'Das Grundprinzip der Nutzung von Diensten:<ul><li>📢 <strong>Publish:</strong> Diensteanbieter veröffentlicht seinen Dienst im Marktplatz</li><li>🔍 <strong>Find:</strong> Dienstenutzer sucht passenden Dienst ("Ich brauche X")</li><li>🔗 <strong>Bind:</strong> Schnittstelle wird bereitgestellt – Verbindung aufgebaut</li><li>▶️ <strong>Invoke:</strong> Dienst wird aufgerufen und genutzt</li></ul><div class="formula">Publish → Find → Bind → Invoke</div>' },
+    { q:'Was ist die Koordinationsschicht?', a:'Eine Schicht <strong>oben auf dem Dienstemarkt</strong>, die den Ablauf (Workflow) koordiniert.<br><br>Technisch: BPMN modelliert den Ablauf als Zustandsübergangsdiagramm. Jede BPMN-Aktivität ruft einen Dienst aus dem Dienstemarkt auf → <strong>Orchestrierung von Diensten</strong>.<br><br>Beispiel: Aufnahme Klinik → Versorgung → Rechnung – alles koordiniert, automatisiert.' },
+    { q:'Wie hängen BPMN, Dienstemarkt und Koordination zusammen?', a:'<ol style="padding-left:1.2rem"><li>BPMN modelliert den <strong>Ablauf</strong> (Zustandsübergänge, Aktivitäten)</li><li>Dienstemarkt stellt die <strong>Dienste</strong> bereit</li><li>Jede BPMN-Aktivität ruft einen Dienst auf → Automatisierung</li></ol><strong>Ergebnis:</strong> Kein manuelles Eingreifen nötig – der Workflow läuft automatisch, Dienste werden dynamisch genutzt. Das ist nachhaltige Koordination!' },
+  ],
+};
+
+const quizQs = [
+  { q:'Wofür steht SEED?', v:['Welche drei Dimensionen müssen bei nachhaltiger IT-Innovation gleichzeitig erfüllt sein?','Google verfolgt Barrierefreiheit, Kosteneffizienz und CO₂-Reduktion gleichzeitig – welchem Rahmen entspricht das?'], opts:['Sustainable, Efficient, Ecological Deployment','Strategic, Environmental, Economic Design','Social, Economic, Ecologic Development','Social, Ethical, Ecologic Deployment'], ans:2, exp:'SEED = Social, Economic, Ecologic Development. Alle drei Dimensionen müssen gleichzeitig erfüllt sein – keine darf ausgeblendet werden.' },
+  { q:'Was kennzeichnet Collective Intelligence?', v:['KI, Sensoren und Stadtplaner optimieren gemeinsam den Stadtverkehr. Welches Konzept steckt dahinter?','Was entsteht, wenn Menschen, Maschinen und Algorithmen gemeinsam handeln?'], opts:['KI-Systeme handeln vollständig autonom ohne menschliche Beteiligung','Eine große Wissensdatenbank, die von vielen Nutzern gepflegt wird','Peer-to-Peer-Netzwerke die ohne zentrale Steuerung kooperieren','Das Zusammenspiel von Menschen + Maschinen + Algorithmen – gemeinsam klüger als Einzelne'], ans:3, exp:'Collective Intelligence = Menschen + Maschinen + Algorithmen handeln gemeinsam klüger als jeder Einzelne. Beispiel: Smart City – Sensoren + KI + Stadtplaner treffen gemeinsam Entscheidungen.' },
+  { q:'Was steht in der Zeit-Raum-Matrix bei "Verschiedener Ort + Gleiche Zeit"?', v:['Ein Continental-Ingenieur in Hamburg überwacht live ein Werk in Hannover. Welcher Quadrant der Zeit-Raum-Matrix?','Was ist ein Beispiel für synchrone Zusammenarbeit über Distanz?'], opts:['Decision Room – alle physisch am selben Ort','Kanban-Board im Büro – asynchron am selben Ort','Schichtübergabe-Dashboard – asynchron und verteilt','Videokonferenz / Remote-Monitoring – live, verschiedene Orte'], ans:3, exp:'Verschiedener Ort + gleiche Zeit = synchrone Fernkollaboration (Videokonferenz, Remote-Monitoring). Selber Ort + gleiche Zeit = Decision Room. Verschiedener Ort + verschiedene Zeit = GitHub/Jira.' },
+  { q:'In welcher Schicht des 3-Schichten-Modells läuft die Überweisungsregel einer Bank?', v:['Welche Schicht prüft beim Online-Banking ob ein Überweisungsbetrag das Limit überschreitet?'], opts:['Präsentationssicht – sie rendert die Web-Oberfläche für den Nutzer','Datenzugriffssicht – sie liest Kontostände aus der Datenbank','Netzwerkschicht – sie leitet Anfragen an den richtigen Server','Applikationssicht – sie enthält Geschäftslogik und Regeln'], ans:3, exp:'Die Applikationssicht (Business Logic Layer) enthält Geschäftsregeln und Workflows. Präsentation = UI, Datenzugriff = DB. Online-Banking: Überweisungslimit prüfen → Applikationssicht.' },
+  { q:'Was unterscheidet P2P grundlegend von Client-Server?', v:['BitTorrent funktioniert ohne zentralen Download-Server. Was für ein Netzwerkmodell ist das?','Warum ist ein P2P-Energienetz robuster als eines mit zentralem Server?'], opts:['Bei P2P gibt es einen leistungsstarken zentralen Server der alle Anfragen koordiniert','Alle Peers senden Daten nur an einen Broker, der sie weiterleitet','P2P ist eine spezielle Form von Cloud Computing mit verteilten Servern','Bei P2P sind alle Teilnehmer gleichberechtigt – gleichzeitig Client und Server'], ans:3, exp:'P2P = alle Peers gleichberechtigt. Jeder ist gleichzeitig Client (nutzt Dienste) und Server (bietet Dienste). Kein zentraler Server nötig → robuster, skaliert automatisch.' },
+  { q:'Warum verarbeitet eine Fabriksensor die Messdaten direkt vor Ort statt alles in die Cloud zu senden?', v:['Was ist der Hauptvorteil von Sensor Intelligence gegenüber reiner Cloud-Verarbeitung?','Continental-Produktionssensoren senden nur Anomalien statt Rohdaten. Was steckt dahinter?'], opts:['Weil Cloud-Anbieter Industriedaten nicht verarbeiten dürfen','Weil Edge-Geräte mehr Langzeitspeicher haben als Cloud-Systeme','Weil Internetverbindungen zu Produktionsanlagen generell verboten sind','Um Bandbreite zu sparen, Latenz zu reduzieren und Datenschutz zu erhöhen'], ans:3, exp:'Edge Computing / Sensor Intelligence: Daten lokal vorverarbeiten → weniger Datenübertragung, geringe Latenz (Echtzeit-Reaktion), besserer Datenschutz (Rohdaten verlassen das Gerät nicht).' },
+  { q:'Ein Unternehmen ändert seine Strategie auf Online-Vertrieb und baut dafür ein Digital-Sales-Team und einen Webshop auf. Was zeigt dieses Beispiel?', v:['Business-Strategie "Online-Vertrieb" zieht IT-Investitionen in Webshop und Logistik nach sich. Welches Konzept beschreibt das?'], opts:['Collective Intelligence – IT und Menschen arbeiten strategisch zusammen','Domain Engineering – eine wiederverwendbare IT-Plattform wird gebaut','Digitale Souveränität – das Unternehmen wird unabhängig von externen Anbietern','Business-IT-Alignment – Strategie und IT stimmen überein und unterstützen sich'], ans:3, exp:'Business-IT-Alignment = Business-Strategie (Online-Vertrieb) bestimmt IT-Strategie (Webshop, Zahlungssysteme, Skalierung) und Org-Struktur (Digital Sales Team). Beide müssen zusammenpassen.' },
+  { q:'Blockchain wurde erst hochgejubelt, dann enttäuschte sie viele – jetzt gibt es erste produktive Erfolge wie IBM Food Trust. Welche Hype-Cycle-Phase?', v:['IBM Food Trust ist aktiv im Einsatz, aber Blockchain in Lieferketten ist noch kein Standard. Welcher Phase entspricht das?'], opts:['Peak of Inflated Expectations – der Hype ist gerade auf dem Höchststand','Technology Trigger – erste Aufmerksamkeit, noch kein fertiges Produkt','Plateau of Productivity – Technologie ist ausgereift und weit verbreitet','Slope of Enlightenment – nach der Enttäuschung entstehen erste echte Anwendungen'], ans:3, exp:'Slope of Enlightenment (Phase 4) = nach der Enttäuschung entstehen erste echte, produktive Anwendungen. IBM Food Trust ist aktiv → Blockchain auf dem Slope, noch nicht am Plateau.' },
+  { q:'Ein Entwickler nutzt Heroku um seine App zu deployen – ohne Server selbst aufzusetzen oder zu konfigurieren. Was nutzt er?', v:['Was ist der Unterschied: Anwendung direkt nutzen vs. Plattform zum Entwickeln vs. Server selbst verwalten?'], opts:['SaaS – er nutzt eine fertige Anwendung direkt als Endnutzer','IaaS – er mietet virtuelle Server und verwaltet Betriebssystem und Middleware selbst','On-Premise – er betreibt eigene physische Hardware','PaaS – er nutzt eine Plattform zum Entwickeln eigener Apps ohne Infrastrukturverwaltung'], ans:3, exp:'PaaS (Platform as a Service) = Entwicklungsplattform ohne eigene Infrastrukturverwaltung (z.B. Heroku, Azure). IaaS = selbst Server konfigurieren. SaaS = fertige App direkt nutzen.' },
+  { q:'IBM entwickelt ein Blockchain-Framework das viele Kunden (Walmart, Nestlé) für Lebensmittelverfolgung nutzen. Was ist das Framework für IBM?', v:['Was liefert Domain Engineering, was konsumiert Application Engineering?','VW baut eine Infotainment-Plattform für Golf, ID.3 und Audi Q4. Was ist diese Plattform im IT-Produktlinien-Kontext?'], opts:['Ein einmaliges Kundenprojekt speziell für Walmart','Ein SaaS-Produkt das Endnutzer im Browser nutzen','Ein Edge-Computing-System für lokale Blockchain-Knoten','Eine wiederverwendbare Plattform (Domain Engineering) die Application Engineering als Basis nutzt'], ans:3, exp:'Domain Engineering = wiederverwendbare Plattform entwickeln. Application Engineering = Walmart/Nestlé nutzen das IBM-Framework für ihre spezifischen Anwendungsfälle. Das Rad nicht neu erfinden = Nachhaltigkeit.' },
+  { q:'Was beschreibt der "Organisation View" in ARIS?', v:['Du willst wissen wer für einen Prozessschritt verantwortlich ist. Welche ARIS-Sicht zeigt das?'], opts:['Welche Aktivitäten und Prozesse im Unternehmen ablaufen','Welche Daten ein Prozess benötigt und als Ergebnis erzeugt','Welche Ereignisse einen Prozess auslösen oder beenden','Welche Stellen und Personen für Prozessschritte verantwortlich sind'], ans:3, exp:'Organisation View = Verantwortlichkeiten (wer macht was). Function View = Aktivitäten. Data View = Daten. Event View = Auslöser. Product/Service View = Ergebnisse.' },
+  { q:'Google DeepMind steuert die Rechenzentrum-Kühlung mit KI und spart 40% Energie. Welcher Hype-Cycle-Phase entspricht das?', v:['KI-Energiesteuerung ist bei Google produktiv im Einsatz und liefert messbare wirtschaftliche Ergebnisse. Welche Phase?'], opts:['Technology Trigger – erste Aufmerksamkeit, kein produktiver Einsatz','Peak of Inflated Expectations – großer Hype, kaum echte Anwendungen im Markt','Slope of Enlightenment – erste Pilotprojekte entstehen gerade','Plateau of Productivity – ausgereift, produktiv, wirtschaftlich einsetzbar'], ans:3, exp:'Plateau of Productivity (Phase 5) = Technologie ist ausgereift und wirtschaftlich einsetzbar. Google nutzt KI-Energiesteuerung tatsächlich in allen Rechenzentren → messbarer Nutzen (40% Einsparung).' },
+  { q:'Continental erstellt ein virtuelles Modell seiner Reifenproduktion um Materialverbrauch vor dem Start zu simulieren. Was ist das?', v:['Was ist der Zweck eines Digitalen Zwillings in der Fertigung?'], opts:['Ein P2P-Netzwerk zwischen Produktionsmaschinen die direkt kommunizieren','Ein BPMN-Prozessdiagramm das den Fertigungsablauf beschreibt','Ein Sensor-Intelligence-System zur Echtzeit-Anomalieerkennung','Ein Digitaler Zwilling – digitales Abbild der Anlage zum Simulieren vor echten Änderungen'], ans:3, exp:'Digitaler Zwilling = digitales Abbild der Realität. Zweck: Simulieren, Steuern, Optimieren – bevor es in der echten Anlage passiert. Continental: Materialverbrauch (Gummi, Metalle) vorab simulieren.' },
+  { q:'Was ist der erste Schritt in der IT-Produktlinie?', v:['Du entwickelst eine IT-Lösung für nachhaltige Energiesteuerung in der Produktion. Was machst du zuerst?','In welcher Reihenfolge läuft die IT-Produktlinie ab?'], opts:['Application Engineering – Kundenprodukt aus der Plattform konfigurieren','Domain Engineering – Use Cases und Requirements für die Domäne modellieren','Plattform-Entwicklung – gemeinsame wiederverwendbare Architektur bauen','Scoping – Bereich und Domäne eingrenzen (z.B. "Nachhaltige Energiesteuerung")'], ans:3, exp:'Scoping kommt zuerst: Bereich eingrenzen. Dann Domain Engineering (Domänenmodell), dann Plattform (gemeinsame Architektur), dann Application Engineering (Kundenprodukt konfigurieren).' },
+  { q:'Continentals Produktionssensor misst Temperatur und sendet nur Anomalien statt alle Rohmesswerte. Welches Prinzip?', v:['Was beschreibt Sensor Intelligence im Kontext Edge vs. Cloud?'], opts:['Cloud Computing – alles wird zur Auswertung zentralisiert in die Cloud gesendet','Business-IT-Alignment – Sensor und Cloud-Strategie sind abgestimmt','Collective Intelligence – Sensor und Mensch entscheiden gemeinsam über Datenweitergabe','Sensor Intelligence (Edge) – lokale Vorverarbeitung am Sensor, nur Relevantes in die Cloud'], ans:3, exp:'Sensor Intelligence = Edge-Verarbeitung. Sensor verarbeitet lokal vor, sendet nur relevante Daten in die Cloud. Spart Bandbreite + ermöglicht Echtzeit-Reaktion ohne Cloud-Latenz.' },
+  { q:'Privatleute verkaufen überschüssigen Solarstrom direkt an Nachbarn über eine digitale Plattform ohne zentralen Anbieter. Was ist das?', v:['Was ist ein Virtuelles Kraftwerk im Kontext von Smart Grids?'], opts:['Ein Cloud-Dienst des Energieversorgers mit zentralem Abrechnungsserver','Ein BPMN-koordinierter Energiemarkt mit automatischen Workflows','Eine IaaS-Infrastruktur für Energieunternehmen im Rechenzentrum','Ein P2P-Energienetz (Smart Grid) – jeder ist gleichzeitig Produzent und Verbraucher'], ans:3, exp:'Smart Grid = P2P-Energienetz. Physisch: normales Stromnetz. Digital: P2P-Marktplatz. Jeder Haushalt = gleichzeitig Client (Strom kaufen) + Server (Strom verkaufen) = Virtuelles Kraftwerk.' },
+  { q:'Welche Nachhaltigkeitsdimension adressiert IBM Food Trust primär?', v:['IBM ermöglicht lückenlose Transparenz in Lebensmittellieferketten und schützt damit Konsumenten. Welche SEED-Dimension?'], opts:['Ökologisch – Blockchain reduziert CO₂ durch Optimierung von Transportwegen','Technisch – Einsatz neuer Technologie als Selbstzweck','Ökonomisch – IBM verdient Lizenzgebühren für das Framework','Sozial – faire, transparente und rückverfolgbare Lieferketten zum Schutz von Konsumenten'], ans:3, exp:'IBM Food Trust primär: Sozial = faire, transparente Lieferkette. Konsumenten können Ursprung prüfen. Produzenten in fairen Bedingungen. Dazu auch Ökonomisch (Prozesseffizienz).' },
+  { q:'Was ist die Kernaussage der IT-Produktlinie in Bezug auf Nachhaltigkeit?', v:['IBM nutzt dasselbe Blockchain-Framework für Dutzende verschiedene Kunden. Warum ist das nachhaltig?'], opts:['Jedes Kundenprojekt braucht eine maßgeschneiderte Architektur von Grund auf','IT-Produktlinien erhöhen Komplexität und sind daher nicht nachhaltig','Scoping ist der letzte Schritt der IT-Produktlinie','Wiederverwendbare Plattformen sparen Entwicklungszeit, Ressourcen und Geld'], ans:3, exp:'IT-Produktlinie = Nachhaltigkeit in der IT! Einmal entwickeln, viele Male verwenden. IBM-Framework → viele Kunden. Spart Zeit, Ressourcen, Geld = direkte Definition von Nachhaltigkeit.' },
+  { q:'Was verpflichtet das LkSG deutsche Konzerne zu tun?', v:['Ein Zulieferer in Asien verletzt Menschenrechte. Welches Gesetz verpflichtet den deutschen Auftraggeber zum Handeln?'], opts:['Jährlich eine CO₂-Bilanz der eigenen Rechenzentren zu veröffentlichen','Alle Mitarbeiterdaten DSGVO-konform zu verarbeiten','Ausschließlich eigene Mitarbeiter nach sozialen Standards zu behandeln','Risiken für Menschenrechte und Umwelt in der gesamten Lieferkette zu prüfen, adressieren und melden'], ans:3, exp:'LkSG = Lieferkettensorgfaltspflichtengesetz (DE, 2023). Konzerne müssen Risiken für Menschenrechte und Umwelt in der GESAMTEN Lieferkette (inkl. Zulieferer) prüfen, adressieren und berichten.' },
+  { q:'Ein Dienst wird im Marktplatz veröffentlicht, ein anderes System findet ihn, baut eine Verbindung auf und ruft ihn auf. Welches Muster?', v:['In welcher Reihenfolge läuft die Nutzung eines Dienstes im Dienstemarkt ab?'], opts:['Request-Response (HTTP GET/POST) – klassisches Web-Protokoll','Domain Engineering → Application Engineering – IT-Produktlinie','Start → Peak → Trough → Slope – Hype-Cycle-Phasen','Publish → Find → Bind → Invoke – Grundprinzip des Dienstmarkts'], ans:3, exp:'Publish → Find → Bind → Invoke: Anbieter veröffentlicht (Publish), Nutzer sucht (Find), Verbindung aufgebaut (Bind), Dienst aufgerufen (Invoke). So koordiniert die BPMN-Schicht den Workflow.' },
+  { q:'Was beschreibt digitale Souveränität?', v:['Schwarz Digit baut eine deutsche Cloud-Infrastruktur für Mobilitäts- und Gesundheitsanbieter. Welches Konzept dahinter?'], opts:['Das Recht der Bürger auf Privatsphäre im Internet (entspricht DSGVO)','Ein ISO-Zertifikat für sichere Cloud-Dienste in der EU','Ein P2P-Netzwerk für staatliche Behörden das unabhängig von Hyperscalern ist','Die Fähigkeit von Nationen/Unternehmen, eigene digitale Infrastruktur zu kontrollieren – unabhängig von Drittanbietern'], ans:3, exp:'Digitale Souveränität = Unabhängigkeit im digitalen Raum. Schwarz Digit: Deutsche Cloud-Infrastruktur → unabhängig von US-Hyperscalern wie AWS oder Azure. Wichtig für Wohlstand und Sicherheit.' },
+  { q:'Was zeigt die Laufzeitsicht (eine der 5 Architektursichten)?', v:['Du willst wissen wie das System hochfährt, konfiguriert und im Betrieb verwaltet wird. Welche Sicht zeigt das?'], opts:['Überblick über die gesamte Systemlandschaft und wie Systeme zusammenhängen','Auf welcher Hardware, welchen Cloud-Diensten und welchem Netzwerk das System läuft','Struktur der Datenelemente und ihre Beziehungen im Datenbankmodell','Bestandteile des Systems während der Ausführung – Systemstart, Konfiguration, Administration'], ans:3, exp:'Laufzeitsicht = was passiert wenn das System läuft (Systemstart, Laufzeitkonfiguration, Admin). Konzeptionell = Überblick Systemlandschaft. Infrastruktursicht = Hardware/Cloud. Datensicht = Datenstruktur.' },
+  { q:'BPMN modelliert einen Workflow mit 5 Aktivitäten, jede ruft automatisch einen Dienst auf. Welche Schicht koordiniert das?', v:['Was macht die Koordinationsschicht die über dem Dienstemarkt liegt?'], opts:['Die Präsentationsschicht im 3-Schichten-Modell rendert den Workflow für Nutzer','Die Datenzugriffssicht speichert Workflow-Status in der Datenbank','Die Infrastruktursicht (Server, Cloud) führt die Dienste physisch aus','Die Koordinationsschicht – sie orchestriert Dienste aus dem Dienstemarkt anhand des BPMN-Ablaufs'], ans:3, exp:'Koordinationsschicht = BPMN + Dienstemarkt. BPMN modelliert den Ablauf (Zustandsübergänge), jede Aktivität ruft automatisch einen Dienst auf = Orchestrierung ohne manuelles Eingreifen.' },
+  { q:'Was ist "Omnibus I" und was bewirkt es?', v:['Ein mittelständisches Unternehmen (500 MA, 200 Mio. € Umsatz) fragt ob es CSDDD-pflichtig ist. Was sagt Omnibus I?'], opts:['Ein SAP-Modul das LkSG-Reporting automatisiert','Ein ISO-Zertifizierungsstandard für nachhaltige Lieferketten','Ein Blockchain-Protokoll für sicheren Datenaustausch mit Lieferanten','Ein EU-Erleichterungspaket (Feb 2026) das Lieferketten-Sorgfaltspflichten für kleinere Unternehmen vereinfacht'], ans:3, exp:'Omnibus I (Feb 2026) vereinfacht LkSG/CSDDD-Regeln für den Mittelstand. CSDDD betrifft >5.000 MA & >1,5 Mrd. € Umsatz. Wer früh vorbereitet ist, hat ab 2028+ einen Wettbewerbsvorteil.' },
+  { q:'Was beschreibt CSCW?', v:['Microsoft Teams, SAP und Power Automate koordinieren Prozesse zwischen Abteilungen. Welches Konzept ist das?'], opts:['Cloud-based Software Communication Workflow – Dienste kommunizieren über die Cloud','Collective Science Community Work – Wissenschaftler kollaborieren per KI','Computer Science Core Work – Grundkonzepte der Informatik','Computer Supported Cooperative Work – IT-gestützte, transparente Zusammenarbeit'], ans:3, exp:'CSCW = Computer Supported Cooperative Work. IT-Systeme machen Zusammenarbeit transparent, steuerbar, nachvollziehbar. Werkzeuge: Teams, SAP, Power Automate, GitHub.' },
+  { q:'Was unterscheidet die Infrastruktursicht von der Laufzeitsicht?', v:['Du willst wissen auf welchen Servern und Cloud-Diensten dein System physisch läuft. Welche Sicht?'], opts:['Beide Sichten beschreiben dasselbe – nur mit unterschiedlichem Namen','Infrastruktursicht = Laufzeitprozesse; Laufzeitsicht = Hardware-Umgebung','Infrastruktursicht = Datenstruktur; Laufzeitsicht = Systemstart-Verhalten','Infrastruktursicht = Ablaufumgebung (Hardware, Server, Cloud); Laufzeitsicht = Systemstart, Konfiguration, Betrieb'], ans:3, exp:'Infrastruktursicht = Wo läuft das System? (Hardware, Server, Cloud, Netzwerk). Laufzeitsicht = Wie läuft das System? (Systemstart, Laufzeitkonfiguration, Admin-Betrieb).' },
+  { q:'Was ist Workflow Management?', v:['Statt E-Mails hin und her werden Aufgaben automatisch zugewiesen, überwacht und dokumentiert. Welches Konzept?'], opts:['Ein Netzwerkprotokoll zur optimierten Datenübertragung zwischen Systemen','Eine Projektmanagement-Methode die komplett ohne IT-Unterstützung auskommt','Ein Verfahren zur Messung und Optimierung von Datenbankabfragen','Digitale Steuerung und Automatisierung von Geschäftsprozessen für Effizienz und Transparenz'], ans:3, exp:'Workflow Management = digitale Steuerung und Automatisierung von Prozessen. Aufgaben werden automatisch verteilt, überwacht, dokumentiert. Ergebnis: Effizienz, Transparenz, Nachverfolgbarkeit.' },
+  { q:'Was ist die CSDDD und wen betrifft sie?', v:['Ab welcher Unternehmensgröße greift die EU-CSDDD Lieferketten-Richtlinie?'], opts:['Deutsches Datenschutzgesetz für Cloud-Dienste – gilt ab 50 Mitarbeitern','ISO-Standard für nachhaltige Software-Entwicklung und IT-Betrieb','Steuerrichtlinie für digitale Plattformen in der EU (>1 Mrd. € Umsatz)','EU-Richtlinie 2024/1760 zur Lieferketten-Sorgfaltspflicht – betrifft >5.000 MA & >1,5 Mrd. € Umsatz'], ans:3, exp:'CSDDD = Corporate Sustainability Due Diligence Directive (EU 2024). Betrifft Unternehmen >5.000 MA & >1,5 Mrd. € Umsatz. Vollanwendung 2028+. Vereinheitlicht LkSG auf EU-Ebene.' },
+  { q:'Continental koordiniert: Energiesensor → KI-Analyse → Techniker-Freigabe → Anlage anpassen. Welches Tool modelliert diesen Ablauf?', v:['Was ist der Unterschied zwischen Aufbauorganisation und Ablauforganisation?'], opts:['ARIS Organisation View – zeigt wer für welchen Schritt verantwortlich ist','Infrastruktursicht – zeigt auf welcher Hardware die Anlage läuft','Datensicht – zeigt wie die Sensordaten strukturiert sind','BPMN – modelliert die Ablauforganisation mit Zustandsübergängen und Diensten'], ans:3, exp:'BPMN modelliert die Ablauforganisation (wer tut was in welcher Reihenfolge, welche Dienste aufgerufen werden). Aufbauorganisation (Wer ist verantwortlich?) = Organigramm, nicht BPMN.' },
+  { q:'Was ist der Unterschied zwischen SaaS und IaaS?', v:['Ein IT-Admin mietet virtuelle Server bei Amazon AWS und konfiguriert das Betriebssystem selbst. Was nutzt er?'], opts:['Kein relevanter Unterschied – beide sind cloud-basiert und vom Anbieter verwaltet','IaaS = fertige Anwendung direkt nutzen; SaaS = selbst Infrastruktur verwalten','SaaS = Entwicklungsplattform für eigene Apps; IaaS = fertige Business-Anwendungen','SaaS = fertige Anwendung direkt nutzen (Google Docs); IaaS = rohe Infrastruktur selbst verwalten (AWS EC2)'], ans:3, exp:'SaaS (Software as a Service) = fertige App nutzen (Google Docs, M365). IaaS (Infrastructure as a Service) = virtuelle Server/Speicher/Netzwerk mieten und selbst verwalten (AWS EC2). PaaS = dazwischen.' },
+];
+
+const examQs = [
+  { q:'Was bedeutet SEED und welche drei Dimensionen hat es?', opts:['Software Engineering Design','Social, Economic, Ecologic Development','System Evaluation & Deployment','Service-Enabled Enterprise Design'], ans:1, exp:'SEED = Social, Economic, Ecologic Development – nachhaltige IT-Innovation muss alle drei Dimensionen erfüllen.' },
+  { q:'Welche Aussage zu P2P ist korrekt?', opts:['Jeder Peer ist nur Client','Jeder Peer ist nur Server','Jeder Peer ist gleichzeitig Client und Server','P2P braucht einen zentralen Server'], ans:2, exp:'Bei P2P sind alle Peers gleichberechtigt – gleichzeitig Client und Server. Keine zentrale Instanz nötig.' },
+  { q:'Was ist der Unterschied zwischen SaaS und PaaS?', opts:['Kein Unterschied','SaaS = fertige App nutzen, PaaS = eigene App entwickeln','PaaS = fertige App, SaaS = Entwicklungsplattform','Beide sind dasselbe'], ans:1, exp:'SaaS (z.B. Google Docs) = Anwendung direkt nutzen. PaaS (z.B. Heroku) = Plattform zur Entwicklung eigener Software.' },
+  { q:'Was macht die Applikationssicht im 3-Schichten-Modell?', opts:['Zeigt die Benutzeroberfläche','Enthält Geschäftslogik und Workflows','Verwaltet Datenbankzugriffe','Stellt Netzwerkverbindungen her'], ans:1, exp:'Applikationssicht (Business Logic Layer) enthält die Geschäftslogik, Workflows und das Domainmodell.' },
+  { q:'In welcher Hype-Cycle-Phase ist eine Technologie "ausgereift und wirtschaftlich einsetzbar"?', opts:['Technology Trigger','Peak of Inflated Expectations','Slope of Enlightenment','Plateau of Productivity'], ans:3, exp:'Plateau of Productivity (Phase 5) – die Technologie ist nun ausgereift, wirtschaftlich einsetzbar und weit verbreitet.' },
+  { q:'Was ist Collective Intelligence?', opts:['Künstliche Intelligenz eines einzelnen Computers','Zusammenspiel von Menschen + Maschinen das klüger handelt als Einzelne','Eine App für kollektive Abstimmung','Ein soziales Netzwerk'], ans:1, exp:'Collective Intelligence = Zusammenspiel von Menschen + Maschinen + Algorithmen. Gemeinsam klügere Entscheidungen als Einzelne.' },
+  { q:'Was versteht man unter CSCW?', opts:['Computer Science Core Work','Computer Supported Cooperative Work – IT-gestützte Zusammenarbeit','Collaborative Software Creation Workflow','Cloud-based Software Communication Web'], ans:1, exp:'CSCW = Computer Supported Cooperative Work – IT-Systeme ermöglichen transparente, steuerbare Zusammenarbeit.' },
+  { q:'Was liefert Domain Engineering?', opts:['Fertige Produkte für Endkunden','Wiederverwendbare Plattform und Module für eine Produktfamilie','Nur Test-Ergebnisse','Konkrete Kundenanforderungen'], ans:1, exp:'Domain Engineering entwickelt wiederverwendbare Bausteine/Plattform. Application Engineering nutzt diese für konkrete Produkte.' },
+  { q:'Was ist das Hauptmerkmal von Edge Computing?', opts:['Alle Daten werden in die Cloud gesendet','Datenverarbeitung findet direkt am Gerät / nah der Quelle statt','Edge = schnellere Cloud-Server','Edge = verteilte Datenbank'], ans:1, exp:'Edge Computing verarbeitet Daten am Rand des Netzwerks – direkt beim Sensor/Gerät. Geringe Latenz, weniger Datenübertragung.' },
+  { q:'Was beschreibt Business-IT-Alignment?', opts:['IT entwickelt autonom ohne Business-Input','Business und IT-Strategie sind aufeinander abgestimmt und unterstützen sich','Business bestimmt allein die IT','IT-Strategie hat nichts mit Business zu tun'], ans:1, exp:'Alignment = Business-Strategie und IT-Strategie müssen aufeinander abgestimmt sein und sich gegenseitig unterstützen.' },
+  { q:'Was ist der erste Schritt in der IT-Produktlinie und was bedeutet er?', opts:['Application Engineering – Produkte bauen','Scoping – Bereich und Domäne eingrenzen','Plattform – Architektur entwickeln','Domain Engineering – Anforderungen sammeln'], ans:1, exp:'Scoping ist der erste Schritt: Den Bereich/die Domäne eingrenzen. Beispiel: "Nachhaltige Energiesteuerung für Industriebetriebe".' },
+  { q:'Continental verwendet einen Digitalen Zwilling. Wofür?', opts:['Um Mitarbeiter zu überwachen','Um Materialverbrauch vor der Produktion zu simulieren','Um Kundendaten zu speichern','Um Lieferketten zu verfolgen'], ans:1, exp:'Continental simuliert mit dem Digitalen Zwilling den Materialverbrauch (Gummi, Metalle) der Reifenproduktion vor der echten Produktion → Ressourceneinsparung.' },
+  { q:'Was beschreibt Sensor Intelligence?', opts:['Intelligente Suchalgorithmen','Sensoren erfassen Daten lokal (Edge), verarbeiten diese vor und senden nur Relevantes in die Cloud','Ein neues KI-Modell für Sensorik','Cloud-basierte Datenerfassung ohne lokale Verarbeitung'], ans:1, exp:'Sensor Intelligence = Edge-Verarbeitung: Sensoren vorverarbeiten Daten lokal, senden nur relevante Ergebnisse in die Cloud. Spart Bandbreite, ermöglicht Echtzeit.' },
+  { q:'Was ist CSDDD?', opts:['Ein deutsches Cloud-Gesetz','EU-Richtlinie 2024/1760 zur Lieferketten-Sorgfaltspflicht – Risiken prüfen, adressieren, melden; betrifft Unternehmen >5.000 MA & >1,5 Mrd. € Umsatz','Ein Datenschutz-Framework','Ein Cloud-Standard der EU'], ans:1, exp:'CSDDD = Corporate Sustainability Due Diligence Directive, EU 2024. Einheitliche EU-Standards für Sorgfaltspflichten in der Lieferkette. Vollanwendung ab 2028+.' },
+  { q:'Was ist Find-Bind-Invoke im Dienstemarkt?', opts:['Drei Phasen der Nutzung: Dienst suchen → verbinden → aufrufen','Drei Datenbankoperationen','Ein Authentifizierungsprotokoll','Phasen des Domain Engineering'], ans:0, exp:'Find = Dienst suchen, Bind = Schnittstelle aufbauen, Invoke = Dienst aufrufen. So koordiniert die BPMN-Workflow-Schicht automatisch Dienste aus dem Dienstemarkt.' },
+  { q:'Welche der 5 Architektursichten beschreibt die Hardware-Umgebung?', opts:['Konzeptionelle Sicht','Laufzeitsicht','Datensicht','Infrastruktursicht'], ans:3, exp:'Die Infrastruktursicht beschreibt die Ablaufumgebung – welche Hardware, Server, Cloud-Dienste und Netzwerkkomponenten das System ausführen.' },
+];
+
+// ===================== SHUFFLE HELPERS =====================
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function prepQ(q){
+  const pairs=q.opts.map((opt,i)=>({opt,correct:i===q.ans}));
+  const shuffled=shuffle(pairs);
+  return{...q,opts:shuffled.map(x=>x.opt),ans:shuffled.findIndex(x=>x.correct)};
+}
+
+// ===================== STATE =====================
+let curCards=[],cIdx=0,cRev=false,xpTotal=0,okTotal=0,doneCards=0;
+let qIdx=0,qOk=0,qWrong=0,qAnswered=false;
+let activeQuiz=[],activeExam=[];
+let eTimer=null,eSec=720,eStarted=false;
+const eSel={};
+
+// ===================== NAV =====================
+function go(id){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  const map={home:0,learn:1,quiz:2,cheat:3,exam:4,tasks:5,altklausur:6};
+  document.querySelectorAll('.tab')[map[id]]?.classList.add('on');
+  if(id==='quiz') initQuiz();
+  if(id==='home') refreshHome();
+  if(id==='learn') initAllCards();
+  if(id==='tasks') initTasks();
+  if(id==='altklausur') renderAltklausur();
+}
+
+function initAllCards(){
+  const all=Object.values(cardSets).flat();
+  curCards=shuffle(all).slice(0,15);
+  cIdx=0;cRev=false;
+  document.getElementById('l-title').textContent='Alle Themen – 15 zufällige Karten';
+  renderC();
+}
+
+function addXP(n){
+  xpTotal+=n;okTotal++;
+  document.getElementById('xp').textContent=xpTotal;
+  document.getElementById('s-xp').textContent=xpTotal;
+  document.getElementById('s-ok').textContent=okTotal;
+}
+
+function refreshHome(){
+  document.getElementById('s-xp').textContent=xpTotal;
+  document.getElementById('s-ok').textContent=okTotal;
+  const pct=Math.min(100,Math.round(doneCards/Object.values(cardSets).flat().length*100));
+  document.getElementById('s-done').textContent=pct+'%';
+}
+
+// ===================== BUILD HOME =====================
+(function(){
+  const g=document.getElementById('topic-grid');
+  topics.forEach(t=>{
+    const d=document.createElement('div');
+    d.className='tcard';
+    d.innerHTML=`<div class="ico">${t.ico}</div><h3>${t.title}</h3><p>${t.sub}</p><div class="folie">${t.folie}</div>`;
+    d.onclick=()=>startLearn(t.id,t.title);
+    g.appendChild(d);
+  });
+  // Quiz shortcut card
+  const qc=document.createElement('div');
+  qc.className='tcard';
+  qc.innerHTML=`<div class="ico">🎯</div><h3>Quiz starten</h3><p>Alle Themen gemischt – teste dein Wissen</p><div class="folie">Mixed</div>`;
+  qc.onclick=()=>go('quiz');
+  g.appendChild(qc);
+})();
+
+// ===================== CARDS =====================
+function startLearn(id,title){
+  curCards=cardSets[id]||[];
+  cIdx=0;cRev=false;
+  document.getElementById('l-title').textContent=title;
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-learn').classList.add('on');
+  document.querySelectorAll('.tab')[1]?.classList.add('on');
+  renderC();
+}
+
+function renderC(){
+  if(!curCards.length) return;
+  const c=curCards[cIdx];
+  document.getElementById('c-q').textContent=c.q;
+  document.getElementById('c-a').innerHTML=c.a;
+  document.getElementById('c-a').classList.remove('show');
+  document.getElementById('c-hint').style.display='block';
+  document.getElementById('c-acts').style.display='none';
+  document.getElementById('c-ctr').textContent=(cIdx+1)+' / '+curCards.length;
+  document.getElementById('c-prog').style.width=((cIdx/curCards.length)*100)+'%';
+  cRev=false;
+}
+
+function revealC(){
+  if(cRev) return;
+  cRev=true;
+  document.getElementById('c-a').classList.add('show');
+  document.getElementById('c-hint').style.display='none';
+  document.getElementById('c-acts').style.display='flex';
+}
+
+function markC(ok){
+  if(ok){addXP(10);doneCards++;}
+  nextC();
+}
+function nextC(){ if(cIdx<curCards.length-1){cIdx++;renderC();} }
+function prevC(){ if(cIdx>0){cIdx--;renderC();} }
+
+// ===================== QUIZ =====================
+function initQuiz(){
+  const pool=quizQs.map(q=>{
+    if(q.v&&Math.random()<0.65){
+      const alt=q.v[Math.floor(Math.random()*q.v.length)];
+      return{...q,q:alt};
+    }
+    return q;
+  });
+  activeQuiz=shuffle(pool).slice(0,15).map(prepQ);
+  qIdx=0;qOk=0;qWrong=0;qAnswered=false;
+  renderQ();
+}
+
+function renderQ(){
+  if(qIdx>=activeQuiz.length){showQdone();return;}
+  const q=activeQuiz[qIdx];
+  document.getElementById('q-ctr').textContent='Frage '+(qIdx+1)+' / '+activeQuiz.length;
+  document.getElementById('q-sc').innerHTML='✅ '+qOk+' &nbsp; ❌ '+qWrong;
+  document.getElementById('q-prog').style.width=((qIdx/activeQuiz.length)*100)+'%';
+  qAnswered=false;
+  let h='<div class="qq">'+q.q+'</div><div class="qopts">';
+  q.opts.forEach((o,i)=>{ h+=`<button class="qopt" id="qo${i}" onclick="ansQ(${i})">${o}</button>`; });
+  h+='</div><div class="qexp" id="qexp">💡 '+q.exp+'</div>';
+  h+='<div style="margin-top:.5rem"><button class="btn btn-p" id="qnext" onclick="nextQ()" style="display:none">Weiter →</button></div>';
+  document.getElementById('q-content').innerHTML=h;
+}
+
+function ansQ(i){
+  if(qAnswered) return;
+  qAnswered=true;
+  const q=activeQuiz[qIdx];
+  document.querySelectorAll('.qopt').forEach((b,j)=>{
+    if(j===q.ans) b.classList.add('right');
+    else if(j===i&&i!==q.ans) b.classList.add('wrong');
+  });
+  if(i===q.ans){qOk++;addXP(15);}else qWrong++;
+  document.getElementById('qexp').classList.add('show');
+  document.getElementById('qnext').style.display='inline-block';
+  document.getElementById('q-sc').innerHTML='✅ '+qOk+' &nbsp; ❌ '+qWrong;
+}
+
+function nextQ(){ qIdx++; renderQ(); }
+
+function showQdone(){
+  const pct=Math.round(qOk/activeQuiz.length*100);
+  const e=pct>=80?'🎉':pct>=60?'👍':'📚';
+  document.getElementById('q-content').innerHTML=`<div class="qdone"><h2>${e} ${pct}%</h2><p>${qOk} von ${activeQuiz.length} richtig</p><button class="btn btn-p" onclick="initQuiz()">Nochmal</button>&nbsp;<button class="btn btn-g" onclick="go('home')">Home</button></div>`;
+}
+
+// ===================== EXAM =====================
+function startExam(){
+  eStarted=true;
+  activeExam=shuffle(examQs).map(prepQ);
+  document.getElementById('e-start').style.display='none';
+  eSec=720;
+  updateT();
+  eTimer=setInterval(()=>{ eSec--; updateT(); if(eSec<=0){clearInterval(eTimer);submitExam();} },1000);
+  let h='';
+  activeExam.forEach((q,i)=>{
+    h+=`<div class="eq-block"><h4>${i+1}. ${q.q}</h4><div class="qopts">`;
+    q.opts.forEach((o,j)=>{ h+=`<button class="qopt" id="eq${i}_${j}" onclick="selE(${i},${j})">${o}</button>`; });
+    h+='</div></div>';
+  });
+  h+=`<button class="btn btn-p" style="margin-top:1rem" onclick="submitExam()">📝 Abgeben</button>`;
+  document.getElementById('e-qs').innerHTML=h;
+  document.getElementById('e-qs').style.display='block';
+}
+
+function selE(qi,oi){
+  eSel[qi]=oi;
+  document.querySelectorAll(`[id^="eq${qi}_"]`).forEach(b=>b.classList.remove('sel'));
+  document.getElementById(`eq${qi}_${oi}`).classList.add('sel');
+}
+
+function updateT(){
+  const m=Math.floor(eSec/60).toString().padStart(2,'0');
+  const s=(eSec%60).toString().padStart(2,'0');
+  const el=document.getElementById('e-timer');
+  el.textContent=m+':'+s;
+  el.className='timer'+(eSec<60?' red':'');
+}
+
+function submitExam(){
+  clearInterval(eTimer);
+  let ok=0;
+  activeExam.forEach((q,i)=>{
+    const sel=eSel[i];
+    document.querySelectorAll(`[id^="eq${i}_"]`).forEach((b,j)=>{
+      b.className='qopt';
+      if(j===q.ans) b.classList.add('right');
+      else if(j===sel&&sel!==q.ans) b.classList.add('wrong');
+    });
+    if(sel===q.ans) ok++;
+  });
+  const pct=Math.round(ok/activeExam.length*100);
+  const grade=pct>=90?'1':pct>=80?'2':pct>=70?'3':pct>=60?'4':'5';
+  const emoji=pct>=80?'🎉':pct>=60?'👍':'📚';
+  addXP(ok*20);
+  document.getElementById('e-result').style.display='block';
+  document.getElementById('e-result').innerHTML=`
+    <div class="exam-box" style="border-color:var(--accent);margin-top:1rem">
+      <h2>${emoji} ${ok} / ${activeExam.length} richtig – Note ${grade}</h2>
+      <p>Du hast <strong style="color:var(--yellow)">${ok*20} XP</strong> verdient! Falsche Antworten sind oben gelb, richtige grün markiert.</p>
+      <br><button class="btn btn-p" onclick="resetExam()">Nochmal</button>
+      &nbsp;<button class="btn btn-g" onclick="go('home')">Home</button>
+    </div>`;
+}
+
+function resetExam(){
+  eStarted=false;
+  Object.keys(eSel).forEach(k=>delete eSel[k]);
+  document.getElementById('e-qs').style.display='none';
+  document.getElementById('e-result').style.display='none';
+  document.getElementById('e-start').style.display='inline-block';
+  document.getElementById('e-timer').textContent='12:00';
+  document.getElementById('e-timer').className='timer';
+}
+
+// ===================== AUFGABEN DATA =====================
+const taskQs=[
+  {pts:10,warn:true,tag:'Aufgabe-1-Format · OHNE Notizen!',
+   q:'Erläutere ein konkretes Fallbeispiel für nachhaltige IT-gestützte Betriebsabläufe. Welche IT-Technologie wird eingesetzt? Welche Nachhaltigkeitsdimensionen werden adressiert? Begründe kurz. (5–6 Sätze)',
+   tip:'Wähle Google, IBM oder Continental. Nenne mind. 2 der 3 Dimensionen und begründe sie.',
+   sol:'<strong>Musterlösung – Google DeepMind:</strong><br>Google setzt KI-Energiesteuerung in Rechenzentren ein. Sensoren erfassen Temperatur und Last am Edge, die KI berechnet die optimale Kühlung in der Cloud, das Steuersignal geht zurück an die Anlage (Edge).<br><br><strong>Dimensionen:</strong><ul><li><strong>Ökologisch:</strong> −40% Kühlenergie, massiv weniger CO₂</li><li><strong>Ökonomisch:</strong> Millionen Euro Energiekosten jährlich gespart</li><li><strong>Sozial:</strong> Techniker von Routineaufgaben entlastet, weniger Ressourcenkonflikte</li></ul><em>Alternativ: IBM Food Trust (sozial: faire Lieferkette + ökonomisch) oder Continental Digitaler Zwilling (ökologisch: weniger Materialverschwendung + ökonomisch: Predictive Maintenance)</em>'},
+  {pts:8,tag:'Gartner Hype Cycle',
+   q:'(a) Beschreibe die 5 Phasen des Gartner Hype Cycle in der richtigen Reihenfolge.\n(b) Ordne KI-Energiesteuerung (Google) und Blockchain in Lieferketten (IBM) ein und begründe jeweils.',
+   tip:'Phasennamen genau merken. Für (b): Das WARUM ist wichtiger als das WAS.',
+   sol:'<strong>(a) 5 Phasen:</strong><ol style="padding-left:1.2rem"><li><strong>Technology Trigger</strong> – Erste Aufmerksamkeit, noch kein fertiges Produkt</li><li><strong>Peak of Inflated Expectations</strong> – Übertriebener Hype, unrealistische Erwartungen</li><li><strong>Trough of Disillusionment</strong> – Enttäuschung, viele Projekte scheitern</li><li><strong>Slope of Enlightenment</strong> – Erste echte Anwendungen entstehen</li><li><strong>Plateau of Productivity</strong> – Ausgereift, wirtschaftlich einsetzbar</li></ol><br><strong>(b) Einordnungen:</strong><ul><li><strong>KI-Energiesteuerung → Plateau of Productivity:</strong> Google nutzt es produktiv in allen Rechenzentren, 40% Einsparung nachgewiesen – kein Experiment mehr</li><li><strong>Blockchain Lieferketten → Slope of Enlightenment:</strong> IBM Food Trust aktiv (Walmart, Nestlé), aber noch kein Industriestandard – auf dem Weg zum Plateau</li></ul>'},
+  {pts:8,tag:'3-Schichten + Edge/Cloud',
+   q:'(a) Nenne und erkläre die 3 Schichten des Schichtenmodells.\n(b) Erkläre anhand der Case Study wo Edge und wo Cloud zum Einsatz kommt. Begründe die Aufteilung und skizziere den Datenfluss.',
+   tip:'Teil (b): Sensor (Edge) → KI (Cloud) → Steuersignal (Edge) – gilt für alle 3 Firmen!',
+   sol:'<strong>(a) 3 Schichten:</strong><ul><li><strong>Präsentationssicht:</strong> Benutzeroberfläche, Dashboard für Techniker</li><li><strong>Applikationssicht:</strong> Geschäftslogik, KI-Berechnungen, Workflow-Steuerung</li><li><strong>Datenzugriffssicht:</strong> Sensordatenbank, Blockchain-Ledger, Historiedaten</li></ul><br><strong>(b) Edge vs. Cloud:</strong><br>Ablauf: <strong>Sensor (Edge) → KI (Cloud) → Steuersignal (Edge)</strong><ul><li><strong>Edge:</strong> Sensoren, lokale Vorverarbeitung, Steuersignale → Echtzeit, Ausfallsicher, Datenschutz</li><li><strong>Cloud:</strong> KI-Berechnung, Langzeitspeicherung, globale Analyse → Rechenleistung, Skalierung</li></ul><em>Google: Temp-Sensor (Edge) → DeepMind (Cloud) → Kühlanlage (Edge). Continental: Produktionssensor (Edge) → Optimierung (Cloud). IBM: Kühlketten-Sensor (Edge) → Blockchain (Cloud).</em>'},
+  {pts:6,tag:'IT-Produktlinie',
+   q:'Beschreibe die vier Schritte der IT-Produktlinie in der richtigen Reihenfolge. Erkläre für jeden Schritt das Ziel und nenne ein Beispiel aus dem Bereich nachhaltige Betriebsabläufe.',
+   tip:'Reihenfolge: Scoping → Domain Engineering → Plattform → Application Engineering',
+   sol:'<ol style="padding-left:1.2rem"><li><strong>Scoping:</strong> Domäne eingrenzen – was soll die Plattform abdecken?<br><em>Beispiel: "Nachhaltige Energiesteuerung für Industriebetriebe"</em></li><li><strong>Domain Engineering:</strong> Domäne analysieren, Modell mit Use Cases & Requirements erstellen.<br><em>Beispiel: Anforderungen an Energiemanagementsysteme sammeln</em></li><li><strong>Plattform:</strong> Gemeinsame wiederverwendbare Architektur entwickeln.<br><em>Beispiel: IBM Blockchain-Framework, Google Cloud AI-Plattform</em></li><li><strong>Application Engineering:</strong> Kundenwunsch aus Plattform konfigurieren.<br><em>Beispiel: Continental nutzt IBM-Framework für Reifenproduktion; Walmart für Lebensmittel</em></li></ol><strong>Kernaussage:</strong> Nicht immer neu entwickeln = Nachhaltigkeit in der IT!'},
+  {pts:6,tag:'LkSG & CSDDD',
+   q:'(a) Was ist das LkSG und seit wann gilt es?\n(b) Was ist die CSDDD – wen betrifft sie?\n(c) Was bewirkt Omnibus I und warum ist frühzeitige Vorbereitung ein Wettbewerbsvorteil?',
+   tip:'Jahreszahlen: LkSG 2023, CSDDD 2024, Omnibus I Feb 2026, Vollanwendung 2028+',
+   sol:'<strong>(a) LkSG:</strong> Lieferkettensorgfaltspflichtengesetz (Deutschland, 2023). Verpflichtet Konzerne, Risiken für Menschenrechte und Umwelt in der gesamten Lieferkette zu prüfen, adressieren und melden.<br><br><strong>(b) CSDDD:</strong> EU-Richtlinie 2024/1760. Betrifft Unternehmen >5.000 MA & >1,5 Mrd. € Umsatz. Vereinheitlicht Sorgfaltspflichten auf EU-Ebene. Vollanwendung 2028+.<br><br><strong>(c) Omnibus I:</strong> EU-Paket (Feb 2026) vereinfacht Regeln für den Mittelstand. Strategischer Vorteil: Wer früh IT-Systeme & Datenerhebung aufbaut, kann 2028+ Nachhaltigkeit als USP nutzen und Partneranforderungen leichter erfüllen.<br><br><em>IT-Hebel: Blockchain (IBM Food Trust), automatisierte Reporting-Systeme statt Excel</em>'},
+  {pts:6,tag:'5 Architektursichten',
+   q:'Benennen Sie die 5 Architektursichten (Folie 128) und beschreiben Sie kurz was jede Sicht zeigt. Nutzen Sie die Merkhilfe K-L-I-D-I.',
+   tip:'K=Konzeptionell, L=Laufzeit, I=Implementation, D=Daten, I=Infrastruktur',
+   sol:'<strong>K-L-I-D-I:</strong><ol style="padding-left:1.2rem"><li><strong>Konzeptionelle Sicht:</strong> Überblick über die Systemlandschaft – welche Systeme existieren, wie hängen sie zusammen?</li><li><strong>Laufzeitsicht:</strong> Bestandteile während der Ausführung – Systemstart, Laufzeitkonfiguration, Administration</li><li><strong>Implementationssicht:</strong> Struktur und Zusammenhänge der Komponenten – wie ist das System aufgebaut?</li><li><strong>Datensicht:</strong> Struktur der Datenelemente und ihre Beziehungen</li><li><strong>Infrastruktursicht:</strong> Ablaufumgebung – Hardware, Server, Cloud-Dienste, Netzwerk</li></ol>'},
+  {pts:6,tag:'Digitaler Zwilling & P2P',
+   q:'(a) Was ist ein Digitaler Zwilling? Nenne 2 Beispiele aus der Case Study.\n(b) Erkläre P2P am Beispiel Smart Grid / Virtuelles Kraftwerk. Warum ist dieses Modell nachhaltig?',
+   tip:'Digitaler Zwilling = simulieren BEVOR echte Änderung. P2P = jeder ist Client UND Server gleichzeitig.',
+   sol:'<strong>(a) Digitaler Zwilling:</strong> Digitales Abbild der realen Hardware/eines Prozesses. Zweck: Simulieren, Steuern, Optimieren – bevor echte Änderungen vorgenommen werden.<br><ul><li><strong>Continental:</strong> Zwilling der Reifenproduktionsanlage → Materialverbrauch (Gummi, Metalle) simulieren vor Produktion → Ressourcenverschwendung vermeiden</li><li><strong>Google:</strong> Zwilling der Rechenzentren → KI simuliert Kühlbedarf vor Anpassung → 40% Energieeinsparung</li></ul><br><strong>(b) P2P Smart Grid:</strong><ul><li>Jeder Haushalt mit Solaranlage: gleichzeitig Produzent (Strom einspeisen) + Konsument (Strom kaufen) = Virtuelles Kraftwerk</li><li>Physisch: normales Stromnetz. Digital: P2P-Marktplatz-Ebene ohne zentralen Anbieter</li><li><strong>Nachhaltig:</strong> Erneuerbare Energie optimal verteilen, lokale Überproduktion wird genutzt statt verloren zu gehen</li></ul>'},
+  {pts:4,tag:'Dienstemarkt & BPMN',
+   q:'Erkläre das Prinzip "Publish → Find → Bind → Invoke". Welche Rolle spielt die Koordinationsschicht (BPMN) dabei?',
+   tip:'Jeder Schritt ist ein Verb: veröffentlichen → suchen → verbinden → aufrufen',
+   sol:'<strong>Publish → Find → Bind → Invoke:</strong><ul><li><strong>Publish:</strong> Anbieter veröffentlicht Dienst im Marktplatz</li><li><strong>Find:</strong> Nutzer sucht passenden Dienst ("Ich brauche einen Analyse-Service")</li><li><strong>Bind:</strong> Schnittstelle wird bereitgestellt – Verbindung aufgebaut</li><li><strong>Invoke:</strong> Dienst wird aufgerufen und genutzt</li></ul><br><strong>Koordinationsschicht (BPMN):</strong> Liegt oben auf dem Dienstemarkt. BPMN modelliert den Ablauf als Zustandsübergangsdiagramm – jede Aktivität ruft automatisch einen Dienst auf. Ergebnis: vollständig automatisierter Workflow ohne manuelles Eingreifen = nachhaltige Ablauforganisation!'},
+];
+
+// ===================== ALTKLAUSUR DATA =====================
+const altklausurQs=[
+  {pts:10,time:'~15 min',warn:true,nr:'Aufgabe 1',
+   q:'Erläutern Sie ein konkretes Fallbeispiel für nachhaltige IT-gestützte Betriebsabläufe.\nNennen Sie die eingesetzte IT-Technologie und ordnen Sie das Beispiel in die drei Dimensionen der Nachhaltigkeit (sozial, ökonomisch, ökologisch) ein. Begründen Sie Ihre Einordnung.',
+   sol:'<strong>Musterlösung – Continental (Digitaler Zwilling + Sensor Intelligence):</strong><br>Continental setzt einen Digitalen Zwilling der Reifenproduktionsanlage ein. Sensoren erfassen Maschinenparameter am Edge, Daten werden in der Cloud analysiert. Das digitale Abbild ermöglicht, Materialverbrauch vor der Produktion zu simulieren.<br><br><ul><li><strong>Ökologisch (4 Pkt):</strong> Materialverschwendung durch Simulation reduziert, Ressourcenschonung, weniger Ausschuss</li><li><strong>Ökonomisch (4 Pkt):</strong> Geringere Produktionskosten, Predictive Maintenance verhindert teure Ausfälle</li><li><strong>Sozial (2 Pkt):</strong> Techniker von gefährlichen manuellen Inspektionen entlastet</li></ul><em>Alternativ: Google DeepMind (ökologisch + ökonomisch) oder IBM Food Trust (sozial + ökonomisch)</em>'},
+  {pts:8,time:'~10 min',warn:false,nr:'Aufgabe 2',
+   q:'(a) Benennen und erläutern Sie kurz die 5 Phasen des Gartner Hype Cycle in der richtigen Reihenfolge. (5 Punkte)\n(b) Ordnen Sie folgende Technologien in den Hype Cycle ein und begründen Sie: KI-Energiesteuerung (Google) und Blockchain in Lieferketten (IBM). (3 Punkte)',
+   sol:'<strong>(a) 5 Phasen (je 1 Pkt):</strong><ol style="padding-left:1.2rem"><li><strong>Technology Trigger:</strong> Neue Technologie taucht auf, erste Aufmerksamkeit, kein fertiges Produkt</li><li><strong>Peak of Inflated Expectations:</strong> Übertriebener Hype, unrealistische Erwartungen</li><li><strong>Trough of Disillusionment:</strong> Hype platzt, viele Projekte scheitern</li><li><strong>Slope of Enlightenment:</strong> Erste echte, produktive Anwendungen entstehen</li><li><strong>Plateau of Productivity:</strong> Technologie ist ausgereift und weit verbreitet</li></ol><br><strong>(b) je 1,5 Pkt:</strong><ul><li><strong>KI-Energiesteuerung → Plateau:</strong> Google nutzt es produktiv in allen Rechenzentren, 40% Einsparung nachgewiesen</li><li><strong>Blockchain Lieferketten → Slope:</strong> IBM Food Trust aktiv, aber noch kein Industriestandard – auf dem Weg zum Plateau</li></ul>'},
+  {pts:8,time:'~10 min',warn:false,nr:'Aufgabe 3',
+   q:'(a) Beschreiben Sie das 3-Schichten-Modell. Nennen Sie alle drei Schichten mit ihrer Funktion. (3 Punkte)\n(b) Erläutern Sie anhand der Case Study, welche Komponenten am Edge und welche in der Cloud laufen. Begründen Sie die Aufteilung und skizzieren Sie den Datenfluss. (5 Punkte)',
+   sol:'<strong>(a) 3 Schichten (je 1 Pkt):</strong><ul><li><strong>Präsentationssicht:</strong> Benutzeroberfläche / Dashboard für Techniker</li><li><strong>Applikationssicht:</strong> Geschäftslogik, KI-Berechnungen, Workflows</li><li><strong>Datenzugriffssicht:</strong> Sensordatenbank, Blockchain-Ledger, Historiedaten</li></ul><br><strong>(b) Edge vs. Cloud (5 Pkt):</strong><br>Prinzip: <strong>Sensor (Edge) → KI (Cloud) → Steuersignal (Edge)</strong><ul><li><strong>Edge (2 Pkt):</strong> Sensoren, lokale Vorverarbeitung, Steuersignale → Echtzeit, ausfallsicher, Datenschutz</li><li><strong>Cloud (2 Pkt):</strong> KI-Berechnung, Langzeitspeicherung, globale Analyse → Rechenleistung, Skalierung</li><li><strong>Beispiele (1 Pkt):</strong> Google: Temp-Sensor (Edge) → DeepMind (Cloud) → Kühlanlage (Edge). Continental: Produktionssensor (Edge) → Optimierung (Cloud). IBM: Kühlketten-Sensor (Edge) → Blockchain (Cloud)</li></ul>'},
+  {pts:8,time:'~10 min',warn:false,nr:'Aufgabe 4',
+   q:'Beschreiben Sie die vier Schritte der IT-Produktlinie in der richtigen Reihenfolge.\nErläutern Sie für jeden Schritt das Ziel und nennen Sie ein Beispiel aus dem Bereich nachhaltige IT-Betriebsabläufe.',
+   sol:'<strong>Scoping → Domain Engineering → Plattform → Application Engineering (je 2 Pkt):</strong><ol style="padding-left:1.2rem"><li><strong>Scoping:</strong> Domäne eingrenzen – was soll die Plattform abdecken?<br><em>Beispiel: "Nachhaltige Energiesteuerung für Industriebetriebe"</em></li><li><strong>Domain Engineering:</strong> Domäne analysieren, Modell mit Use Cases & Requirements erstellen.<br><em>Beispiel: Alle Anforderungen an Energiemanagementsysteme modellieren</em></li><li><strong>Plattform:</strong> Wiederverwendbare gemeinsame Architektur entwickeln.<br><em>Beispiel: IBM Blockchain-Framework, Google Cloud AI-Plattform</em></li><li><strong>Application Engineering:</strong> Kundenwunsch aus Plattform konfigurieren.<br><em>Beispiel: Continental nutzt IBM-Framework für Reifen; Walmart für Lebensmittel</em></li></ol>'},
+  {pts:6,time:'~8 min',warn:false,nr:'Aufgabe 5',
+   q:'Benennen und erläutern Sie die 5 Architektursichten (Folie 128).\nNutzen Sie die Merkhilfe K-L-I-D-I.',
+   sol:'<strong>K-L-I-D-I (je 1,2 Pkt):</strong><ol style="padding-left:1.2rem"><li><strong>Konzeptionelle Sicht:</strong> Überblick Systemlandschaft – welche Systeme, wie hängen sie zusammen?</li><li><strong>Laufzeitsicht:</strong> Bestandteile während Ausführung – Systemstart, Konfiguration, Administration</li><li><strong>Implementationssicht:</strong> Struktur & Zusammenhänge der Komponenten – wie ist das System aufgebaut?</li><li><strong>Datensicht:</strong> Struktur der Datenelemente und ihre Beziehungen</li><li><strong>Infrastruktursicht:</strong> Ablaufumgebung – Hardware, Server, Cloud, Netzwerk</li></ol>'},
+  {pts:6,time:'~8 min',warn:false,nr:'Aufgabe 6',
+   q:'(a) Was ist das LkSG, seit wann gilt es und was verpflichtet es Unternehmen zu tun? (2 Punkte)\n(b) Was ist die CSDDD (EU-Richtlinie 2024/1760) und wen betrifft sie? (2 Punkte)\n(c) Was ist Omnibus I und warum hat frühzeitige Vorbereitung strategische Vorteile? (2 Punkte)',
+   sol:'<strong>(a) LkSG (2 Pkt):</strong> Lieferkettensorgfaltspflichtengesetz, Deutschland, seit 2023. Verpflichtet Konzerne, Menschenrechts- und Umweltrisiken in der gesamten Lieferkette zu prüfen, adressieren und melden.<br><br><strong>(b) CSDDD (2 Pkt):</strong> EU-Richtlinie 2024/1760. Betrifft Unternehmen >5.000 MA & >1,5 Mrd. € Umsatz. Einheitliche EU-Sorgfaltspflichten. Vollanwendung 2028+.<br><br><strong>(c) Omnibus I (2 Pkt):</strong> EU-Paket (Feb 2026) – vereinfacht Regeln für Mittelstand. Frühzeitige Vorbereitung → Wettbewerbsvorteil 2028+: Nachhaltigkeit als USP, Partneranforderungen leichter erfüllen.'},
+  {pts:8,time:'~10 min',warn:false,nr:'Aufgabe 7',
+   q:'(a) Was ist ein Digitaler Zwilling? Erläutern Sie anhand von 2 Beispielen aus der Case Study. (4 Punkte)\n(b) Erklären Sie das P2P-Konzept am Beispiel eines Smart Grids / Virtuellen Kraftwerks. Warum ist dieses Modell nachhaltig? (4 Punkte)',
+   sol:'<strong>(a) Digitaler Zwilling (4 Pkt):</strong> Digitales Abbild der realen Hardware/eines Prozesses. Zweck: Simulieren, Steuern, Optimieren – bevor echte Änderungen vorgenommen werden.<br><ul><li><strong>Continental (2 Pkt):</strong> Zwilling der Reifenproduktionsanlage → Materialverbrauch simulieren vor Produktion → Ressourcenverschwendung vermeiden</li><li><strong>Google (2 Pkt):</strong> Zwilling der Rechenzentren → KI simuliert Kühlbedarf vor Anpassung → 40% Energieeinsparung</li></ul><br><strong>(b) P2P Smart Grid (4 Pkt):</strong><ul><li><strong>Konzept (2 Pkt):</strong> Jeder Haushalt ist gleichzeitig Produzent (Strom einspeisen) + Konsument (Strom kaufen). Physisch: normales Stromnetz. Digital: P2P-Marktplatz-Ebene = Virtuelles Kraftwerk</li><li><strong>Nachhaltig (2 Pkt):</strong> Erneuerbare Energie optimal verteilen, lokale Überproduktion direkt genutzt, keine zentrale Infrastruktur-Verschwendung</li></ul>'},
+];
+
+// ===================== AUFGABEN FUNCTIONS =====================
+let tIdx=0,tOk=0,tRep=0;
+
+function initTasks(){
+  tIdx=0;tOk=0;tRep=0;
+  renderTask();
+}
+
+function renderTask(){
+  if(tIdx>=taskQs.length){showTasksDone();return;}
+  const t=taskQs[tIdx];
+  document.getElementById('t-ctr').textContent=`Aufgabe ${tIdx+1} / ${taskQs.length}`;
+  document.getElementById('t-sc').innerHTML=`✅ ${tOk} &nbsp; 🔁 ${tRep}`;
+  document.getElementById('t-prog').style.width=((tIdx/taskQs.length)*100)+'%';
+  let h=`<div class="task-card">`;
+  if(t.warn) h+=`<div style="background:var(--rbg);color:var(--red);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;margin-bottom:.75rem;display:inline-block">⚠️ ${t.tag} · ${t.pts} Pkt</div>`;
+  else h+=`<div style="background:var(--s3);color:var(--a3);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:600;margin-bottom:.75rem;display:inline-block">${t.tag} · ${t.pts} Pkt</div>`;
+  h+=`<div class="qq" style="white-space:pre-line">${t.q}</div>`;
+  if(t.tip) h+=`<div style="font-size:12px;color:var(--muted);margin:.6rem 0;padding:8px 12px;background:var(--s2);border-radius:8px;border-left:3px solid var(--yellow)">💡 ${t.tip}</div>`;
+  h+=`<textarea class="task-area" id="t-ans" placeholder="Schreibe deine Antwort hier…" rows="5"></textarea>`;
+  h+=`<div style="display:flex;gap:8px;margin-top:.75rem"><button class="btn btn-p" onclick="revealTask()">Lösung zeigen</button><button class="btn btn-g" onclick="skipTask()">Überspringen →</button></div>`;
+  h+=`<div class="sol-box" id="t-sol">${t.sol}</div>`;
+  h+=`<div class="cactions" id="t-acts" style="display:none;margin-top:.75rem"><button class="bok" onclick="rateTask(true)">✅ Gut verstanden (+15 XP)</button><button class="brep" onclick="rateTask(false)">🔁 Nochmal üben</button></div>`;
+  h+=`</div>`;
+  document.getElementById('t-content').innerHTML=h;
+}
+
+function revealTask(){
+  document.getElementById('t-sol').classList.add('show');
+  document.getElementById('t-acts').style.display='flex';
+}
+
+function rateTask(ok){
+  if(ok){tOk++;addXP(15);}else tRep++;
+  tIdx++;renderTask();
+}
+
+function skipTask(){tIdx++;renderTask();}
+
+function showTasksDone(){
+  document.getElementById('t-prog').style.width='100%';
+  document.getElementById('t-content').innerHTML=`<div class="qdone"><h2>${tOk>=6?'🎉':tOk>=4?'👍':'📚'} ${tOk} / ${taskQs.length}</h2><p>Aufgaben gut verstanden</p><button class="btn btn-p" onclick="initTasks()">Nochmal von vorne</button>&nbsp;<button class="btn btn-g" onclick="go('home')">Home</button></div>`;
+}
+
+// ===================== ALTKLAUSUR FUNCTIONS =====================
+function renderAltklausur(){
+  let h='';
+  altklausurQs.forEach((q,i)=>{
+    h+=`<div class="ak-block">`;
+    if(q.warn) h+=`<div class="ak-head warn"><span>${q.nr} · ${q.pts} Pkt</span><span>⏱ ${q.time} · ⚠️ OHNE Notizen!</span></div>`;
+    else h+=`<div class="ak-head"><span>${q.nr} · ${q.pts} Pkt</span><span>⏱ ${q.time}</span></div>`;
+    h+=`<div class="ak-q">${q.q}</div>`;
+    h+=`<button class="btn btn-g" onclick="toggleSol(${i})" id="btn-sol-${i}" style="margin-top:.9rem;font-size:13px">📋 Musterlösung zeigen</button>`;
+    h+=`<div class="sol-box" id="sol-${i}">${q.sol}</div>`;
+    h+=`</div>`;
+  });
+  document.getElementById('ak-content').innerHTML=h;
+}
+
+function toggleSol(i){
+  const box=document.getElementById(`sol-${i}`);
+  const btn=document.getElementById(`btn-sol-${i}`);
+  const v=box.classList.toggle('show');
+  btn.textContent=v?'📋 Musterlösung verbergen':'📋 Musterlösung zeigen';
+}
+</script>
+</body>
+</html>
